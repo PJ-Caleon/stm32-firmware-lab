@@ -16,3 +16,6 @@ Each day has a project to commit to this repo with its own documentation and cha
 - Build (4h)
 - Debug and Test (1.5h)
 - Write-up (1h)
+
+# Daily Documentation 
+I make a documentation of my learnings per day and they are all made through excalidraw so to access them. Open them with excalidraw to properly see the documentation 
