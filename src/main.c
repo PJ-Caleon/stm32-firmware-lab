@@ -1,29 +1,36 @@
 #include <stdint.h>
+#include "stm32f103.h"
 
-// Register Address
-#define RCC_BASE 0x40021000
-#define GPIOC_BASE 0x40011000
-#define RCC_APB2ENR *(volatile uint32_t *)(RCC_BASE + 0x18)
-#define GPIO_CRH *(volatile uint32_t *)(GPIOC_BASE + 0x04)
-#define GPIO_ODR *(volatile uint32_t *)(GPIOC_BASE + 0x0C)
-
-// Bit Field 
-#define RCC_IOPCEN (1<<4)
-#define GPIOC13 (1UL<<13)
-
-int init = 42;
-int zeroed;
-const int ro = 7;
+#define PIN13 (1UL << 13)
 
 int main(void){
-  RCC_APB2ENR |= RCC_IOPCEN; // Clock Config 
-  GPIO_CRH &= 0xFF0FFFFF; // Port config 
-  GPIO_CRH |= 0x00200000;
+  /*
+    Enable GPIOC clock with APB2ENR bit 4
+    IOPBEN is bit 3, IOPCEN is bit 4
+
+    -> is a shorthand for pointers to structs, its like the . but for pointers 
+  */
+  SET_BIT(RCC->APB2ENR, (1 << 4));
+
+  /*
+    Configure PC13 as 2 MHz push-pull output 
+    Pint 13 uses bits 23:20 in CRH (20 is the start bit for pin 13)
+  */
+  CLEAR_BIT(GPIOC->CRH, (0xF << 20));
+  SET_BIT(GPIOC->CRH, (0x2 << 20)); // Sets to 0b0010 (output max 2 MHz)
 
   while(1){
-    GPIO_ODR |= GPIOC13;
+    /*
+      Toggle the BSRR/BRR 
+      The STM LED is active low (0 = on, 1 = off)
+    */
+
+    // On: write to BRR to reset pin low 
+    GPIOC->BRR = PIN13;
     for (int i = 0; i < 500000; i++);
-    GPIO_ODR &= ~GPIOC13;
+
+    // Off: write to BSRR to set pin high 
+    GPIOC->BSRR = PIN13;
     for (int i = 0; i < 500000; i++);
   }
 }

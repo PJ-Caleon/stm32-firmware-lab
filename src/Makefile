@@ -8,8 +8,8 @@ LDFLAGS = -T link.ld -nostdlib -Wl,-Map=app.map
 
 all: app.elf app.bin
 
-%.o: %.c
-	$(CC) $(CFLAGS)	$^	-o	$@ 
+%.o: %.c stm32f103.h
+	$(CC) $(CFLAGS)	$<	-o	$@ 
 
 app.elf:	main.o	startup.o 
 	$(CC)	$(LDFLAGS) $^	-o	$@ 
