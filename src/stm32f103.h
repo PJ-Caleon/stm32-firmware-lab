@@ -17,6 +17,9 @@ typedef struct Gpio{
 // Mapped at GPIOC 0x40011000
 #define GPIOC ((gpio *) 0x40011000)
 
+// Mapped at GPIOA 0x40010800 
+#define GPIOA ((gpio *) 0x40010800)
+
 // RCC Struct 
 typedef struct Rcc{
   volatile uint32_t CR;

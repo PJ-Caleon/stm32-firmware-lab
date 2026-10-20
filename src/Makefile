@@ -1,7 +1,7 @@
 CC=arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 MACH=cortex-m3
-CFLAGS = -c -mcpu=$(MACH) -mthumb -std=gnu11 -O0 -Wall
+CFLAGS = -c -mcpu=$(MACH) -mthumb -std=gnu11 -O0 -Wall -g
 LDFLAGS = -T link.ld -nostdlib -Wl,-Map=app.map 
 
 .PHONY: all clean 
