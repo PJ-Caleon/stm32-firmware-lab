@@ -73,6 +73,10 @@ typedef struct Exti{
 
 #define EXTI ((exti *) 0x40010400UL)
 
+#define EXTI_PORTA (0x0UL)
+#define EXTI_PORTB (0x1UL)
+#define EXTI_PORTC (0x2UL)
+
 // Nested Vectored Interrupt Controller 
 typedef struct Nvic{
   volatile uint32_t ISER[8];

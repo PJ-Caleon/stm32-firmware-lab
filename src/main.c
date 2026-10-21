@@ -11,6 +11,7 @@ volatile uint32_t interval = 0;
 volatile uint32_t count = 0;
 volatile uint8_t exti_flag = 0;
 volatile uint32_t interrupt_timestamp = 0;
+static uint32_t last_valid_time = 0;
 
 /*
   Clear pending bit in ISR
@@ -75,7 +76,10 @@ int main(void){
     Select the falling edge 
     Enable IRQ 6 in the NVIC 
   */
-  SET_BIT(AFIO->EXTICR[0], PINA0);
+
+  // EXTI# access pins A#, B#, C# & Setting it to Port A 
+  // Tells STM, with EXTICR0 at Port A, set Pin A-0 to become the interrupt 
+  MODIFY_REG(AFIO->EXTICR[0], (0xF << 0), (EXTI_PORTA << 0));
 
   SET_BIT(EXTI->IMR, (1 << 0));
 
@@ -86,26 +90,19 @@ int main(void){
 
   while(1){
     
+    // Triggered if PA0 is pressed 
     if (exti_flag){
       exti_flag = 0;
-
-      // Does something 
-    }
-
-    /*
-      Read PINA0 button press 
-      press is considered if the press is done within 10ms
-      Any longer and it is not a valid press 
-    */
-    if(!(READ_BIT(GPIOA->IDR, PINA0))){
-      while(!(READ_BIT(GPIOA->IDR, PINA0))){
+      
+      // Checks if 20 ms has passed since last press 
+      if ((interrupt_timestamp - last_valid_time >= 20)){
+        last_valid_time = interrupt_timestamp;
         
         if (count != 2){
           count++;
         }else{
           count = 0;
         } 
-        
         delay_ms(10);
       }
     }
