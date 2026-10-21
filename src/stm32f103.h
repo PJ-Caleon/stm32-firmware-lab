@@ -55,8 +55,9 @@ typedef struct Flash{
 typedef struct Afio{
   volatile uint32_t EVRC;
   volatile uint32_t MAPR;
-  volatile uint32_t MAPR2;
   volatile uint32_t EXTICR[4];
+  uint32_t RESERVED0;
+  volatile uint32_t MAPR2;
 } afio;
 
 #define AFIO ((afio *) 0x40010000UL)
@@ -90,7 +91,7 @@ typedef struct Nvic{
 
 // Data WatchPoint and Trace
 #define DEMCR (*(volatile uint32_t*)0xE000EDFCUL)
-#define DWT_CTRL ((*(volatile uint32_t*))0xE0001000UL)
+#define DWT_CTRL (*(volatile uint32_t*)0xE0001000UL)
 #define DWT_CYCCNT  (*(volatile uint32_t*)0xE0001004UL)
 #define TRCENA (1U << 24)
 #define CYCCNTENA (1UL << 0)
