@@ -38,7 +38,7 @@ typedef struct Rcc{
 #define RCC ((rcc *) 0x40021000)
 
 // FLASH Struct
-typedef Flash{
+typedef struct Flash{
   volatile uint32_t ACR;
   volatile uint32_t KEYR;
   volatile uint32_t OPTKEYR;

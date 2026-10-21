@@ -5,8 +5,27 @@
 #define PINC13 (1UL << 13)
 #define PINA0 (1UL << 0)
 
+volatile uint32_t ms_tick = 0;
+
+void systick_init(void){
+  // Set reload value for 1ms tick (72,000 cycles)
+  SYSTICK->LOAD = 72000 - 1;
+
+  // Clear current counter value 
+  SYSTICK->VAL = 0;
+
+  // Enable systick, interupt, set clksrc to processor clock 
+  SYSTICK->CTRL = SYSTICK_EN | SYSTICK_TICKINT | SYSTICK_CLKSRC;
+}
+
+void Systick_Handler(void){
+  ms_tick++;
+}
+
 int main(void){
+   
   setClock();
+  systick_init();
 
   /*
     Enable GPIOC clock with APB2ENR bit 4
