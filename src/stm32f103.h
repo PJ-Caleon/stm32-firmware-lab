@@ -37,6 +37,20 @@ typedef struct Rcc{
 // Mapped at RCC 0x40021000
 #define RCC ((rcc *) 0x40021000)
 
+// FLASH Struct
+typedef struct Flash{
+  volatile uint32_t ACR;
+  volatile uint32_t KEYR;
+  volatile uint32_t OPTKEYR;
+  volatile uint32_t SR;
+  volatile uint32_t CR;
+  volatile uint32_t AR;
+  volatile uint32_t OBR;
+  volatile uint32_t WRPR;
+} flash;
+
+#define FLASH ((flash *) 0x40022000)
+
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)  ((REG) &= ~(BIT))

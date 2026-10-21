@@ -1,10 +1,15 @@
 #include <stdint.h>
 #include "stm32f103.h"
+#include "clock.h"
 
 #define PINC13 (1UL << 13)
 #define PINA0 (1UL << 0)
 
 int main(void){
+   
+  setClock();
+  systick_init();
+
   /*
     Enable GPIOC clock with APB2ENR bit 4
     IOPBEN is bit 3, IOPCEN is bit 4
@@ -46,9 +51,9 @@ int main(void){
 
 
   // Global Variables 
-
+  volatile uint32_t last_time = 0;
+  volatile uint32_t interval = 0;
   volatile uint32_t count = 0;
-  volatile uint32_t timer = 0;
 
   while(1){
   
@@ -65,26 +70,28 @@ int main(void){
         }else{
           count = 0;
         } 
-
-        for (volatile int i = 0; i < 100000; i++);
+        
+        delay_ms(10);
       }
     }
 
     if (count == 0){
-      timer = 100000;
+      interval = 1000;
     }
     if (count == 1){
-      timer = 50000;
+      interval = 500;
     }
     if (count == 2){
-      timer = 10000;
+      interval = 100;
     }
 
-    if (READ_BIT(GPIOC->ODR, PINC13)){
-      GPIOC->BRR = PINC13;
-    } else{
-      GPIOC->BSRR = PINC13;
+    if (millis() - last_time >= interval){
+      last_time = millis();
+      if (READ_BIT(GPIOC->ODR, PINC13)){
+        GPIOC->BRR = PINC13;
+      } else{
+        GPIOC->BSRR = PINC13;
+      }
     }
-    for (volatile int i = 0; i < timer; i++);
   }
 }
