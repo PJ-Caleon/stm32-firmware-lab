@@ -51,6 +51,39 @@ typedef struct Flash{
 
 #define FLASH ((flash *) 0x40022000)
 
+// External Interrupt/Event GPIO 
+typedef struct Afio{
+  volatile uint32_t EVRC;
+  volatile uint32_t MAPR;
+  volatile uint32_t MAPR2;
+  volatile uint32_t EXTICR[4];
+} afio;
+
+#define AFIO ((afio *) 0x40010000UL)
+
+// External Interrupt Peripheral
+typedef struct Exti{
+  volatile uint32_t IMR;
+  volatile uint32_t EMR;
+  volatile uint32_t RTSR;
+  volatile uint32_t FTSR;
+  volatile uint32_t SWIER;
+  volatile uint32_t PR;
+} exti;
+
+#define EXTI ((exti *) 0x40010400UL)
+
+// Nested Vectored Interrupt Controller 
+typedef struct Nvic{
+  volatile uint32_t ISER[8];
+  uint32_t RESERVED0[24];
+  volatile uint32_t ICER[8];
+  uint32_t RESERVED1[24];
+  volatile uint32_t ISPR[8];
+} nvic;
+
+#define NVIC ((nvic *) 0xE000E100UL)
+
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)  ((REG) &= ~(BIT))

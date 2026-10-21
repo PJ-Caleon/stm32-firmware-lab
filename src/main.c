@@ -50,6 +50,21 @@ int main(void){
   SET_BIT(GPIOA->ODR, PINA0);
 
 
+  /*
+    Set PINA0 to interrupt
+    Unmask line 0 
+    Select the falling edge 
+    Enable IRQ 6 in the NVIC 
+  */
+  SET_BIT(AFIO->EXTICR[0], PINA0);
+
+  SET_BIT(EXTI->IMR, (1 << 0));
+
+  SET_BIT(EXTI->FTSR, (1 << 0));
+  SET_BIT(EXTI->FTSR, (1 << 0));
+
+  NVIC->ISER[0] = (1 << 6);
+
   // Global Variables 
   volatile uint32_t last_time = 0;
   volatile uint32_t interval = 0;
