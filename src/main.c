@@ -5,8 +5,28 @@
 #define PINC13 (1UL << 13)
 #define PINA0 (1UL << 0)
 
+// Global Variables 
+volatile uint32_t last_time = 0;
+volatile uint32_t interval = 0;
+volatile uint32_t count = 0;
+volatile uint8_t exti_flag = 0;
+volatile uint32_t interrupt_timestamp = 0;
+
+/*
+  Clear pending bit in ISR
+  Record the time 
+  Set a flag 
+*/
+  
+// EXTI0 since that is where PA0 lives at 
+void EXTI0_IRQHandler(void){
+  EXTI->PR = (1 << 0); // Acknowledges interrupt occured 
+  interrupt_timestamp = millis();
+  exti_flag = 1;
+}
+
 int main(void){
-   
+
   setClock();
   systick_init();
 
@@ -49,7 +69,6 @@ int main(void){
   */
   SET_BIT(GPIOA->ODR, PINA0);
 
-
   /*
     Set PINA0 to interrupt
     Unmask line 0 
@@ -65,13 +84,14 @@ int main(void){
 
   NVIC->ISER[0] = (1 << 6);
 
-  // Global Variables 
-  volatile uint32_t last_time = 0;
-  volatile uint32_t interval = 0;
-  volatile uint32_t count = 0;
-
   while(1){
-  
+    
+    if (exti_flag){
+      exti_flag = 0;
+
+      // Does something 
+    }
+
     /*
       Read PINA0 button press 
       press is considered if the press is done within 10ms

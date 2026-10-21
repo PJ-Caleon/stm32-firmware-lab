@@ -21,7 +21,7 @@ LOAD main.o
  .isr_vector    0x08000000       0x40 startup.o
                 0x08000000                vectors
 
-.text           0x08000040      0x33c
+.text           0x08000040      0x394
  *(.vectors .vectors.*)
  *(.text*)
  .text          0x08000040       0x8c startup.o
@@ -41,70 +41,75 @@ LOAD main.o
                 0x08000110                systick_init
                 0x08000138                SysTick_Handler
                 0x08000154                setClock
- .text          0x08000230      0x14c main.o
-                0x08000230                main
+ .text          0x08000230      0x1a4 main.o
+                0x08000230                EXTI0_IRQHandler
+                0x0800025c                main
  *(.rodata*)
-                0x0800037c                        _etext = .
+                0x080003d4                        _etext = .
 
-.glue_7         0x0800037c        0x0
- .glue_7        0x0800037c        0x0 linker stubs
+.glue_7         0x080003d4        0x0
+ .glue_7        0x080003d4        0x0 linker stubs
 
-.glue_7t        0x0800037c        0x0
- .glue_7t       0x0800037c        0x0 linker stubs
+.glue_7t        0x080003d4        0x0
+ .glue_7t       0x080003d4        0x0 linker stubs
 
-.vfp11_veneer   0x0800037c        0x0
- .vfp11_veneer  0x0800037c        0x0 linker stubs
+.vfp11_veneer   0x080003d4        0x0
+ .vfp11_veneer  0x080003d4        0x0 linker stubs
 
-.v4_bx          0x0800037c        0x0
- .v4_bx         0x0800037c        0x0 linker stubs
+.v4_bx          0x080003d4        0x0
+ .v4_bx         0x080003d4        0x0 linker stubs
 
-.iplt           0x0800037c        0x0
- .iplt          0x0800037c        0x0 startup.o
+.iplt           0x080003d4        0x0
+ .iplt          0x080003d4        0x0 startup.o
 
-.igot.plt       0x0800037c        0x0
- .igot.plt      0x0800037c        0x0 startup.o
+.igot.plt       0x080003d4        0x0
+ .igot.plt      0x080003d4        0x0 startup.o
 
-.rel.dyn        0x0800037c        0x0
- .rel.iplt      0x0800037c        0x0 startup.o
+.rel.dyn        0x080003d4        0x0
+ .rel.iplt      0x080003d4        0x0 startup.o
 
-.bss            0x20000000        0x4
+.bss            0x20000000       0x18
                 0x20000000                        _sbss = .
  *(.bss*)
  .bss           0x20000000        0x0 startup.o
  .bss           0x20000000        0x4 clock.o
                 0x20000000                ms_tick
- .bss           0x20000004        0x0 main.o
+ .bss           0x20000004       0x14 main.o
+                0x20000004                last_time
+                0x20000008                interval
+                0x2000000c                count
+                0x20000010                exti_flag
+                0x20000014                interrupt_timestamp
  *(COMMON)
-                0x20000004                        _ebss = .
-                0x0800037c                        _la_data = LOADADDR (.DATA)
+                0x20000018                        _ebss = .
+                0x080003d4                        _la_data = LOADADDR (.DATA)
 
-.DATA           0x20000004        0x0 load address 0x0800037c
-                0x20000004                        _sdata = .
+.DATA           0x20000018        0x0 load address 0x080003d4
+                0x20000018                        _sdata = .
  *(.data*)
- .data          0x20000004        0x0 startup.o
- .data          0x20000004        0x0 clock.o
- .data          0x20000004        0x0 main.o
-                0x20000004                        _edata = .
+ .data          0x20000018        0x0 startup.o
+ .data          0x20000018        0x0 clock.o
+ .data          0x20000018        0x0 main.o
+                0x20000018                        _edata = .
 
-.stack          0x20000004      0x404 load address 0x0800037c
-                0x20000008                        . = ALIGN (0x8)
- *fill*         0x20000004        0x4 
-                0x20000408                        . = (. + STACK_SIZE)
- *fill*         0x20000008      0x400 
-                0x20000408                        . = ALIGN (0x8)
-                0x20000408                        _end = .
+.stack          0x20000018      0x400 load address 0x080003d4
+                0x20000018                        . = ALIGN (0x8)
+                0x20000418                        . = (. + STACK_SIZE)
+ *fill*         0x20000018      0x400 
+                0x20000418                        . = ALIGN (0x8)
+                0x20000418                        _end = .
 OUTPUT(app.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000      0x72a
+.debug_info     0x00000000      0x786
  .debug_info    0x00000000      0x1a2 startup.o
  .debug_info    0x000001a2      0x26a clock.o
- .debug_info    0x0000040c      0x31e main.o
+ .debug_info    0x0000040c      0x37a main.o
 
-.debug_abbrev   0x00000000      0x36f
+.debug_abbrev   0x00000000      0x389
  .debug_abbrev  0x00000000      0x106 startup.o
  .debug_abbrev  0x00000106      0x129 clock.o
- .debug_abbrev  0x0000022f      0x140 main.o
+ .debug_abbrev  0x0000022f      0x15a main.o
 
 .debug_aranges  0x00000000       0x60
  .debug_aranges
@@ -114,18 +119,18 @@ LOAD linker stubs
  .debug_aranges
                 0x00000040       0x20 main.o
 
-.debug_line     0x00000000      0x50f
+.debug_line     0x00000000      0x52c
  .debug_line    0x00000000      0x17f startup.o
  .debug_line    0x0000017f      0x1c5 clock.o
- .debug_line    0x00000344      0x1cb main.o
+ .debug_line    0x00000344      0x1e8 main.o
 
-.debug_str      0x00000000      0x2cd
- .debug_str     0x00000000      0x2cd startup.o
+.debug_str      0x00000000      0x2fc
+ .debug_str     0x00000000      0x2fc startup.o
                                 0x1b9 (size before relaxing)
- .debug_str     0x000002cd        0x0 clock.o
+ .debug_str     0x000002fc        0x0 clock.o
                                 0x1f3 (size before relaxing)
- .debug_str     0x000002cd        0x0 main.o
-                                0x22b (size before relaxing)
+ .debug_str     0x000002fc        0x0 main.o
+                                0x26c (size before relaxing)
 
 .comment        0x00000000       0x46
  .comment       0x00000000       0x46 startup.o
@@ -144,7 +149,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x0000005a       0x2d main.o
 
-.debug_frame    0x00000000      0x134
+.debug_frame    0x00000000      0x14c
  .debug_frame   0x00000000       0x4c startup.o
  .debug_frame   0x0000004c       0xb8 clock.o
- .debug_frame   0x00000104       0x30 main.o
+ .debug_frame   0x00000104       0x48 main.o
