@@ -88,6 +88,13 @@ typedef struct Nvic{
 
 #define NVIC ((nvic *) 0xE000E100UL)
 
+// Data WatchPoint and Trace
+#define DEMCR (*(volatile uint32_t*)0xE000EDFCUL)
+#define DWT_CTRL ((*(volatile uint32_t*))0xE0001000UL)
+#define DWT_CYCCNT  (*(volatile uint32_t*)0xE0001004UL)
+#define TRCENA (1U << 24)
+#define CYCCNTENA (1UL << 0)
+
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)  ((REG) &= ~(BIT))

@@ -18,7 +18,6 @@ static uint32_t last_valid_time = 0;
   Record the time 
   Set a flag 
 */
-  
 // EXTI0 since that is where PA0 lives at 
 void EXTI0_IRQHandler(void){
   EXTI->PR = (1 << 0); // Acknowledges interrupt occured 
@@ -26,10 +25,20 @@ void EXTI0_IRQHandler(void){
   exti_flag = 1;
 }
 
+/*
+  Init DWT - counts how many cycles occured since startup
+*/
+void dwt_init(void){
+  SET_BIT(DEMCR, TRCENA); // Enable trace enable 
+  DWT_CYCCNT = 0; // Resets the cycle count 
+  SET_BIT(DWT_CTRL, CYCCNTENA); // Enable Cycle Counter Enable 
+}
+
 int main(void){
 
   setClock();
   systick_init();
+  dwt_init();
 
   /*
     Enable GPIOC clock with APB2ENR bit 4
@@ -117,6 +126,10 @@ int main(void){
       interval = 100;
     }
 
+    // Check how many cycles this occures 
+
+    uint32_t start_cycles = DWT_CYCCNT;
+
     if (millis() - last_time >= interval){
       last_time = millis();
       if (READ_BIT(GPIOC->ODR, PINC13)){
@@ -125,5 +138,7 @@ int main(void){
         GPIOC->BSRR = PINC13;
       }
     }
+
+    uint32_t elapsed_cycles = DWT_CYCCNT - start_cycles;
   }
 }
