@@ -19,3 +19,13 @@ Each day has a project to commit to this repo with its own documentation and cha
 
 # Daily Documentation 
 I make a documentation of my learnings per day and they are all made through excalidraw so to access them. Open them with excalidraw to properly see the documentation 
+
+## To Compile
+```
+make
+```
+
+## To Flash to board
+```
+openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c 'program app.elf verify reset exit'
+```
