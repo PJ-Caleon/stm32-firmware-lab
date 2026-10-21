@@ -20,6 +20,8 @@ void DebugMon_Handler (void) __attribute__((weak, alias("Default_Handler")));
 void PendSV_Handler (void) __attribute__((weak, alias("Default_Handler")));
 void SysTick_Handler (void) __attribute__((weak, alias("Default_Handler")));
 
+void EXTI0_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+
 int main(void);
 
 const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
@@ -39,6 +41,13 @@ const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
   0,
   (uint32_t) &PendSV_Handler,
   (uint32_t) &SysTick_Handler,
+  0,
+  0,
+  0,
+  0,
+  0,
+  0,
+  (uint32_t) &EXTI0_IRQHandler, 
 };
 
 void Reset_Handler(void){

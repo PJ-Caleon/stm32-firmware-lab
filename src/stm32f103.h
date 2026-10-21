@@ -51,6 +51,51 @@ typedef struct Flash{
 
 #define FLASH ((flash *) 0x40022000)
 
+// External Interrupt/Event GPIO 
+typedef struct Afio{
+  volatile uint32_t EVRC;
+  volatile uint32_t MAPR;
+  volatile uint32_t EXTICR[4];
+  uint32_t RESERVED0;
+  volatile uint32_t MAPR2;
+} afio;
+
+#define AFIO ((afio *) 0x40010000UL)
+
+// External Interrupt Peripheral
+typedef struct Exti{
+  volatile uint32_t IMR;
+  volatile uint32_t EMR;
+  volatile uint32_t RTSR;
+  volatile uint32_t FTSR;
+  volatile uint32_t SWIER;
+  volatile uint32_t PR;
+} exti;
+
+#define EXTI ((exti *) 0x40010400UL)
+
+#define EXTI_PORTA (0x0UL)
+#define EXTI_PORTB (0x1UL)
+#define EXTI_PORTC (0x2UL)
+
+// Nested Vectored Interrupt Controller 
+typedef struct Nvic{
+  volatile uint32_t ISER[8];
+  uint32_t RESERVED0[24];
+  volatile uint32_t ICER[8];
+  uint32_t RESERVED1[24];
+  volatile uint32_t ISPR[8];
+} nvic;
+
+#define NVIC ((nvic *) 0xE000E100UL)
+
+// Data WatchPoint and Trace
+#define DEMCR (*(volatile uint32_t*)0xE000EDFCUL)
+#define DWT_CTRL (*(volatile uint32_t*)0xE0001000UL)
+#define DWT_CYCCNT  (*(volatile uint32_t*)0xE0001004UL)
+#define TRCENA (1U << 24)
+#define CYCCNTENA (1UL << 0)
+
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)  ((REG) &= ~(BIT))
