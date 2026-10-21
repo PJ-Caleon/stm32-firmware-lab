@@ -1,10 +1,13 @@
 #include <stdint.h>
 #include "stm32f103.h"
+#include "clock.h"
 
 #define PINC13 (1UL << 13)
 #define PINA0 (1UL << 0)
 
 int main(void){
+  setClock();
+
   /*
     Enable GPIOC clock with APB2ENR bit 4
     IOPBEN is bit 3, IOPCEN is bit 4
