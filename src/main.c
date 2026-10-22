@@ -117,8 +117,8 @@ int main(void){
     if (exti_flag){
       exti_flag = 0;
       
-      // Checks if 20 ms has passed since last press 
-      if ((interrupt_timestamp - last_valid_time >= 50)){
+      // Checks if 500 ms has passed since last press 
+      if ((interrupt_timestamp - last_valid_time >= 500)){
         last_valid_time = interrupt_timestamp;
 
         btn_event = 1;
