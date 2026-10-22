@@ -1,15 +1,13 @@
 #include <stdint.h>
 #include "stm32f103.h"
 #include "clock.h"
-
-#define PINC13 (1UL << 13)
-#define PINA0 (1UL << 0)
+#include "stateMachine.h"
+#include "port_pin.h"
 
 // Global Variables 
 volatile uint32_t last_time = 0;
 volatile uint32_t interval = 0;
-volatile uint32_t count = 0;
-volatile uint8_t exti_flag = 0;
+volatile uint8_t exti_flag = 0; // PINA0: 0 not pressed, 1 pressed 
 volatile uint32_t interrupt_timestamp = 0;
 static uint32_t last_valid_time = 0;
 
@@ -106,48 +104,27 @@ int main(void){
   dwt_start = DWT_CYCCNT;
   EXTI->SWIER = 1;
 
+  // State Machine Var 
+  StateMachine reaction_game = {0};
+  reaction_game.current_state = IDLE;
+
   while(1){
     
+    uint32_t current_time = millis();
+    volatile uint8_t btn_event = 0;
+
     // Triggered if PA0 is pressed 
     if (exti_flag){
       exti_flag = 0;
       
       // Checks if 20 ms has passed since last press 
-      if ((interrupt_timestamp - last_valid_time >= 20)){
+      if ((interrupt_timestamp - last_valid_time >= 50)){
         last_valid_time = interrupt_timestamp;
-        
-        if (count != 2){
-          count++;
-        }else{
-          count = 0;
-        } 
-        delay_ms(10);
+
+        btn_event = 1;
       }
     }
 
-    if (count == 0){
-      interval = 1000;
-    }
-    if (count == 1){
-      interval = 500;
-    }
-    if (count == 2){
-      interval = 100;
-    }
-
-    // Check how many cycles this occures 
-
-    // uint32_t start_cycles = DWT_CYCCNT;
-
-    if (millis() - last_time >= interval){
-      last_time = millis();
-      if (READ_BIT(GPIOC->ODR, PINC13)){
-        GPIOC->BRR = PINC13;
-      } else{
-        GPIOC->BSRR = PINC13;
-      }
-    }
-
-    // uint32_t elapsed_cycles = DWT_CYCCNT - start_cycles;
+    stateMachine_update(&reaction_game, btn_event, current_time);
   }
 }

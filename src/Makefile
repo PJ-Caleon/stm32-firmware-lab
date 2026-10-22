@@ -4,7 +4,7 @@ MACH=cortex-m3
 CFLAGS = -c -mcpu=$(MACH) -mthumb -std=gnu11 -O0 -Wall -g -MMD -MP
 LDFLAGS = -T link.ld -nostdlib -Wl,-Map=app.map
 
-SRC = startup.c clock.c main.c
+SRC = startup.c clock.c main.c stateMachine.c
 OBJS = $(SRC:.c=.o)
 DEPS = $(OBJS:.o=.d)
 
