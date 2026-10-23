@@ -8,5 +8,9 @@ void uart_putc(char c);
 char uart_getc(void);
 void uart_puts(const char *s);
 int _write(int file, char *ptr, int len);
+void uart_rx_interrupt_init(void);
+int uart_data_available(void);
+char uart_read_char(void);
+void UART_IRQHandler(void);
 
 #endif

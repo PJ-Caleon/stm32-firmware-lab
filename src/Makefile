@@ -2,9 +2,9 @@ CC=arm-none-eabi-gcc
 OBJCOPY = arm-none-eabi-objcopy
 MACH=cortex-m3
 CFLAGS = -c -mcpu=$(MACH) -mthumb -std=gnu11 -O0 -Wall -g -MMD -MP
-LDFLAGS = -T link.ld -nostdlib -Wl,-Map=app.map
+LDFLAGS = -mcpu=$(MACH) -mthumb -T link.ld -nostartfiles --specs=nano.specs --specs=nosys.specs -Wl,-Map=app.map
 
-SRC = startup.c clock.c main.c stateMachine.c uart.c
+SRC = startup.c clock.c main.c stateMachine.c uart.c shell.c
 OBJS = $(SRC:.c=.o)
 DEPS = $(OBJS:.o=.d)
 

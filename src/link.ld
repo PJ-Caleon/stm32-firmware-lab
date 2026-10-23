@@ -48,4 +48,5 @@ SECTIONS{
   } > RAM 
 
   _end = . ;
+  PROVIDE(end = _end);
 }

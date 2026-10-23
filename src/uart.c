@@ -1,6 +1,18 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "stm32f103.h"
+#include <errno.h>
+#include <sys/stat.h>
+
+#define UART_RX_BUFFER_SIZE 64
+
+typedef struct Ring_Buffer{
+  volatile uint8_t buffer[UART_RX_BUFFER_SIZE];
+  volatile uint16_t head;
+  volatile uint16_t tail;
+} ring_buffer;
+
+static ring_buffer rx_buffer = { {0}, 0, 0};
 
 // Initialize uart1 clock  
 void uart1_enable(void){
@@ -87,4 +99,82 @@ int _write(int file, char *ptr, int len){
     uart_putc(*ptr++);
   }
   return len;
+}
+
+/*
+  Enable UART1 RX Interrupt and NVIC IRQ 37 
+  Enable RXNE Interrupt 
+  Enable IRQ 37
+*/
+void uart_rx_interrupt_init(void){
+  SET_BIT(UART1->CR1, (1 << 5));
+  NVIC->ISER[1] = (1 << (37 % 32));
+}
+
+/*
+  Check if data is available in the ring buffer 
+*/
+int uart_data_available(void){
+  return (rx_buffer.head != rx_buffer.tail);
+}
+
+/*
+  Read a single character from the ring buffer  
+*/
+char uart_read_char(void){
+  if (!uart_data_available()){
+    return '\0';
+  }
+  char c = rx_buffer.buffer[rx_buffer.tail];
+  rx_buffer.tail = (rx_buffer.tail + 1) % UART_RX_BUFFER_SIZE;
+  return c;
+}
+
+/*
+  UART1 Interrupt Service 
+*/
+void UART_IRQHandler(void){
+  if (UART1->SR & (1 << 5)){
+    uint8_t data = (uint8_t)(UART1->DR & 0xFF);
+    uint8_t next_head = (rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
+
+    if (next_head != rx_buffer.tail){
+      rx_buffer.buffer[rx_buffer.head] = data;
+      rx_buffer.head = next_head;
+    } else{}
+  }
+}
+
+/*
+  Minimal syscall stubs for newlib 
+*/
+int _close(int file){
+  (void)file;
+  return -1;
+}
+
+int _fstat(int file, struct stat *st){
+  (void)file;
+  st->st_mode = S_IFCHR;  // tell newlib stdout is a character device (a terminal)
+  return 0;
+}
+int _isatty(int file){
+  (void)file;
+  return 1;               // stdout is a terminal
+}
+int _lseek(int file, int ptr, int dir){
+  (void)file; (void)ptr; (void)dir;
+  return 0;
+}
+int _read(int file, char *ptr, int len){
+  (void)file; (void)ptr; (void)len;
+  return 0;               // nothing to read via stdin; the shell uses its own UART buffer
+}
+int _getpid(void){
+  return 1;
+}
+int _kill(int pid, int sig){
+  (void)pid; (void)sig;
+  errno = EINVAL;
+  return -1;
 }
