@@ -3,6 +3,8 @@
 #include "clock.h"
 #include "stateMachine.h"
 #include "port_pin.h"
+#include "uart.h"
+#include "shell.h"
 
 // Global Variables 
 volatile uint32_t last_time = 0;
@@ -41,6 +43,11 @@ int main(void){
   setClock();
   systick_init();
   dwt_init();
+  uart1_enable();
+  init_tx1_rx1();
+  enable_baud_rate(72000000);
+  uart_rx_interrupt_init();
+  shell_init();
 
   // Enable AFIO Clock 
   SET_BIT(RCC->APB2ENR, (1 << 0));
@@ -61,8 +68,11 @@ int main(void){
   SET_BIT(GPIOC->CRH, (0x2 << 20)); // Sets to 0b0010 (output max 2 MHz)
 
   /*
-    Enable GPIOA clock with APB2ENR bit 4
+    Enable GPIOA clock with APB2ENR
     (enable/disable << port num)
+
+    Enable GPIOA (bit 2)
+    Enable UART1 (bit 14)
   */
   SET_BIT(RCC->APB2ENR, (1 << 2));
 
@@ -109,6 +119,7 @@ int main(void){
   reaction_game.current_state = IDLE;
 
   while(1){
+    shell_poll();
     
     uint32_t current_time = millis();
     volatile uint8_t btn_event = 0;
