@@ -16,6 +16,7 @@ static ring_buffer rx_buffer = { {0}, 0, 0};
 
 // Initialize uart1 clock  
 void uart1_enable(void){
+  SET_BIT(RCC->APB2ENR, (1 << 2));
   SET_BIT(RCC->APB2ENR, (1 << 14));
 }
 
@@ -133,7 +134,7 @@ char uart_read_char(void){
 /*
   UART1 Interrupt Service 
 */
-void UART_IRQHandler(void){
+void USART1_IRQHandler(void){
   if (UART1->SR & (1 << 5)){
     uint8_t data = (uint8_t)(UART1->DR & 0xFF);
     uint8_t next_head = (rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
