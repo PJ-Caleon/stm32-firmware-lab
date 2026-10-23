@@ -96,6 +96,20 @@ typedef struct Nvic{
 #define TRCENA (1U << 24)
 #define CYCCNTENA (1UL << 0)
 
+// USART 
+typedef struct Usart{
+  volatile uint32_t SR;
+  volatile uint32_t DR;
+  volatile uint32_t BRR;
+  volatile uint32_t CR1;
+  volatile uint32_t CR2;
+  volatile uint32_t CR3;
+  volatile uint32_t GTPR;
+} usart;
+
+#define USART1 ((usart *) 0x40013800)
+
+
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))
 #define CLEAR_BIT(REG, BIT)  ((REG) &= ~(BIT))

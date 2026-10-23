@@ -61,10 +61,14 @@ int main(void){
   SET_BIT(GPIOC->CRH, (0x2 << 20)); // Sets to 0b0010 (output max 2 MHz)
 
   /*
-    Enable GPIOA clock with APB2ENR bit 4
+    Enable GPIOA clock with APB2ENR
     (enable/disable << port num)
+
+    Enable GPIOA (bit 2)
+    Enable USART1 (bit 14)
   */
   SET_BIT(RCC->APB2ENR, (1 << 2));
+  SET_BIT(RCC->APB2ENR, (1 << 14));
 
   /*
     Configure PA0 as input with internall pull-up
@@ -83,6 +87,35 @@ int main(void){
     Set the ODR bit to 1 to be a pull-up to make the pin be 10001  
   */
   SET_BIT(GPIOA->ODR, PINA0);
+
+  /*
+    Set PA9 as alternate function push pull 
+    50 MHz 
+    nibble 0xB
+    10000
+
+    Set PA10 as floating input
+    nibble 0x4
+    000000
+  */
+  CLEAR_BIT(GPIOA->CRH, (0xF << 4)); // Clear PINA9 (explanation of 4 & 8 in day8)
+  CLEAR_BIT(GPIOA->CRH, (0xF << 8)); // Clear PINA10 
+
+  MODIFY_REG(GPIOA->CRH, (0xF << 4), (0xB << 4)); // Configure PA9 (TX)
+  MODIFY_REG(GPIOA->CRH, (0xF << 8), (0x4 << 8)); // Configure PA10 (RX)
+
+  /*
+    BRR = 72,000,000/115,200 = 625 (0x271)
+    CR1 gets UE, TE, RE 
+    USART Enable - Bit 13
+    Transmitter Enable - Bit 3 
+    Receiver Enable - Bit 2 
+  */
+  CLEAR_BIT(USART1->BRR, (0xF << 0));
+  CLEAR_BIT(USART1->CR1, (0xF << 0));
+
+  USART1->BRR = 0x271;
+  SET_BIT(USART1->CR1, (1 << 13) | (1 << 3) | 1 << 2));
 
   /*
     Set PINA0 to interrupt
