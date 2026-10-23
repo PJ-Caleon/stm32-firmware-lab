@@ -107,7 +107,7 @@ typedef struct Usart{
   volatile uint32_t GTPR;
 } usart;
 
-#define USART1 ((usart *) 0x40013800)
+#define UART1 ((usart *) 0x40013800)
 
 
 // Helper Macros 
