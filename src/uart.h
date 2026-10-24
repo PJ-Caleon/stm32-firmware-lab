@@ -12,5 +12,6 @@ void uart_rx_interrupt_init(void);
 int uart_data_available(void);
 char uart_read_char(void);
 void USART_IRQHandler(void);
+void process_uart_dma_buffer(void);
 
 #endif

@@ -1,10 +1,13 @@
 #include <stdint.h>
 #include <unistd.h>
 #include "stm32f103.h"
+#include "dma.h"
 #include <errno.h>
 #include <sys/stat.h>
 
 #define UART_RX_BUFFER_SIZE 64
+
+extern uint8_t dma_rx_buffer[DMA_BUFFER_SIZE];
 
 typedef struct Ring_Buffer{
   volatile uint8_t buffer[UART_RX_BUFFER_SIZE];
@@ -12,7 +15,7 @@ typedef struct Ring_Buffer{
   volatile uint16_t tail;
 } ring_buffer;
 
-static ring_buffer rx_buffer = { {0}, 0, 0};
+static ring_buffer uart_rx_buffer = { {0}, 0, 0};
 
 // Initialize uart1 clock  
 void uart1_enable(void){
@@ -116,7 +119,7 @@ void uart_rx_interrupt_init(void){
   Check if data is available in the ring buffer 
 */
 int uart_data_available(void){
-  return (rx_buffer.head != rx_buffer.tail);
+  return (uart_rx_buffer.head != uart_rx_buffer.tail);
 }
 
 /*
@@ -126,8 +129,8 @@ char uart_read_char(void){
   if (!uart_data_available()){
     return '\0';
   }
-  char c = rx_buffer.buffer[rx_buffer.tail];
-  rx_buffer.tail = (rx_buffer.tail + 1) % UART_RX_BUFFER_SIZE;
+  char c = uart_rx_buffer.buffer[uart_rx_buffer.tail];
+  uart_rx_buffer.tail = (uart_rx_buffer.tail + 1) % UART_RX_BUFFER_SIZE;
   return c;
 }
 
@@ -137,11 +140,11 @@ char uart_read_char(void){
 void USART1_IRQHandler(void){
   if (UART1->SR & (1 << 5)){
     uint8_t data = (uint8_t)(UART1->DR & 0xFF);
-    uint8_t next_head = (rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
+    uint8_t next_head = (uart_rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
 
-    if (next_head != rx_buffer.tail){
-      rx_buffer.buffer[rx_buffer.head] = data;
-      rx_buffer.head = next_head;
+    if (next_head != uart_rx_buffer.tail){
+      uart_rx_buffer.buffer[uart_rx_buffer.head] = data;
+      uart_rx_buffer.head = next_head;
     } else{}
   }
 }
@@ -178,4 +181,27 @@ int _kill(int pid, int sig){
   (void)pid; (void)sig;
   errno = EINVAL;
   return -1;
+}
+
+/*
+  Process the UART DMA buffer 
+  Track the last position 
+  Compute where the DMA is writing 
+  Process bytes from tail up to head, handling the circular wrap-around 
+
+  This function acts a bridge. Pulls new bytes out of large DMA buffer and feeds
+  the uart ring buffer 
+*/
+void process_uart_dma_buffer(void){
+  static uint16_t dma_tail = 0;
+  uint16_t dma_head = DMA_BUFFER_SIZE - DMA1->CH[4].CNDTR;
+
+  while (dma_tail != dma_head){
+    uint16_t next_head = (uart_rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
+    if (next_head != uart_rx_buffer.tail){
+      uart_rx_buffer.buffer[uart_rx_buffer.head] = dma_rx_buffer[dma_tail];
+      uart_rx_buffer.head = next_head;
+    }
+    dma_tail = (dma_tail + 1) % DMA_BUFFER_SIZE;
+  }
 }

@@ -1,7 +1,7 @@
 #ifndef DMA_H
 #define DMA_H
 
-#define BUFFER_SIZE 256
+#define DMA_BUFFER_SIZE 256
 #define DMA_CCR_EN (1U << 0)
 #define DMA_CCR_CIRC (1U << 5)
 #define DMA_CCR_MINC (1U << 7)

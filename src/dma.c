@@ -7,7 +7,7 @@
   Configure DMA1 Channel 5 to copy incoming bytes 
   from UART1 Data Register into RAM buffer 
 */
-uint8_t rx_buffer[BUFFER_SIZE];
+uint8_t dma_rx_buffer[DMA_BUFFER_SIZE];
 
 void dma1_enable(void){
   // Enable DMA1 clock in RCC 
@@ -21,10 +21,10 @@ void dma1_enable(void){
   DMA1->CH[4].CPAR = (uint32_t)&(UART1->DR);
 
   // Set memory address to 256 byte buffer 
-  DMA1->CH[4].CMAR = (uint32_t)rx_buffer;
+  DMA1->CH[4].CMAR = (uint32_t)dma_rx_buffer;
 
   // Set transfer count 
-  DMA1->CH[4].CNDTR = BUFFER_SIZE;
+  DMA1->CH[4].CNDTR = DMA_BUFFER_SIZE;
 
   // Configure CCR: Enable memory to incremement and circular mode 
   DMA1->CH[4].CCR = DMA_CCR_MINC | DMA_CCR_CIRC;
