@@ -109,6 +109,21 @@ typedef struct Usart{
 
 #define UART1 ((usart *) 0x40013800)
 
+// DMA 
+typedef struct Dma_Channel{
+  volatile uint32_t CCR;
+  volatile uint32_t CNDTR;
+  volatile uint32_t CPAR; 
+  volatile uint32_t CMAR;
+} dma_channel;
+
+typedef struct Dma{
+  volatile uint32_t ISR;
+  volatile uint32_t IFCR;
+  dma_channel CH[7];
+} dma;
+
+#define DMA1 ((dma *) 0x40020000UL)
 
 // Helper Macros 
 #define SET_BIT(REG, BIT)  ((REG) |= (BIT))

@@ -23,6 +23,12 @@ void SysTick_Handler (void) __attribute__((weak, alias("Default_Handler")));
 void EXTI0_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void USART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 
+void DMA1_Channel1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void DMA1_Channel2_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void DMA1_Channel3_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void DMA1_Channel4_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void DMA1_Channel5_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+
 int main(void);
 
 const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
@@ -51,8 +57,13 @@ const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
   (uint32_t) &EXTI0_IRQHandler,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // IRQ 7-16
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // IRQ 17-26
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // IRQ 27-36
-  (uint32_t) &USART1_IRQHandler,  // IRQ 37
+  0, 0, 0, 0,                   // IRQ 27-30
+  (uint32_t) &DMA1_Channel1_IRQHandler, 
+  (uint32_t) &DMA1_Channel2_IRQHandler, 
+  (uint32_t) &DMA1_Channel3_IRQHandler,
+  (uint32_t) &DMA1_Channel4_IRQHandler, 
+  (uint32_t) &DMA1_Channel5_IRQHandler, 
+  (uint32_t) &USART1_IRQHandler,         
 };
 
 void Reset_Handler(void){
