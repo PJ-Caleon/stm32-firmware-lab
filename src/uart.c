@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "stm32f103.h"
 #include "dma.h"
+#include "uart.h"
 #include <errno.h>
 #include <sys/stat.h>
 
@@ -10,6 +11,7 @@
 extern uint8_t dma_rx_buffer[DMA_BUFFER_SIZE];
 
 volatile uint8_t burst_ready = 0; // Flag to tell main loop that burst ended 
+tx_queue tx_q = { {0}, 0, 0, 0};
 
 typedef struct Ring_Buffer{
   volatile uint8_t buffer[UART_RX_BUFFER_SIZE];
@@ -139,7 +141,7 @@ char uart_read_char(void){
 /*
   UART1 Interrupt Service 
 */
-void USART1_IRQHandler(void){
+void UART1_IRQHandler(void){
   if (UART1->SR & (1 << 5)){
     uint8_t data = (uint8_t)(UART1->DR & 0xFF);
     uint8_t next_head = (uart_rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
@@ -150,7 +152,7 @@ void USART1_IRQHandler(void){
     } else{}
   }
 
-  if (UART1->SR ^ (1 << 4)){
+  if (UART1->SR & (1 << 4)){
     volatile uint32_t dummmy = UART1->SR;
     dummmy = UART1->DR;
     (void)dummmy;

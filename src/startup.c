@@ -21,7 +21,7 @@ void PendSV_Handler (void) __attribute__((weak, alias("Default_Handler")));
 void SysTick_Handler (void) __attribute__((weak, alias("Default_Handler")));
 
 void EXTI0_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
-void USART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void UART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 
 void DMA1_Channel1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void DMA1_Channel2_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
@@ -63,7 +63,7 @@ const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
   (uint32_t) &DMA1_Channel3_IRQHandler,
   (uint32_t) &DMA1_Channel4_IRQHandler, 
   (uint32_t) &DMA1_Channel5_IRQHandler, 
-  (uint32_t) &USART1_IRQHandler,         
+  (uint32_t) &UART1_IRQHandler,         
 };
 
 void Reset_Handler(void){

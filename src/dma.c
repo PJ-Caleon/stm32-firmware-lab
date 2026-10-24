@@ -36,3 +36,82 @@ void dma1_enable(void){
   // to enable DMA receiver request 
   SET_BIT(UART1->CR3, (UART_CR3_DMAR));
 }
+
+// Initialize DMA1 Channel 4 for UART1 TX 
+void dma1_tx_init(void){
+  SET_BIT(RCC->AHBENR, RCC_AHBENR_DMA1EN);
+  SET_BIT(UART1->CR3, USART_CR3_DMAT);
+}
+
+// Startup for the DMA Transfer 
+static void start_dma_tx(const uint8_t *data, uint16_t size){
+  // Disable channel before config 
+  CLEAR_BIT(DMA1->CH[3].CCR, DMA_CCR_EN);
+
+  // Set peripheral address to UART1 data register 
+  DMA1->CH[3].CPAR = (uint32_t)&(UART1->DR);
+
+  // Set memory address 
+  DMA1->CH[3].CNDTR = size;
+  
+  // Config CCR 
+  DMA1->CH[3].CCR = DMA_CCR_DIR | DMA_CCR_MINC | DMA_CCR_TCIE;
+
+  // Enable NVIC IRQ for DMA1 channel 4 
+  NVIC->ISER[0] = (1 << 14);
+  tx_q.busy = 1;
+
+  // Enable DMA channel 
+  SET_BIT(DMA1->CH[3].CCR, DMA_CCR_EN);
+}
+
+void uart_dma_puts(const char *s) {
+  while (*s) {
+    uint16_t next_head = (tx_q.head + 1) % TX_QUEUE_SIZE;
+    while (next_head == tx_q.tail); // Block if queue is full
+
+    tx_q.buffer[tx_q.head] = (uint8_t)*s;
+    tx_q.head = next_head;
+    s++;
+  }
+
+  // If DMA is idle, start transfer immediately
+  if (!tx_q.busy && (tx_q.head != tx_q.tail)) {
+    tx_q.busy = 1;
+        
+    // For a ring buffer, calculate contiguous bytes up to the end or head
+    uint16_t start_idx = tx_q.tail;
+    uint16_t len;
+        
+    if (tx_q.head > tx_q.tail) {
+      len = tx_q.head - tx_q.tail;
+      tx_q.tail = tx_q.head; // Advance tail to head
+    } else {
+      len = TX_QUEUE_SIZE - tx_q.tail; // Send up to end of buffer first
+      tx_q.tail = 0; // Wrap around
+    }
+      start_dma_tx(&tx_q.buffer[start_idx], len);
+  }
+}
+
+void DMA1_Channel4_IRQHandler(void){
+  if (DMA1->ISR & (1 << 13)){
+    DMA1->IFCR = (1 << 13);
+    if (tx_q.head != tx_q.tail){
+      uint16_t start_idx = tx_q.tail;
+      uint16_t len;
+
+      if (tx_q.head > tx_q.tail){
+        len = tx_q.head - tx_q.tail;
+        tx_q.tail = tx_q.head;
+      } else{
+        len = TX_QUEUE_SIZE - tx_q.tail;
+        tx_q.tail = 0;
+      }
+
+      start_dma_tx(&tx_q.buffer[start_idx], len);
+    } else{
+      tx_q.busy = 0;
+    }
+  }
+}
