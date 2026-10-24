@@ -141,17 +141,8 @@ char uart_read_char(void){
 /*
   UART1 Interrupt Service 
 */
-void UART1_IRQHandler(void){
-  if (UART1->SR & (1 << 5)){
-    uint8_t data = (uint8_t)(UART1->DR & 0xFF);
-    uint8_t next_head = (uart_rx_buffer.head + 1) % UART_RX_BUFFER_SIZE;
-
-    if (next_head != uart_rx_buffer.tail){
-      uart_rx_buffer.buffer[uart_rx_buffer.head] = data;
-      uart_rx_buffer.head = next_head;
-    } else{}
-  }
-
+void USART1_IRQHandler(void){
+  // IDLE flag: clear by reading SR then DR
   if (UART1->SR & (1 << 4)){
     volatile uint32_t dummmy = UART1->SR;
     dummmy = UART1->DR;

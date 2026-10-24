@@ -21,7 +21,7 @@ void PendSV_Handler (void) __attribute__((weak, alias("Default_Handler")));
 void SysTick_Handler (void) __attribute__((weak, alias("Default_Handler")));
 
 void EXTI0_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
-void UART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
+void USART1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 
 void DMA1_Channel1_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
 void DMA1_Channel2_IRQHandler(void) __attribute__((weak, alias("Default_Handler")));
@@ -31,39 +31,28 @@ void DMA1_Channel5_IRQHandler(void) __attribute__((weak, alias("Default_Handler"
 
 int main(void);
 
+#define IRQ_SLOT(n) (16 + (n))
+
 const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
-  (uint32_t) &_estack,
-  (uint32_t) &Reset_Handler,
-  (uint32_t) &NMI_Handler,
-  (uint32_t) &HardFault_Handler,
-  (uint32_t) &MemManage_Handler,
-  (uint32_t) &BusFault_Handler,
-  (uint32_t) &UsageFault_Handler,
-  0,
-  0,
-  0,
-  0,
-  (uint32_t) &SVC_Handler,
-  (uint32_t) &DebugMon_Handler,
-  0,
-  (uint32_t) &PendSV_Handler,
-  (uint32_t) &SysTick_Handler,
-  0,
-  0,
-  0,
-  0,
-  0,
-  0,
-  (uint32_t) &EXTI0_IRQHandler,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // IRQ 7-16
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0,  // IRQ 17-26
-  0, 0, 0, 0,                   // IRQ 27-30
-  (uint32_t) &DMA1_Channel1_IRQHandler, 
-  (uint32_t) &DMA1_Channel2_IRQHandler, 
-  (uint32_t) &DMA1_Channel3_IRQHandler,
-  (uint32_t) &DMA1_Channel4_IRQHandler, 
-  (uint32_t) &DMA1_Channel5_IRQHandler, 
-  (uint32_t) &UART1_IRQHandler,         
+  [0] = (uint32_t) &_estack,
+  [1] = (uint32_t) &Reset_Handler,
+  [2] = (uint32_t) &NMI_Handler,
+  [3] = (uint32_t) &HardFault_Handler,
+  [4] = (uint32_t) &MemManage_Handler,
+  [5] = (uint32_t) &BusFault_Handler,
+  [6] = (uint32_t) &UsageFault_Handler,
+  [11] = (uint32_t) &SVC_Handler,
+  [12] = (uint32_t) &DebugMon_Handler,
+  [14] = (uint32_t) &PendSV_Handler,
+  [15] = (uint32_t) &SysTick_Handler,
+
+  [IRQ_SLOT(6)] = (uint32_t) &EXTI0_IRQHandler,
+  [IRQ_SLOT(11)] = (uint32_t) &DMA1_Channel1_IRQHandler,
+  [IRQ_SLOT(12)] = (uint32_t) &DMA1_Channel2_IRQHandler,
+  [IRQ_SLOT(13)] = (uint32_t) &DMA1_Channel3_IRQHandler,
+  [IRQ_SLOT(14)] = (uint32_t) &DMA1_Channel4_IRQHandler,
+  [IRQ_SLOT(15)] = (uint32_t) &DMA1_Channel5_IRQHandler,
+  [IRQ_SLOT(37)] = (uint32_t) &USART1_IRQHandler,
 };
 
 void Reset_Handler(void){

@@ -13,5 +13,7 @@
 #define USART_CR3_DMAT (1U << 7)
 
 void dma1_enable(void);
+void dma1_tx_init(void);
+void uart_dma_puts(const char *s);
 
 #endif

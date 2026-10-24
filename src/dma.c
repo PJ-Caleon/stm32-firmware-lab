@@ -52,6 +52,9 @@ static void start_dma_tx(const uint8_t *data, uint16_t size){
   DMA1->CH[3].CPAR = (uint32_t)&(UART1->DR);
 
   // Set memory address 
+  DMA1->CH[3].CMAR = (uint32_t)data;
+
+  // Set transfer count  
   DMA1->CH[3].CNDTR = size;
   
   // Config CCR 
