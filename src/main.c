@@ -4,6 +4,7 @@
 #include "stateMachine.h"
 #include "port_pin.h"
 #include "uart.h"
+#include "dma.h"
 #include "shell.h"
 
 // Global Variables 
@@ -47,6 +48,8 @@ int main(void){
   init_tx1_rx1();
   enable_baud_rate(72000000);
   uart_rx_interrupt_init();
+  dma1_enable();
+
   shell_init();
 
   // Enable AFIO Clock 
@@ -120,7 +123,11 @@ int main(void){
 
   while(1){
     shell_poll();
-    
+    if (burst_ready){
+      burst_ready = 0;
+      process_uart_dma_buffer();
+    }
+
     uint32_t current_time = millis();
     volatile uint8_t btn_event = 0;
 
