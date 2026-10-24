@@ -1,6 +1,10 @@
 #ifndef UART_H
 #define UART_H
 
+#include <stdint.h>
+
+extern volatile uint8_t burst_ready;
+
 void uart1_enable(void);
 void init_tx1_rx1(void);
 void enable_baud_rate(uint32_t pclk_freq);

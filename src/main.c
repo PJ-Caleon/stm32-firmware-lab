@@ -123,7 +123,10 @@ int main(void){
 
   while(1){
     shell_poll();
-    process_uart_dma_buffer();
+    if (burst_ready){
+      burst_ready = 0;
+      process_uart_dma_buffer();
+    }
 
     uint32_t current_time = millis();
     volatile uint8_t btn_event = 0;

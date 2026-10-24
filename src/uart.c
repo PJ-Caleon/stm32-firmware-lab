@@ -9,6 +9,8 @@
 
 extern uint8_t dma_rx_buffer[DMA_BUFFER_SIZE];
 
+volatile uint8_t burst_ready = 0; // Flag to tell main loop that burst ended 
+
 typedef struct Ring_Buffer{
   volatile uint8_t buffer[UART_RX_BUFFER_SIZE];
   volatile uint16_t head;
@@ -53,7 +55,7 @@ void enable_baud_rate(uint32_t pclk_freq){
   CLEAR_BIT(UART1->CR1, (0xF << 0));
 
   UART1->BRR = pclk_freq/115200;
-  SET_BIT(UART1->CR1, (1 << 13) | (1 << 3) | (1 << 2));
+  SET_BIT(UART1->CR1, (1 << 13) | (1 << 3) | (1 << 2) | (1 << 4));
 }
 
 /*
@@ -146,6 +148,13 @@ void USART1_IRQHandler(void){
       uart_rx_buffer.buffer[uart_rx_buffer.head] = data;
       uart_rx_buffer.head = next_head;
     } else{}
+  }
+
+  if (UART1->SR ^ (1 << 4)){
+    volatile uint32_t dummmy = UART1->SR;
+    dummmy = UART1->DR;
+    (void)dummmy;
+    burst_ready = 1;
   }
 }
 
