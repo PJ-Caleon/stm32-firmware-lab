@@ -70,6 +70,7 @@ typedef struct Rcc{
 #define RCC_APB2ENR_AFIOEN (1U << 0)
 #define RCC_APB2ENR_IOPAEN (1U << 2)
 #define RCC_APB2ENR_IOPCEN (1U << 4)
+#define RCC_APB2ENR_ADC1EN (1U << 9)
 #define RCC_APB2ENR_USART1EN (1U << 14)
 
 // Flash 
@@ -224,5 +225,34 @@ _Static_assert(offsetof(flash, OBR) == 0x1C, "FLASH OBR must be at offset 0x1C")
 #define DMA_ISR_TCIF(ch)   (1U << (((ch) - 1U) * 4U + 1U))
 #define DMA_IFCR_CGIF(ch)  (1U << (((ch) - 1U) * 4U))      // clears ALL flags of the channel
 #define DMA_IFCR_CTCIF(ch) (1U << (((ch) - 1U) * 4U + 1U))
+
+// ADC 
+typedef struct Adc{
+  volatile uint32_t SR;
+  volatile uint32_t CR1;
+  volatile uint32_t CR2;
+  volatile uint32_t SMPR1;
+  volatile uint32_t SMPR2;
+  volatile uint32_t JOFR1;
+  volatile uint32_t JOFR2;
+  volatile uint32_t JOFR3;
+  volatile uint32_t JOFR4;
+  volatile uint32_t HTR; 
+  volatile uint32_t LTR;
+  volatile uint32_t SQR1;
+  volatile uint32_t SQR2;
+  volatile uint32_t SQR3;
+  volatile uint32_t JSQR;
+  volatile uint32_t JDR1;
+  volatile uint32_t JDR2;
+  volatile uint32_t JDR3;
+  volatile uint32_t JDR4;
+  volatile uint32_t DR;
+} Adc;
+
+#define ADC1 ((Adc *) 0x40012400U)
+
+#define ADC_PRESCALER_MASK (3U << 14)
+#define ADC_PRESCALER_DIV6 (2U << 14)
 
 #endif
