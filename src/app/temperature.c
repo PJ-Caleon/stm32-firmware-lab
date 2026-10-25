@@ -23,6 +23,5 @@ int32_t temperature_ReadCelsius(void){
 }
 
 uint16_t internalVref_ReadRaw(void){
-  SET_BIT(ADC1->CR2, (ADC_CR2_TSVREFE));
-  return ADC_ReadChannel(17);
+  return ADC_GetScanTempRaw();
 }

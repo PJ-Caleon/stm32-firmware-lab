@@ -5,5 +5,7 @@
 
 void ADC_init(void);
 uint16_t ADC_ReadChannel(uint8_t channel);
+uint16_t ADC_GetScanPotRaw(void);
+uint16_t ADC_GetScanTempRaw(void);
 
 #endif
