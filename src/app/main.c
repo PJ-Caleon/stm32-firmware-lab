@@ -1,11 +1,14 @@
 #include <stdint.h>
+
 #include "clock.h"
 #include "port_pin.h"
 #include "exti.h"
 #include "uart.h"
 #include "button.h"
+#include "potentiometer.h"
 #include "stateMachine.h"
 #include "shell.h"
+#include "adc.h"
 
 int main(void){
 
@@ -13,6 +16,7 @@ int main(void){
   setClock();
   systick_init();
   dwt_init();
+  ADC_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks

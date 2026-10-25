@@ -255,8 +255,12 @@ typedef struct Adc{
 #define ADC_PRESCALER_MASK (3U << 14)
 #define ADC_PRESCALER_DIV6 (2U << 14)
 #define ADC_CR2_ADON (1U << 0)
+#define ADC_CR2_SWSTART (1U << 22)
 #define ADC_CR2_RSTCAL (1U << 3)
 #define ADC_CR2_CAL (1U << 2)
+#define ADC_SR_EOC (1U << 1)
+#define ADC_SQR3_SQ1_POS 0 
+#define ADC_SQR3_SQ1_MASK (0x1FU << 0)
 
 
 #endif

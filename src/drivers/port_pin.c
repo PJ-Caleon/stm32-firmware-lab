@@ -34,8 +34,7 @@ void port_pin_init(void){
     Analog Input is MODE2 = 00 
     CNF2 = 00
   */
-  MODIFY_REG(GPIOA->CRL, (0xF << 8), (0x0 << 0));
-  SET_BIT(GPIOA->IDR, PINA2);
+  MODIFY_REG(GPIOA->CRL, (0xF << 8), (0x0 << 8));
 }
 
 // LED is active-LOW: BRR (reset) lights it, BSRR (set) turns it off

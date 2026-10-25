@@ -1,10 +1,12 @@
 build/app/main.o: app/main.c drivers/clock.h drivers/port_pin.h \
- drivers/exti.h drivers/uart.h app/button.h app/stateMachine.h \
- app/shell.h
+ drivers/exti.h drivers/uart.h app/button.h app/potentiometer.h \
+ app/stateMachine.h app/shell.h drivers/adc.h
 drivers/clock.h:
 drivers/port_pin.h:
 drivers/exti.h:
 drivers/uart.h:
 app/button.h:
+app/potentiometer.h:
 app/stateMachine.h:
 app/shell.h:
+drivers/adc.h:

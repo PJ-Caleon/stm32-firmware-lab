@@ -5,11 +5,13 @@
 #include "uart.h"
 #include "clock.h"
 #include "port_pin.h"
+#include "potentiometer.h"
 
 /*
   Commands:
     status  - prints system uptime
     led on  - turns the LED on, it turns itself off after 3 seconds
+    pot     - tells the current voltage mV the potentiometer output has 
 
   The shell only talks through uart.h (uart_read_char / uart_puts / printf)
   and port_pin.h (led_on / led_off). No registers here.
@@ -44,6 +46,11 @@ static void cmd_status(int argc, char **argv){
   printf("System Uptime: %lu seconds (%lu ms)\r\n", ms / 1000, ms);
 }
 
+static void cmd_pot(int argc, char **argv){
+  (void)argc; (void)argv;
+  printf("Potentiometer Vout: %u mV\r\n", Potentiometer_ReadRaw());
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -53,7 +60,8 @@ typedef struct {
 
 static const cmd_entry_t cmd_table[] = {
   {"status", cmd_status},
-  {"led",    cmd_led}
+  {"led",    cmd_led},
+  {"pot", cmd_pot}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
@@ -92,8 +100,8 @@ static void shell_led_timer(void){
 
 void shell_init(void){
   line_idx = 0;
-  uart_puts("\r\nSTM32 Shell. Commands: status | led on\r\n");
-  uart_puts("shell> ");
+  uart_puts("\r\nSTM32 Shell. Commands: status | led on | pot\r\n");
+  uart_puts("✿ ~ ❯ ");
 }
 
 void shell_poll(void){
@@ -116,7 +124,7 @@ void shell_poll(void){
         shell_run_line(line_buf);
       }
       line_idx = 0;
-      uart_puts("shell> ");
+      uart_puts("✿ ~ ❯  ");
       continue;
     }
 
