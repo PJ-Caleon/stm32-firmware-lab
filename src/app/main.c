@@ -10,6 +10,7 @@
 #include "shell.h"
 #include "adc.h"
 #include "temperature.h"
+#include "pwm.h"
 
 int main(void){
 
@@ -18,6 +19,7 @@ int main(void){
   systick_init();
   dwt_init();
   ADC_init();
+  pwm_init();
   temperature_init();
 
   // Hardware

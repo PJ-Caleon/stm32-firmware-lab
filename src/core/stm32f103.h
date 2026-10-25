@@ -72,6 +72,7 @@ typedef struct Rcc{
 #define RCC_APB2ENR_IOPCEN (1U << 4)
 #define RCC_APB2ENR_ADC1EN (1U << 9)
 #define RCC_APB2ENR_USART1EN (1U << 14)
+#define RCC_APB1ENR_TIM3EN (1UL << 1)
 
 // Flash 
 typedef struct Flash{
@@ -271,5 +272,30 @@ typedef struct Adc{
 
 #define DMA_CCR_PSIZE_16 (1U << 8)
 #define DMA_CCR_MSIZE_16 (1U << 10)
+
+// Timer Register
+typedef struct Tim{
+  volatile uint32_t CR1;
+  volatile uint32_t CR2;
+  volatile uint32_t SMCR;
+  volatile uint32_t DIER;
+  volatile uint32_t SR;
+  volatile uint32_t EGR;
+  volatile uint32_t CCMR1;
+  volatile uint32_t CCMR2;
+  volatile uint32_t CCER;
+  volatile uint32_t CNT;
+  volatile uint32_t PSC;
+  volatile uint32_t ARR;
+  volatile uint32_t Reserved1;
+  volatile uint32_t CCR1;
+  volatile uint32_t CCR2;
+  volatile uint32_t CCR3;
+  volatile uint32_t CCR4;
+} Tim;
+
+#define APB1PERIPH_BASE 0x40000000UL
+#define TIM3_BASE (APB1PERIPH_BASE + 0x0400UL)
+#define TIM3 ((Tim *) TIM3_BASE)
 
 #endif
