@@ -9,6 +9,7 @@
 #include "stateMachine.h"
 #include "shell.h"
 #include "adc.h"
+#include "temperature.h"
 
 int main(void){
 
@@ -17,6 +18,7 @@ int main(void){
   systick_init();
   dwt_init();
   ADC_init();
+  temperature_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks

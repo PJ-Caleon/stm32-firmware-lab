@@ -261,6 +261,7 @@ typedef struct Adc{
 #define ADC_SR_EOC (1U << 1)
 #define ADC_SQR3_SQ1_POS 0 
 #define ADC_SQR3_SQ1_MASK (0x1FU << 0)
+#define ADC_CR2_TSVREFE (1U << 23)
 
 
 #endif

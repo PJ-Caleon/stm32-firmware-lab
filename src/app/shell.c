@@ -6,6 +6,7 @@
 #include "clock.h"
 #include "port_pin.h"
 #include "potentiometer.h"
+#include "temperature.h"
 
 /*
   Commands:
@@ -51,6 +52,12 @@ static void cmd_pot(int argc, char **argv){
   printf("Potentiometer Vout: %u mV\r\n", Potentiometer_ReadRaw());
 }
 
+static void cmd_temp(int argc, char **argv){
+  (void)argc; (void)argv;
+  printf("MCU Temp: ~%ld °C | VREF Raw: %u \r\n", 
+         temperature_ReadCelsius(), internalVref_ReadRaw());
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -61,7 +68,8 @@ typedef struct {
 static const cmd_entry_t cmd_table[] = {
   {"status", cmd_status},
   {"led",    cmd_led},
-  {"pot", cmd_pot}
+  {"pot", cmd_pot},
+  {"temp", cmd_temp}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
@@ -100,7 +108,7 @@ static void shell_led_timer(void){
 
 void shell_init(void){
   line_idx = 0;
-  uart_puts("\r\nSTM32 Shell. Commands: status | led on | pot\r\n");
+  uart_puts("\r\nSTM32 Shell. Commands: status | led on | pot | temp \r\n");
   uart_puts("✿ ~ ❯ ");
 }
 
