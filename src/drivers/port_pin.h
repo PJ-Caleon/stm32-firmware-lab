@@ -13,7 +13,7 @@
 
 #define PINC13 (1UL << 13)
 #define PINA1 (1UL << 1)
-#define PINA2 (UL << 2)
+#define PINA2 (1UL << 2)
 #define PINA9 (1UL << 9)
 #define PINA10 (1UL << 10)
 

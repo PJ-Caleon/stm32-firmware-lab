@@ -254,5 +254,9 @@ typedef struct Adc{
 
 #define ADC_PRESCALER_MASK (3U << 14)
 #define ADC_PRESCALER_DIV6 (2U << 14)
+#define ADC_CR2_ADON (1U << 0)
+#define ADC_CR2_RSTCAL (1U << 3)
+#define ADC_CR2_CAL (1U << 2)
+
 
 #endif
