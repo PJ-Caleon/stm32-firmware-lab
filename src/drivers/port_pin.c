@@ -28,6 +28,22 @@ void port_pin_init(void){
   */
   MODIFY_REG(GPIOA->CRH, (0xF << 4), (0xB << 4));
   MODIFY_REG(GPIOA->CRH, (0xF << 8), (0x4 << 8));
+
+  /*
+    Set PA2 to analog mode
+    Analog Input is MODE2 = 00 
+    CNF2 = 00
+  */
+  MODIFY_REG(GPIOA->CRL, (0xF << 8), (0x0 << 8));
+
+  /*
+    Set PA6 to Alternate Function Push pull 
+    CNF[1:0] = 10 
+    MODE[1:0] = 11 
+    Combined: 1011 or 0xB
+    27:24
+  */
+  MODIFY_REG(GPIOA->CRL, (0xF << 24), (0xB << 24));
 }
 
 // LED is active-LOW: BRR (reset) lights it, BSRR (set) turns it off

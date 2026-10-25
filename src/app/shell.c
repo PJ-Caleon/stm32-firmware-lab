@@ -5,15 +5,10 @@
 #include "uart.h"
 #include "clock.h"
 #include "port_pin.h"
-
-/*
-  Commands:
-    status  - prints system uptime
-    led on  - turns the LED on, it turns itself off after 3 seconds
-
-  The shell only talks through uart.h (uart_read_char / uart_puts / printf)
-  and port_pin.h (led_on / led_off). No registers here.
-*/
+#include "potentiometer.h"
+#include "temperature.h"
+#include "pwm.h"
+#include "adc.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -27,6 +22,19 @@ static uint8_t led_timer_active = 0;
 static uint32_t led_off_time = 0;
 
 // Commands 
+
+static void cmd_help(int argc, char **argv){
+  (void)argc; (void)argv;
+  uart_puts("Available commands:\r\n");
+  uart_puts("  status      - Print system uptime\r\n");
+  uart_puts("  led on      - Turn on onboard LED for 3 seconds\r\n");
+  uart_puts("  pot         - Read potentiometer voltage in mV\r\n");
+  uart_puts("  temp        - Read MCU internal temperature and VREF\r\n");
+  uart_puts("  pwm         - Update and print hardware PWM duty cycle\r\n");
+  uart_puts("  pwm_test    - Run 1000-sample loopback test (PA6 to PA2)\r\n");
+  uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
+}
+
 static void cmd_led(int argc, char **argv){
   if (argc == 2 && strcmp(argv[1], "on") == 0){
     led_on();
@@ -44,6 +52,61 @@ static void cmd_status(int argc, char **argv){
   printf("System Uptime: %lu seconds (%lu ms)\r\n", ms / 1000, ms);
 }
 
+static void cmd_pot(int argc, char **argv){
+  (void)argc; (void)argv;
+  printf("Potentiometer Vout: %u mV\r\n", Potentiometer_ReadRaw());
+}
+
+static void cmd_temp(int argc, char **argv){
+  (void)argc; (void)argv;
+  printf("MCU Temp: ~%ld °C | VREF Raw: %u \r\n", 
+         temperature_ReadCelsius(), internalVref_ReadRaw());
+}
+
+static void cmd_pwm(int argc, char **argv){
+  (void)argc; (void)argv;
+  printf("PWM Duty Cycle Set: %u / 1000\r\n", pwm_update());
+}
+
+static void cmd_pwm_test(int argc, char **argv){
+  (void)argc; (void)argv;
+  uint32_t sum = 0;
+  int samples = 1000;
+
+  for (int i = 0; i < samples; i++){
+    sum += ADC_GetScanPotRaw();
+  }
+
+  uint32_t average = sum/ samples;
+  uint32_t measured_duty = (average * 1000UL)/ 4095UL;
+  printf("PWM Loop, Avg Raw: %lu | Duty: %lu / 1000\r\n", average, measured_duty);
+}
+
+static void cmd_led_dim(int argc, char **argv){
+  (void)argc; (void)argv;
+
+  printf("Starting 20-second LED dimming test. Adjust the potentiometer...\r\n");
+
+  for (int cycle = 0; cycle < 2000; cycle++){
+    uint16_t raw = ADC_GetScanPotRaw();
+    uint32_t duty = ((uint32_t)raw * 1000UL)/ 4095UL;
+
+    uint32_t on_time_ms = (1000UL - duty) * 10UL/ 1000UL;
+    uint32_t off_time_ms = 10UL - on_time_ms;
+
+    if (on_time_ms > 0){
+      led_on();
+      delay_ms(on_time_ms);
+    }
+    if (off_time_ms > 0){
+      led_off();
+      delay_ms(off_time_ms);
+    }
+  }
+  led_off();
+  printf("LED dimming test completed\r\n");
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -52,8 +115,14 @@ typedef struct {
 } cmd_entry_t;
 
 static const cmd_entry_t cmd_table[] = {
+  {"help", cmd_help},
   {"status", cmd_status},
-  {"led",    cmd_led}
+  {"led",    cmd_led},
+  {"pot", cmd_pot},
+  {"temp", cmd_temp},
+  {"pwm", cmd_pwm},
+  {"pwm_test", cmd_pwm_test},
+  {"pwm_led_dim", cmd_led_dim}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
@@ -92,8 +161,8 @@ static void shell_led_timer(void){
 
 void shell_init(void){
   line_idx = 0;
-  uart_puts("\r\nSTM32 Shell. Commands: status | led on\r\n");
-  uart_puts("shell> ");
+  uart_puts("\r\nSTM32 Shell. Type 'help' for list of commands \r\n");
+  uart_puts("✿ ~ ❯ ");
 }
 
 void shell_poll(void){
@@ -116,7 +185,7 @@ void shell_poll(void){
         shell_run_line(line_buf);
       }
       line_idx = 0;
-      uart_puts("shell> ");
+      uart_puts("✿ ~ ❯  ");
       continue;
     }
 

@@ -70,7 +70,9 @@ typedef struct Rcc{
 #define RCC_APB2ENR_AFIOEN (1U << 0)
 #define RCC_APB2ENR_IOPAEN (1U << 2)
 #define RCC_APB2ENR_IOPCEN (1U << 4)
+#define RCC_APB2ENR_ADC1EN (1U << 9)
 #define RCC_APB2ENR_USART1EN (1U << 14)
+#define RCC_APB1ENR_TIM3EN (1UL << 1)
 
 // Flash 
 typedef struct Flash{
@@ -224,5 +226,76 @@ _Static_assert(offsetof(flash, OBR) == 0x1C, "FLASH OBR must be at offset 0x1C")
 #define DMA_ISR_TCIF(ch)   (1U << (((ch) - 1U) * 4U + 1U))
 #define DMA_IFCR_CGIF(ch)  (1U << (((ch) - 1U) * 4U))      // clears ALL flags of the channel
 #define DMA_IFCR_CTCIF(ch) (1U << (((ch) - 1U) * 4U + 1U))
+
+// ADC 
+typedef struct Adc{
+  volatile uint32_t SR;
+  volatile uint32_t CR1;
+  volatile uint32_t CR2;
+  volatile uint32_t SMPR1;
+  volatile uint32_t SMPR2;
+  volatile uint32_t JOFR1;
+  volatile uint32_t JOFR2;
+  volatile uint32_t JOFR3;
+  volatile uint32_t JOFR4;
+  volatile uint32_t HTR; 
+  volatile uint32_t LTR;
+  volatile uint32_t SQR1;
+  volatile uint32_t SQR2;
+  volatile uint32_t SQR3;
+  volatile uint32_t JSQR;
+  volatile uint32_t JDR1;
+  volatile uint32_t JDR2;
+  volatile uint32_t JDR3;
+  volatile uint32_t JDR4;
+  volatile uint32_t DR;
+} Adc;
+
+#define ADC1 ((Adc *) 0x40012400U)
+
+#define ADC_PRESCALER_MASK (3U << 14)
+#define ADC_PRESCALER_DIV6 (2U << 14)
+#define ADC_CR2_ADON (1U << 0)
+#define ADC_CR2_SWSTART (1U << 22)
+#define ADC_CR2_RSTCAL (1U << 3)
+#define ADC_CR2_CAL (1U << 2)
+#define ADC_SR_EOC (1U << 1)
+#define ADC_SQR3_SQ1_POS 0 
+#define ADC_SQR3_SQ1_MASK (0x1FU << 0)
+#define ADC_CR2_TSVREFE (1U << 23)
+
+#define ADC_CR1_SCAN (1U << 8)
+#define ADC_CR2_CONT (1U << 1)
+#define ADC_CR2_DMA (1U << 8)
+#define ADC_SQR3_SQ2_POS 5 
+#define ADC_SQR3_SQ2_MASK (0x1FU << 5)
+
+#define DMA_CCR_PSIZE_16 (1U << 8)
+#define DMA_CCR_MSIZE_16 (1U << 10)
+
+// Timer Register
+typedef struct Tim{
+  volatile uint32_t CR1;
+  volatile uint32_t CR2;
+  volatile uint32_t SMCR;
+  volatile uint32_t DIER;
+  volatile uint32_t SR;
+  volatile uint32_t EGR;
+  volatile uint32_t CCMR1;
+  volatile uint32_t CCMR2;
+  volatile uint32_t CCER;
+  volatile uint32_t CNT;
+  volatile uint32_t PSC;
+  volatile uint32_t ARR;
+  volatile uint32_t Reserved1;
+  volatile uint32_t CCR1;
+  volatile uint32_t CCR2;
+  volatile uint32_t CCR3;
+  volatile uint32_t CCR4;
+} Tim;
+
+#define APB1PERIPH_BASE 0x40000000UL
+#define TIM3_BASE (APB1PERIPH_BASE + 0x0400UL)
+#define TIM3 ((Tim *) TIM3_BASE)
 
 #endif
