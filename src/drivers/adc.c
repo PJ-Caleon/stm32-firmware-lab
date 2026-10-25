@@ -72,16 +72,6 @@ void ADC_init(void){
   SET_BIT(ADC1->CR2, (ADC_CR2_SWSTART));
 }
 
-uint16_t ADC_ReadChannel(uint8_t channel){
-  // Set the 1st conversation in regular sequence to requested channel 
-  MODIFY_REG(ADC1->SQR3, ADC_SQR3_SQ1_MASK, (channel << ADC_SQR3_SQ1_POS));
-  
-  SET_BIT(ADC1->CR2, (ADC_CR2_SWSTART));
-  while (READ_BIT(ADC1->SR, ADC_SR_EOC) == 0U) {}
-
-  return (uint16_t)ADC1->DR;
-}
-
 // DMA Buffer Getters
 uint16_t ADC_GetScanPotRaw(void) {
   return adc_dma_buffer[0];

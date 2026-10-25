@@ -14,7 +14,7 @@ void temperature_init(void){
 }
 
 int32_t temperature_ReadCelsius(void){
-  uint16_t raw = ADC_ReadChannel(16);
+  uint16_t raw = ADC_GetScanTempRaw();
 
   int32_t v_mv = (int32_t)(((uint32_t)raw * 3300UL) / 4095UL);
   int32_t temp = ((1430 - v_mv) * 1000) / 4300 + 25;
