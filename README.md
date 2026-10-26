@@ -38,6 +38,13 @@ Branch: `Day7-Reaction-Time-Game`
 - It was first created in excalidraw by drawing the flow from one state to another then created a table with state, event, next_state, and action
 - As for code implementation, it is done via switch-case where it checks on the state case then does the operation and moves to the next state 
 - The test timing of this code was done *in le head* 
+## Yunayuispink's Malfoid in OLED
+
+Branch: `day11-I2C`
+
+During the implementation of the I2C with OLED, I decided to add this cool artwork just for fun. Original artwork goes to `@yunayuispink`
+
+![455](img/malfoid.jpg)
 # Reference
 - Test Driven Development: https://pragprog.com/titles/jgade/test-driven-development-for-embedded-c/
 
