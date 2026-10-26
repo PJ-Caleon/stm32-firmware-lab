@@ -9,6 +9,7 @@
 #include "temperature.h"
 #include "pwm.h"
 #include "adc.h"
+#include "i2c.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -33,6 +34,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm         - Update and print hardware PWM duty cycle\r\n");
   uart_puts("  pwm_test    - Run 1000-sample loopback test (PA6 to PA2)\r\n");
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
+  uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -107,6 +109,11 @@ static void cmd_led_dim(int argc, char **argv){
   printf("LED dimming test completed\r\n");
 }
 
+static void cmd_i2c_scan(int argc, char **argv){
+  (void)argc; (void)argv;
+  i2c_scan();
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -122,7 +129,8 @@ static const cmd_entry_t cmd_table[] = {
   {"temp", cmd_temp},
   {"pwm", cmd_pwm},
   {"pwm_test", cmd_pwm_test},
-  {"pwm_led_dim", cmd_led_dim}
+  {"pwm_led_dim", cmd_led_dim},
+  {"i2c_scan", cmd_i2c_scan}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))

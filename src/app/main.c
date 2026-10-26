@@ -22,13 +22,13 @@ int main(void){
   ADC_init();
   pwm_init();
   temperature_init();
-  i2c_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks
   uart_init(PCLK2_HZ);    // USART1 + its DMA channels
   exti1_init();           // PA1 button interrupt
   exti1_latency_test();   // optional: fills dwt_start / dwt_isr for the debugger
+  i2c_init();             
 
   // Application
   shell_init();

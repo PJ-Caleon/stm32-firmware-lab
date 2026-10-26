@@ -337,5 +337,6 @@ typedef struct I2c{
 #define I2C_SR1_RXNE (1UL << 6)
 #define I2C_SR1_TXE (1UL << 7)
 #define I2C_SR1_AF (1UL << 10)
+#define I2C_CR1_SWRST (1UL << 15)
 
 #endif

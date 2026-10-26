@@ -1,11 +1,17 @@
 #include <stdint.h>
+#include <stdio.h>
 #include "stm32f103.h"
+#include "uart.h"
+#include "i2c.h"
 
 #define I2C_TIMEOUT_MAX 50000UL
 
 void i2c_init(void){
   // Enable I2C1 clock 
   SET_BIT(RCC->APB1ENR, (RCC_APB1ENR_I2C1EN));
+
+  SET_BIT(I2C1->CR1, (I2C_CR1_SWRST));
+  CLEAR_BIT(I2C1->CR1, (I2C_CR1_SWRST));
 
   /*
     Configure I2C1
@@ -45,7 +51,7 @@ void i2c_write(uint8_t addr, uint8_t *buf, uint16_t len){
   // Send slave address with write bit 0 
   I2C1->DR = (addr << 1) & ~0x1;
   timeout = I2C_TIMEOUT_MAX;
-  while(!(I2C1->SR1 & I2C_SR1_AF)){
+  while(!(I2C1->SR1 & I2C_SR1_ADDR)){
     // Check ACK 
     if (I2C1->SR1 & I2C_SR1_AF){
       CLEAR_BIT(I2C1->SR1, I2C_SR1_AF);
@@ -143,4 +149,56 @@ void i2c_read(uint8_t addr, uint8_t *buf, uint16_t len){
     }
     buf[i] = I2C1->DR;
   }
+}
+
+uint16_t i2c_device_ready(uint8_t addr){
+  uint32_t timeout;
+  
+  timeout = I2C_TIMEOUT_MAX;
+  while (I2C1->CR1 & I2C_CR1_STOP){
+    if (--timeout == 0) return 0;
+  }
+
+  SET_BIT(I2C1->CR1, I2C_CR1_START);
+  timeout = I2C_TIMEOUT_MAX;
+  while (!(I2C1->SR1 & I2C_SR1_SB)){
+    if (--timeout == 0){
+      SET_BIT(I2C1->CR1, I2C_CR1_STOP);
+      return 0;
+    }
+  }
+
+  I2C1->DR = (addr << 1) & ~0x1;
+  timeout = I2C_TIMEOUT_MAX;
+  while (!(I2C1->SR1 & I2C_SR1_ADDR)){
+    if (I2C1->SR1 & I2C_SR1_AF){
+      CLEAR_BIT(I2C1->SR1, I2C_SR1_AF);
+      SET_BIT(I2C1->CR1, I2C_CR1_STOP);
+      return 0;
+    }
+    if (--timeout == 0){
+      SET_BIT(I2C1->CR1, I2C_CR1_STOP);
+      return 0;
+    }
+  }
+
+  (void)I2C1->SR1;
+  (void)I2C1->SR2;
+  SET_BIT(I2C1->CR1, I2C_CR1_STOP);
+  return 1;
+}
+
+void i2c_scan(void){
+  char msg[64];
+
+  uart_puts("Scanning I2C bus...\r\n");
+
+  for (uint8_t addr = 0x08; addr <= 0x77; addr++) {
+    if (i2c_device_ready(addr)){
+      sprintf(msg, "Found I2C device at address: 0x%02X\r\n", addr);
+      uart_puts(msg);
+    }
+  }
+  uart_puts("I2C scan complete\r\n");
+
 }
