@@ -2,8 +2,8 @@
 #include "port_pin.h"
 
 void port_pin_init(void){
-  // Clocks for AFIO (bit 0), GPIOA (bit 2), GPIOC (bit 4)
-  SET_BIT(RCC->APB2ENR, (RCC_APB2ENR_AFIOEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPCEN));
+  // Clocks for AFIO (bit 0), GPIOA (bit 2), GPIOB (bit 3), GPIOC (bit 4)
+  SET_BIT(RCC->APB2ENR, (RCC_APB2ENR_AFIOEN | RCC_APB2ENR_IOPAEN | RCC_APB2ENR_IOPBEN | RCC_APB2ENR_IOPCEN));
   (void)RCC->APB2ENR; // read back so the clock is running before touching GPIO registers
 
   /*
@@ -44,6 +44,14 @@ void port_pin_init(void){
     27:24
   */
   MODIFY_REG(GPIOA->CRL, (0xF << 24), (0xB << 24));
+
+  /*
+    Set PB6 - to I2C1_SCL [27:24] 
+    Set PB7 to I2C1_SDA [31:28]
+    Alternate function open drain with 50 MHz 
+  */
+  MODIFY_REG(GPIOB->CRL, (0xF << 24), (0xF << 24));
+  MODIFY_REG(GPIOB->CRL, (0xF << 28), (0xF << 28));
 }
 
 // LED is active-LOW: BRR (reset) lights it, BSRR (set) turns it off

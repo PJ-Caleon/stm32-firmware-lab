@@ -29,6 +29,8 @@ typedef struct Gpio{
 
 // Mapped at GPIOA 0x40010800
 #define GPIOA ((gpio *) 0x40010800)
+// Mapped at GPIOB 0x40010C00 
+#define GPIOB ((gpio *) 0x40010C00)
 // Mapped at GPIOC 0x40011000
 #define GPIOC ((gpio *) 0x40011000)
 
@@ -69,10 +71,12 @@ typedef struct Rcc{
 #define RCC_AHBENR_DMA1EN (1U << 0)
 #define RCC_APB2ENR_AFIOEN (1U << 0)
 #define RCC_APB2ENR_IOPAEN (1U << 2)
+#define RCC_APB2ENR_IOPBEN (1U << 3)
 #define RCC_APB2ENR_IOPCEN (1U << 4)
 #define RCC_APB2ENR_ADC1EN (1U << 9)
 #define RCC_APB2ENR_USART1EN (1U << 14)
 #define RCC_APB1ENR_TIM3EN (1UL << 1)
+#define RCC_APB1ENR_I2C1EN (1UL << 21)
 
 // Flash 
 typedef struct Flash{

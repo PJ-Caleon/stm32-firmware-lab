@@ -11,6 +11,7 @@
 #include "adc.h"
 #include "temperature.h"
 #include "pwm.h"
+#include "i2c.h"
 
 int main(void){
 
@@ -21,6 +22,7 @@ int main(void){
   ADC_init();
   pwm_init();
   temperature_init();
+  i2c_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks
