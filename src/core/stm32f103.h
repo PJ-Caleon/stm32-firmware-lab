@@ -29,6 +29,8 @@ typedef struct Gpio{
 
 // Mapped at GPIOA 0x40010800
 #define GPIOA ((gpio *) 0x40010800)
+// Mapped at GPIOB 0x40010C00 
+#define GPIOB ((gpio *) 0x40010C00)
 // Mapped at GPIOC 0x40011000
 #define GPIOC ((gpio *) 0x40011000)
 
@@ -69,10 +71,12 @@ typedef struct Rcc{
 #define RCC_AHBENR_DMA1EN (1U << 0)
 #define RCC_APB2ENR_AFIOEN (1U << 0)
 #define RCC_APB2ENR_IOPAEN (1U << 2)
+#define RCC_APB2ENR_IOPBEN (1U << 3)
 #define RCC_APB2ENR_IOPCEN (1U << 4)
 #define RCC_APB2ENR_ADC1EN (1U << 9)
 #define RCC_APB2ENR_USART1EN (1U << 14)
 #define RCC_APB1ENR_TIM3EN (1UL << 1)
+#define RCC_APB1ENR_I2C1EN (1UL << 21)
 
 // Flash 
 typedef struct Flash{
@@ -297,5 +301,42 @@ typedef struct Tim{
 #define APB1PERIPH_BASE 0x40000000UL
 #define TIM3_BASE (APB1PERIPH_BASE + 0x0400UL)
 #define TIM3 ((Tim *) TIM3_BASE)
+
+// I2C Register 
+typedef struct I2c{
+  volatile uint16_t CR1;
+  uint16_t RESERVED0;
+  volatile uint16_t CR2;
+  uint16_t RESERVED1;
+  volatile uint16_t OAR1;
+  uint16_t RESERVED2;
+  volatile uint16_t OAR2;
+  uint16_t RESERVED3;
+  volatile uint16_t DR;
+  uint16_t RESERVED4;
+  volatile uint16_t SR1;
+  uint16_t RESERVED5;
+  volatile uint16_t SR2;
+  uint16_t RESERVED6;
+  volatile uint16_t CCR;
+  uint16_t RESERVED7;
+  volatile uint16_t TRISE;
+  uint16_t RESERVED8;
+} i2c;
+
+#define I2C1_BASE (APB1PERIPH_BASE + 0x5400UL)
+#define I2C1 ((i2c *) I2C1_BASE)
+
+#define I2C_CR1_START (1UL << 8)
+#define I2C_CR1_STOP (1UL << 9)
+#define I2C_CR1_ACK (1UL << 10)
+
+#define I2C_SR1_SB (1UL << 0)
+#define I2C_SR1_ADDR (1UL << 1)
+#define I2C_SR1_BTF (1UL << 2)
+#define I2C_SR1_RXNE (1UL << 6)
+#define I2C_SR1_TXE (1UL << 7)
+#define I2C_SR1_AF (1UL << 10)
+#define I2C_CR1_SWRST (1UL << 15)
 
 #endif
