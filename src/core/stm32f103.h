@@ -327,4 +327,15 @@ typedef struct I2c{
 #define I2C1_BASE (APB1PERIPH_BASE + 0x5400UL)
 #define I2C1 ((i2c *) I2C1_BASE)
 
+#define I2C_CR1_START (1UL << 8)
+#define I2C_CR1_STOP (1UL << 9)
+#define I2C_CR1_ACK (1UL << 10)
+
+#define I2C_SR1_SB (1UL << 0)
+#define I2C_SR1_ADDR (1UL << 1)
+#define I2C_SR1_BTF (1UL << 2)
+#define I2C_SR1_RXNE (1UL << 6)
+#define I2C_SR1_TXE (1UL << 7)
+#define I2C_SR1_AF (1UL << 10)
+
 #endif
