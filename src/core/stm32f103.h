@@ -302,4 +302,29 @@ typedef struct Tim{
 #define TIM3_BASE (APB1PERIPH_BASE + 0x0400UL)
 #define TIM3 ((Tim *) TIM3_BASE)
 
+// I2C Register 
+typedef struct I2c{
+  volatile uint16_t CR1;
+  uint16_t RESERVED0;
+  volatile uint16_t CR2;
+  uint16_t RESERVED1;
+  volatile uint16_t OAR1;
+  uint16_t RESERVED2;
+  volatile uint16_t OAR2;
+  uint16_t RESERVED3;
+  volatile uint16_t DR;
+  uint16_t RESERVED4;
+  volatile uint16_t SR1;
+  uint16_t RESERVED5;
+  volatile uint16_t SR2;
+  uint16_t RESERVED6;
+  volatile uint16_t CCR;
+  uint16_t RESERVED7;
+  volatile uint16_t TRISE;
+  uint16_t RESERVED8;
+} i2c;
+
+#define I2C1_BASE (APB1PERIPH_BASE + 0x5400UL)
+#define I2C1 ((i2c *) I2C1_BASE)
+
 #endif
