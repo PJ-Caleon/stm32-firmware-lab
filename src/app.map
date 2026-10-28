@@ -149,7 +149,7 @@ END GROUP
 .ARM.exidx      0x080000d8        0x8
  .ARM.exidx     0x080000d8        0x8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strcmp.o)
 
-.text           0x080000e0     0x465f
+.text           0x080000e0     0x4903
  *(.vectors .vectors.*)
  *(.text*)
  .text          0x080000e0       0x8c build/core/startup.o
@@ -218,397 +218,395 @@ END GROUP
  .text          0x08000fa4       0xa4 build/drivers/pwm.o
                 0x08000fa4                pwm_init
                 0x08001004                pwm_update
- .text          0x08001048      0x1cc build/drivers/spi.o
+ .text          0x08001048      0x164 build/drivers/spi.o
                 0x08001048                spi_init
-                0x08001110                spi_transmit
-                0x08001188                spi_receive
-                0x080011e8                spi_xfer
- .text          0x08001214      0x250 build/drivers/uart.o
-                0x0800122a                uart_data_available
-                0x0800124c                uart_read_char
-                0x08001360                uart_putc
-                0x080013c0                uart_puts
-                0x080013ec                uart_init
- .text          0x08001464       0x48 build/app/button.o
-                0x08001464                button_poll
- .text          0x080014ac       0x80 build/app/main.o
-                0x080014ac                main
- .text          0x0800152c       0x9c build/app/malfoid.o
-                0x0800152c                draco_malfoid
- .text          0x080015c8      0x394 build/app/oled.o
-                0x080015f0                oled_clear
-                0x08001608                oled_draw_pixel
-                0x080016ac                oled_draw_char
-                0x0800175c                oled_draw_string
-                0x080017a2                oled_refresh
-                0x0800183c                oled_dashboard
-                0x08001924                oled_init
- .text          0x0800195c       0x34 build/app/potentiometer.o
-                0x0800195c                Potentiometer_ReadRaw
- .text          0x08001990      0x4b4 build/app/shell.o
-                0x08001d1c                shell_init
-                0x08001d44                shell_poll
- .text          0x08001e44      0x180 build/app/stateMachine.o
-                0x08001e70                stateMachine_update
- .text          0x08001fc4       0xa4 build/app/temperature.o
-                0x08001fc4                temperature_init
-                0x08001ffc                temperature_ReadCelsius
-                0x08002058                internalVref_ReadRaw
- .text          0x08002068        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
+                0x08001110                spi_xfer
+ .text          0x080011ac      0x250 build/drivers/uart.o
+                0x080011c2                uart_data_available
+                0x080011e4                uart_read_char
+                0x080012f8                uart_putc
+                0x08001358                uart_puts
+                0x08001384                uart_init
+ .text          0x080013fc       0x48 build/app/button.o
+                0x080013fc                button_poll
+ .text          0x08001444       0x84 build/app/main.o
+                0x08001444                main
+ .text          0x080014c8       0x9c build/app/malfoid.o
+                0x080014c8                draco_malfoid
+ .text          0x08001564      0x394 build/app/oled.o
+                0x0800158c                oled_clear
+                0x080015a4                oled_draw_pixel
+                0x08001648                oled_draw_char
+                0x080016f8                oled_draw_string
+                0x0800173e                oled_refresh
+                0x080017d8                oled_dashboard
+                0x080018c0                oled_init
+ .text          0x080018f8       0x34 build/app/potentiometer.o
+                0x080018f8                Potentiometer_ReadRaw
+ .text          0x0800192c      0x6a0 build/app/shell.o
+                0x08001ea4                shell_init
+                0x08001ecc                shell_poll
+ .text          0x08001fcc      0x180 build/app/stateMachine.o
+                0x08001ff8                stateMachine_update
+ .text          0x0800214c       0xa4 build/app/temperature.o
+                0x0800214c                temperature_init
+                0x08002184                temperature_ReadCelsius
+                0x080021e0                internalVref_ReadRaw
+ .text          0x080021f0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
  .text._printf_r
-                0x08002068       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
-                0x08002068                _printf_r
-                0x08002068                _iprintf_r
- .text.printf   0x08002084       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
-                0x08002084                printf
-                0x08002084                iprintf
- .text          0x080020a8        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
- .text._puts_r  0x080020a8       0xaa /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
-                0x080020a8                _puts_r
- *fill*         0x08002152        0x2 
- .text.puts     0x08002154       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
-                0x08002154                puts
- .text          0x08002164        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
+                0x080021f0       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
+                0x080021f0                _printf_r
+                0x080021f0                _iprintf_r
+ .text.printf   0x0800220c       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
+                0x0800220c                printf
+                0x0800220c                iprintf
+ .text          0x08002230        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
+ .text._puts_r  0x08002230       0xaa /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
+                0x08002230                _puts_r
+ *fill*         0x080022da        0x2 
+ .text.puts     0x080022dc       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
+                0x080022dc                puts
+ .text          0x080022ec        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
  .text._sprintf_r
-                0x08002164       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
-                0x08002164                _siprintf_r
-                0x08002164                _sprintf_r
- .text.sprintf  0x080021a0       0x44 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
-                0x080021a0                sprintf
-                0x080021a0                siprintf
- .text          0x080021e4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
+                0x080022ec       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
+                0x080022ec                _siprintf_r
+                0x080022ec                _sprintf_r
+ .text.sprintf  0x08002328       0x44 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
+                0x08002328                sprintf
+                0x08002328                siprintf
+ .text          0x0800236c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
  .text.__swbuf_r
-                0x080021e4       0x7a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
-                0x080021e4                __swbuf_r
- *fill*         0x0800225e        0x2 
- .text.__swbuf  0x08002260       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
-                0x08002260                __swbuf
- .text          0x08002270        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
+                0x0800236c       0x7a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
+                0x0800236c                __swbuf_r
+ *fill*         0x080023e6        0x2 
+ .text.__swbuf  0x080023e8       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
+                0x080023e8                __swbuf
+ .text          0x080023f8        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
  .text.__swsetup_r
-                0x08002270       0xa8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
-                0x08002270                __swsetup_r
- .text          0x08002318        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
- .text.memset   0x08002318       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
-                0x08002318                memset
- .text          0x08002328        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
- .text.strtok   0x08002328       0x7c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
-                0x08002328                strtok
- .text          0x080023a4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
+                0x080023f8       0xa8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
+                0x080023f8                __swsetup_r
+ .text          0x080024a0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+ .text.memset   0x080024a0       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+                0x080024a0                memset
+ .text          0x080024b0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
+ .text.strtok   0x080024b0       0x7c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
+                0x080024b0                strtok
+ .text          0x0800252c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
  .text.__strtok_r
-                0x080023a4       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
-                0x080023a4                __strtok_r
+                0x0800252c       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
+                0x0800252c                __strtok_r
  .text.strtok_r
-                0x080023f4        0x6 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
-                0x080023f4                strtok_r
- .text          0x080023fa        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-impure.o)
- .text          0x080023fa        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
- *fill*         0x080023fa        0x2 
- .text.__errno  0x080023fc        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
-                0x080023fc                __errno
- .text          0x08002408        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x0800257c        0x6 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
+                0x0800257c                strtok_r
+ .text          0x08002582        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-impure.o)
+ .text          0x08002582        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
+ *fill*         0x08002582        0x2 
+ .text.__errno  0x08002584        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
+                0x08002584                __errno
+ .text          0x08002590        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
  .text.__retarget_lock_init
-                0x08002408        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08002408                __retarget_lock_init
+                0x08002590        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08002590                __retarget_lock_init
  .text.__retarget_lock_init_recursive
-                0x0800240a        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800240a                __retarget_lock_init_recursive
+                0x08002592        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08002592                __retarget_lock_init_recursive
  .text.__retarget_lock_close
-                0x0800240c        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800240c                __retarget_lock_close
+                0x08002594        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08002594                __retarget_lock_close
  .text.__retarget_lock_close_recursive
-                0x0800240e        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800240e                __retarget_lock_close_recursive
+                0x08002596        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08002596                __retarget_lock_close_recursive
  .text.__retarget_lock_acquire
-                0x08002410        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08002410                __retarget_lock_acquire
+                0x08002598        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08002598                __retarget_lock_acquire
  .text.__retarget_lock_acquire_recursive
-                0x08002412        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08002412                __retarget_lock_acquire_recursive
+                0x0800259a        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x0800259a                __retarget_lock_acquire_recursive
  .text.__retarget_lock_try_acquire
-                0x08002414        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08002414                __retarget_lock_try_acquire
+                0x0800259c        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x0800259c                __retarget_lock_try_acquire
  .text.__retarget_lock_try_acquire_recursive
-                0x08002418        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08002418                __retarget_lock_try_acquire_recursive
+                0x080025a0        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x080025a0                __retarget_lock_try_acquire_recursive
  .text.__retarget_lock_release
-                0x0800241c        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800241c                __retarget_lock_release
+                0x080025a4        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x080025a4                __retarget_lock_release
  .text.__retarget_lock_release_recursive
-                0x0800241e        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800241e                __retarget_lock_release_recursive
- .text          0x08002420       0x14 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strcmp.o)
-                0x08002420                strcmp
- .text          0x08002434        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080025a6        0x2 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x080025a6                __retarget_lock_release_recursive
+ .text          0x080025a8       0x14 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strcmp.o)
+                0x080025a8                strcmp
+ .text          0x080025bc        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
  .text.__assert_func
-                0x08002434       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
-                0x08002434                __assert_func
+                0x080025bc       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080025bc                __assert_func
  .text.__assert
-                0x08002470        0xa /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
-                0x08002470                __assert
- .text          0x0800247a        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
- *fill*         0x0800247a        0x2 
- .text._free_r  0x0800247c       0x94 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
-                0x0800247c                _free_r
- .text          0x08002510        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
- .text.malloc   0x08002510       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
-                0x08002510                malloc
- .text.free     0x08002520       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
-                0x08002520                free
- .text          0x08002530        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x080025f8        0xa /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080025f8                __assert
+ .text          0x08002602        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
+ *fill*         0x08002602        0x2 
+ .text._free_r  0x08002604       0x94 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
+                0x08002604                _free_r
+ .text          0x08002698        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
+ .text.malloc   0x08002698       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
+                0x08002698                malloc
+ .text.free     0x080026a8       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
+                0x080026a8                free
+ .text          0x080026b8        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
  .text.sbrk_aligned
-                0x08002530       0x44 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x080026b8       0x44 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x08002574       0xf8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
-                0x08002574                _malloc_r
- .text          0x0800266c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+                0x080026fc       0xf8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x080026fc                _malloc_r
+ .text          0x080027f4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
  .text.__malloc_lock
-                0x0800266c        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
-                0x0800266c                __malloc_lock
+                0x080027f4        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+                0x080027f4                __malloc_lock
  .text.__malloc_unlock
-                0x08002678        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
-                0x08002678                __malloc_unlock
- .text          0x08002684        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08002800        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+                0x08002800                __malloc_unlock
+ .text          0x0800280c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
  .text.__ssputs_r
-                0x08002684       0xc0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08002684                __ssputs_r
+                0x0800280c       0xc0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x0800280c                __ssputs_r
  .text.__ssprint_r
-                0x08002744       0xf4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08002744                __ssprint_r
+                0x080028cc       0xf4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x080028cc                __ssprint_r
  .text._svfprintf_r
-                0x08002838      0x1f0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08002838                _svfprintf_r
-                0x08002838                _svfiprintf_r
- .text          0x08002a28        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080029c0      0x1f0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x080029c0                _svfprintf_r
+                0x080029c0                _svfiprintf_r
+ .text          0x08002bb0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
  .text.__sfputc_r
-                0x08002a28       0x2a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08002bb0       0x2a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
  .text.__sfputs_r
-                0x08002a52       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x08002a52                __sfputs_r
+                0x08002bda       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08002bda                __sfputs_r
  .text.__sprint_r
-                0x08002a76       0x1a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x08002a76                __sprint_r
+                0x08002bfe       0x1a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08002bfe                __sprint_r
  .text._vfprintf_r
-                0x08002a90      0x228 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x08002a90                _vfiprintf_r
-                0x08002a90                _vfprintf_r
+                0x08002c18      0x228 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08002c18                _vfiprintf_r
+                0x08002c18                _vfprintf_r
  .text.vfprintf
-                0x08002cb8       0x14 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x08002cb8                vfiprintf
-                0x08002cb8                vfprintf
- .text          0x08002ccc        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08002e40       0x14 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08002e40                vfiprintf
+                0x08002e40                vfprintf
+ .text          0x08002e54        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
  .text._printf_common
-                0x08002ccc       0xea /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08002ccc                _printf_common
- *fill*         0x08002db6        0x2 
+                0x08002e54       0xea /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08002e54                _printf_common
+ *fill*         0x08002f3e        0x2 
  .text._printf_i
-                0x08002db8      0x254 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08002db8                _printf_i
- .text          0x0800300c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x08002f40      0x254 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08002f40                _printf_i
+ .text          0x08003194        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
  .text.__sflush_r
-                0x0800300c       0xf8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
-                0x0800300c                __sflush_r
+                0x08003194       0xf8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x08003194                __sflush_r
  .text._fflush_r
-                0x08003104       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
-                0x08003104                _fflush_r
- .text.fflush   0x08003154       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
-                0x08003154                fflush
- .text          0x0800317c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
- .text.std      0x0800317c       0x6c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x0800328c       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x0800328c                _fflush_r
+ .text.fflush   0x080032dc       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x080032dc                fflush
+ .text          0x08003304        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+ .text.std      0x08003304       0x6c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.stdio_exit_handler
-                0x080031e8       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003370       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.cleanup_stdio
-                0x08003200       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003388       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.__fp_lock
-                0x08003240       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x080033c8       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.__fp_unlock
-                0x08003258       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x080033e0       0x18 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.global_stdio_init.part.0
-                0x08003270       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x080033f8       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.__sfp_lock_acquire
-                0x080032b0        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x080032b0                __sfp_lock_acquire
+                0x08003438        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003438                __sfp_lock_acquire
  .text.__sfp_lock_release
-                0x080032bc        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x080032bc                __sfp_lock_release
- .text.__sfp    0x080032c8       0xa4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x080032c8                __sfp
- .text.__sinit  0x0800336c       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x0800336c                __sinit
+                0x08003444        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003444                __sfp_lock_release
+ .text.__sfp    0x08003450       0xa4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003450                __sfp
+ .text.__sinit  0x080034f4       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x080034f4                __sinit
  .text.__fp_lock_all
-                0x0800339c       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x0800339c                __fp_lock_all
+                0x08003524       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003524                __fp_lock_all
  .text.__fp_unlock_all
-                0x080033b8       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x080033b8                __fp_unlock_all
- .text          0x080033d4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
+                0x08003540       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08003540                __fp_unlock_all
+ .text          0x0800355c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
  .text._fprintf_r
-                0x080033d4       0x1a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
-                0x080033d4                _fprintf_r
-                0x080033d4                _fiprintf_r
- *fill*         0x080033ee        0x2 
- .text.fprintf  0x080033f0       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
-                0x080033f0                fprintf
-                0x080033f0                fiprintf
- .text          0x08003414        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
+                0x0800355c       0x1a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
+                0x0800355c                _fprintf_r
+                0x0800355c                _fiprintf_r
+ *fill*         0x08003576        0x2 
+ .text.fprintf  0x08003578       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
+                0x08003578                fprintf
+                0x08003578                fiprintf
+ .text          0x0800359c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
  .text.__sfvwrite_r
-                0x08003414      0x2a0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
-                0x08003414                __sfvwrite_r
- .text          0x080036b4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
+                0x0800359c      0x2a0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
+                0x0800359c                __sfvwrite_r
+ .text          0x0800383c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
  .text._fwalk_sglue
-                0x080036b4       0x3a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
-                0x080036b4                _fwalk_sglue
- .text          0x080036ee        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+                0x0800383c       0x3a /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
+                0x0800383c                _fwalk_sglue
+ .text          0x08003876        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
  .text.__swhatbuf_r
-                0x080036ee       0x48 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
-                0x080036ee                __swhatbuf_r
+                0x08003876       0x48 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+                0x08003876                __swhatbuf_r
  .text.__smakebuf_r
-                0x08003736       0x72 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
-                0x08003736                __smakebuf_r
- .text          0x080037a8        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
- .text.__sread  0x080037a8       0x22 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x080037a8                __sread
+                0x080038be       0x72 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+                0x080038be                __smakebuf_r
+ .text          0x08003930        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+ .text.__sread  0x08003930       0x22 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x08003930                __sread
  .text.__seofread
-                0x080037ca        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x080037ca                __seofread
+                0x08003952        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x08003952                __seofread
  .text.__swrite
-                0x080037ce       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x080037ce                __swrite
- .text.__sseek  0x08003806       0x26 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x08003806                __sseek
+                0x08003956       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x08003956                __swrite
+ .text.__sseek  0x0800398e       0x26 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x0800398e                __sseek
  .text.__sclose
-                0x0800382c        0x8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x0800382c                __sclose
- .text          0x08003834        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
- .text.memmove  0x08003834       0x32 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
-                0x08003834                memmove
- .text          0x08003866        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
- *fill*         0x08003866        0x2 
+                0x080039b4        0x8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x080039b4                __sclose
+ .text          0x080039bc        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
+ .text.memmove  0x080039bc       0x32 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
+                0x080039bc                memmove
+ .text          0x080039ee        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
+ *fill*         0x080039ee        0x2 
  .text._close_r
-                0x08003868       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
-                0x08003868                _close_r
- .text          0x08003888        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
+                0x080039f0       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
+                0x080039f0                _close_r
+ .text          0x08003a10        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
  .text._reclaim_reent
-                0x08003888       0xbc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
-                0x08003888                _reclaim_reent
- .text          0x08003944        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
+                0x08003a10       0xbc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
+                0x08003a10                _reclaim_reent
+ .text          0x08003acc        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
  .text._fstat_r
-                0x08003944       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
-                0x08003944                _fstat_r
- .text          0x08003968        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
+                0x08003acc       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
+                0x08003acc                _fstat_r
+ .text          0x08003af0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
  .text._isatty_r
-                0x08003968       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
-                0x08003968                _isatty_r
- .text          0x08003988        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
+                0x08003af0       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
+                0x08003af0                _isatty_r
+ .text          0x08003b10        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
  .text._lseek_r
-                0x08003988       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
-                0x08003988                _lseek_r
- .text          0x080039ac        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
- .text._read_r  0x080039ac       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
-                0x080039ac                _read_r
- .text          0x080039d0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
- .text._sbrk_r  0x080039d0       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
-                0x080039d0                _sbrk_r
- .text          0x080039f0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
+                0x08003b10       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
+                0x08003b10                _lseek_r
+ .text          0x08003b34        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
+ .text._read_r  0x08003b34       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
+                0x08003b34                _read_r
+ .text          0x08003b58        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
+ .text._sbrk_r  0x08003b58       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
+                0x08003b58                _sbrk_r
+ .text          0x08003b78        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
  .text._write_r
-                0x080039f0       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
-                0x080039f0                _write_r
- .text          0x08003a14        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
- .text.memchr   0x08003a14       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
-                0x08003a14                memchr
- .text          0x08003a30        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
- .text.memcpy   0x08003a30       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
-                0x08003a30                memcpy
- .text          0x08003a4c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
- .text.abort    0x08003a4c        0xe /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
-                0x08003a4c                abort
- .text          0x08003a5a        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
+                0x08003b78       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
+                0x08003b78                _write_r
+ .text          0x08003b9c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
+ .text.memchr   0x08003b9c       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
+                0x08003b9c                memchr
+ .text          0x08003bb8        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
+ .text.memcpy   0x08003bb8       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
+                0x08003bb8                memcpy
+ .text          0x08003bd4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
+ .text.abort    0x08003bd4        0xe /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
+                0x08003bd4                abort
+ .text          0x08003be2        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
  .text._realloc_r
-                0x08003a5a       0x5c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
-                0x08003a5a                _realloc_r
- .text          0x08003ab6        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003be2       0x5c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
+                0x08003be2                _realloc_r
+ .text          0x08003c3e        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
  .text._init_signal_r
-                0x08003ab6       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003ab6                _init_signal_r
+                0x08003c3e       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003c3e                _init_signal_r
  .text._signal_r
-                0x08003ade       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003ade                _signal_r
+                0x08003c66       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003c66                _signal_r
  .text._raise_r
-                0x08003b0e       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003b0e                _raise_r
+                0x08003c96       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003c96                _raise_r
  .text.__sigtramp_r
-                0x08003b5e       0x48 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003b5e                __sigtramp_r
- *fill*         0x08003ba6        0x2 
- .text.raise    0x08003ba8       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003ba8                raise
- .text.signal   0x08003bb8       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003bb8                signal
+                0x08003ce6       0x48 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003ce6                __sigtramp_r
+ *fill*         0x08003d2e        0x2 
+ .text.raise    0x08003d30       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003d30                raise
+ .text.signal   0x08003d40       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003d40                signal
  .text._init_signal
-                0x08003bc8        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003bc8                _init_signal
+                0x08003d50        0xc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003d50                _init_signal
  .text.__sigtramp
-                0x08003bd4       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08003bd4                __sigtramp
- .text          0x08003be4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
- .text._kill_r  0x08003be4       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
-                0x08003be4                _kill_r
+                0x08003d5c       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08003d5c                __sigtramp
+ .text          0x08003d6c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+ .text._kill_r  0x08003d6c       0x24 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+                0x08003d6c                _kill_r
  .text._getpid_r
-                0x08003c08        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
-                0x08003c08                _getpid_r
- .text          0x08003c0c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
+                0x08003d90        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+                0x08003d90                _getpid_r
+ .text          0x08003d94        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
  .text._malloc_usable_size_r
-                0x08003c0c       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
-                0x08003c0c                _malloc_usable_size_r
- .text          0x08003c1c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
- .text._sbrk    0x08003c1c       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
-                0x08003c1c                _sbrk
- .text          0x08003c38        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
- .text._exit    0x08003c38        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
-                0x08003c38                _exit
+                0x08003d94       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
+                0x08003d94                _malloc_usable_size_r
+ .text          0x08003da4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+ .text._sbrk    0x08003da4       0x1c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+                0x08003da4                _sbrk
+ .text          0x08003dc0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
+ .text._exit    0x08003dc0        0x4 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
+                0x08003dc0                _exit
  *(.rodata*)
- .rodata        0x08003c3c       0x54 build/drivers/i2c.o
- .rodata        0x08003c90      0x409 build/app/malfoid.o
- *fill*         0x08004099        0x3 
- .rodata        0x0800409c      0x16a build/app/oled.o
- *fill*         0x08004206        0x2 
- .rodata        0x08004208      0x440 build/app/shell.o
+ .rodata        0x08003dc4       0x54 build/drivers/i2c.o
+ .rodata        0x08003e18      0x409 build/app/malfoid.o
+ *fill*         0x08004221        0x3 
+ .rodata        0x08004224      0x16a build/app/oled.o
+ *fill*         0x0800438e        0x2 
+ .rodata        0x08004390      0x55c build/app/shell.o
  .rodata.strtok.str1.1
-                0x08004648       0xf7 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
+                0x080048ec       0xf7 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
                                  0x88 (size before relaxing)
  .rodata.__assert_func.str1.1
-                0x0800473f        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080049e3        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
                                  0x3d (size before relaxing)
  .rodata._svfprintf_r.str1.1
-                0x0800473f        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x080049e3        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._vfprintf_r.str1.1
-                0x0800473f        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080049e3        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._printf_i.str1.1
-                0x0800473f        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x080049e3        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
                                  0x22 (size before relaxing)
-                0x0800473f                        _etext = .
+                0x080049e3                        _etext = .
 
-.glue_7         0x08004740        0x0
- .glue_7        0x08004740        0x0 linker stubs
+.glue_7         0x080049e4        0x0
+ .glue_7        0x080049e4        0x0 linker stubs
 
-.glue_7t        0x08004740        0x0
- .glue_7t       0x08004740        0x0 linker stubs
+.glue_7t        0x080049e4        0x0
+ .glue_7t       0x080049e4        0x0 linker stubs
 
-.vfp11_veneer   0x08004740        0x0
- .vfp11_veneer  0x08004740        0x0 linker stubs
+.vfp11_veneer   0x080049e4        0x0
+ .vfp11_veneer  0x080049e4        0x0 linker stubs
 
-.v4_bx          0x08004740        0x0
- .v4_bx         0x08004740        0x0 linker stubs
+.v4_bx          0x080049e4        0x0
+ .v4_bx         0x080049e4        0x0 linker stubs
 
-.iplt           0x08004740        0x0
- .iplt          0x08004740        0x0 build/core/startup.o
+.iplt           0x080049e4        0x0
+ .iplt          0x080049e4        0x0 build/core/startup.o
 
-.igot.plt       0x08004740        0x0
- .igot.plt      0x08004740        0x0 build/core/startup.o
+.igot.plt       0x080049e4        0x0
+ .igot.plt      0x080049e4        0x0 build/core/startup.o
 
-.rel.dyn        0x08004740        0x0
- .rel.iplt      0x08004740        0x0 build/core/startup.o
+.rel.dyn        0x080049e4        0x0
+ .rel.iplt      0x080049e4        0x0 build/core/startup.o
 
 .bss            0x20000000      0x76c
                 0x20000000                        _sbss = .
@@ -724,9 +722,9 @@ END GROUP
  .bss           0x2000076c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
  *(COMMON)
                 0x2000076c                        _ebss = .
-                0x0800473f                        _la_data = LOADADDR (.DATA)
+                0x080049e3                        _la_data = LOADADDR (.DATA)
 
-.DATA           0x2000076c       0x60 load address 0x0800473f
+.DATA           0x2000076c       0x60 load address 0x080049e3
                 0x2000076c                        _sdata = .
  *(.data*)
  .data          0x2000076c        0x0 build/core/startup.o
@@ -803,7 +801,7 @@ END GROUP
  .data          0x200007cc        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
                 0x200007cc                        _edata = .
 
-.stack          0x200007cc      0x404 load address 0x0800479f
+.stack          0x200007cc      0x404 load address 0x08004a43
                 0x200007d0                        . = ALIGN (0x8)
  *fill*         0x200007cc        0x4 
                 0x20000bd0                        . = (. + STACK_SIZE)
@@ -814,7 +812,7 @@ END GROUP
 OUTPUT(app.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x3675
+.debug_info     0x00000000     0x384e
  .debug_info    0x00000000      0x1a9 build/core/startup.o
  .debug_info    0x000001a9      0x457 build/core/syscalls.o
  .debug_info    0x00000600      0x2f1 build/drivers/adc.o
@@ -824,18 +822,18 @@ LOAD linker stubs
  .debug_info    0x0000138e      0x3ea build/drivers/i2c.o
  .debug_info    0x00001778      0x1af build/drivers/port_pin.o
  .debug_info    0x00001927      0x26e build/drivers/pwm.o
- .debug_info    0x00001b95      0x324 build/drivers/spi.o
- .debug_info    0x00001eb9      0x3ea build/drivers/uart.o
- .debug_info    0x000022a3       0xe5 build/app/button.o
- .debug_info    0x00002388      0x24e build/app/main.o
- .debug_info    0x000025d6      0x18b build/app/malfoid.o
- .debug_info    0x00002761      0x404 build/app/oled.o
- .debug_info    0x00002b65       0xcf build/app/potentiometer.o
- .debug_info    0x00002c34      0x61d build/app/shell.o
- .debug_info    0x00003251      0x1e1 build/app/stateMachine.o
- .debug_info    0x00003432      0x243 build/app/temperature.o
+ .debug_info    0x00001b95      0x2ba build/drivers/spi.o
+ .debug_info    0x00001e4f      0x3ea build/drivers/uart.o
+ .debug_info    0x00002239       0xe5 build/app/button.o
+ .debug_info    0x0000231e      0x255 build/app/main.o
+ .debug_info    0x00002573      0x18b build/app/malfoid.o
+ .debug_info    0x000026fe      0x404 build/app/oled.o
+ .debug_info    0x00002b02       0xcf build/app/potentiometer.o
+ .debug_info    0x00002bd1      0x859 build/app/shell.o
+ .debug_info    0x0000342a      0x1e1 build/app/stateMachine.o
+ .debug_info    0x0000360b      0x243 build/app/temperature.o
 
-.debug_abbrev   0x00000000     0x17e8
+.debug_abbrev   0x00000000     0x181b
  .debug_abbrev  0x00000000      0x106 build/core/startup.o
  .debug_abbrev  0x00000106      0x159 build/core/syscalls.o
  .debug_abbrev  0x0000025f      0x131 build/drivers/adc.o
@@ -845,16 +843,16 @@ LOAD linker stubs
  .debug_abbrev  0x00000849      0x1ec build/drivers/i2c.o
  .debug_abbrev  0x00000a35       0xb2 build/drivers/port_pin.o
  .debug_abbrev  0x00000ae7      0x139 build/drivers/pwm.o
- .debug_abbrev  0x00000c20      0x159 build/drivers/spi.o
- .debug_abbrev  0x00000d79      0x1ed build/drivers/uart.o
- .debug_abbrev  0x00000f66       0x80 build/app/button.o
- .debug_abbrev  0x00000fe6      0x104 build/app/main.o
- .debug_abbrev  0x000010ea       0xcf build/app/malfoid.o
- .debug_abbrev  0x000011b9      0x18e build/app/oled.o
- .debug_abbrev  0x00001347       0x7a build/app/potentiometer.o
- .debug_abbrev  0x000013c1      0x1b2 build/app/shell.o
- .debug_abbrev  0x00001573      0x138 build/app/stateMachine.o
- .debug_abbrev  0x000016ab      0x13d build/app/temperature.o
+ .debug_abbrev  0x00000c20      0x135 build/drivers/spi.o
+ .debug_abbrev  0x00000d55      0x1ed build/drivers/uart.o
+ .debug_abbrev  0x00000f42       0x80 build/app/button.o
+ .debug_abbrev  0x00000fc2      0x104 build/app/main.o
+ .debug_abbrev  0x000010c6       0xcf build/app/malfoid.o
+ .debug_abbrev  0x00001195      0x18e build/app/oled.o
+ .debug_abbrev  0x00001323       0x7a build/app/potentiometer.o
+ .debug_abbrev  0x0000139d      0x209 build/app/shell.o
+ .debug_abbrev  0x000015a6      0x138 build/app/stateMachine.o
+ .debug_abbrev  0x000016de      0x13d build/app/temperature.o
 
 .debug_aranges  0x00000000      0x260
  .debug_aranges
@@ -896,7 +894,7 @@ LOAD linker stubs
  .debug_aranges
                 0x00000240       0x20 build/app/temperature.o
 
-.debug_line     0x00000000     0x28c3
+.debug_line     0x00000000     0x2949
  .debug_line    0x00000000      0x185 build/core/startup.o
  .debug_line    0x00000185      0x1f6 build/core/syscalls.o
  .debug_line    0x0000037b      0x19e build/drivers/adc.o
@@ -906,55 +904,55 @@ LOAD linker stubs
  .debug_line    0x00000b8f      0x432 build/drivers/i2c.o
  .debug_line    0x00000fc1      0x177 build/drivers/port_pin.o
  .debug_line    0x00001138      0x17c build/drivers/pwm.o
- .debug_line    0x000012b4      0x21d build/drivers/spi.o
- .debug_line    0x000014d1      0x232 build/drivers/uart.o
- .debug_line    0x00001703      0x150 build/app/button.o
- .debug_line    0x00001853      0x1eb build/app/main.o
- .debug_line    0x00001a3e      0x182 build/app/malfoid.o
- .debug_line    0x00001bc0      0x331 build/app/oled.o
- .debug_line    0x00001ef1      0x14d build/app/potentiometer.o
- .debug_line    0x0000203e      0x4c3 build/app/shell.o
- .debug_line    0x00002501      0x234 build/app/stateMachine.o
- .debug_line    0x00002735      0x18e build/app/temperature.o
+ .debug_line    0x000012b4      0x1ea build/drivers/spi.o
+ .debug_line    0x0000149e      0x232 build/drivers/uart.o
+ .debug_line    0x000016d0      0x150 build/app/button.o
+ .debug_line    0x00001820      0x1f5 build/app/main.o
+ .debug_line    0x00001a15      0x182 build/app/malfoid.o
+ .debug_line    0x00001b97      0x331 build/app/oled.o
+ .debug_line    0x00001ec8      0x14d build/app/potentiometer.o
+ .debug_line    0x00002015      0x572 build/app/shell.o
+ .debug_line    0x00002587      0x234 build/app/stateMachine.o
+ .debug_line    0x000027bb      0x18e build/app/temperature.o
 
-.debug_str      0x00000000      0xdf1
- .debug_str     0x00000000      0xdf1 build/core/startup.o
+.debug_str      0x00000000      0xe00
+ .debug_str     0x00000000      0xe00 build/core/startup.o
                                 0x1ca (size before relaxing)
- .debug_str     0x00000df1        0x0 build/core/syscalls.o
+ .debug_str     0x00000e00        0x0 build/core/syscalls.o
                                 0x2d9 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/adc.o
+ .debug_str     0x00000e00        0x0 build/drivers/adc.o
                                 0x268 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/clock.o
+ .debug_str     0x00000e00        0x0 build/drivers/clock.o
                                 0x21a (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/dma.o
+ .debug_str     0x00000e00        0x0 build/drivers/dma.o
                                 0x38a (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/exti.o
+ .debug_str     0x00000e00        0x0 build/drivers/exti.o
                                 0x2b9 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/i2c.o
+ .debug_str     0x00000e00        0x0 build/drivers/i2c.o
                                 0x268 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/port_pin.o
+ .debug_str     0x00000e00        0x0 build/drivers/port_pin.o
                                 0x1b4 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/pwm.o
+ .debug_str     0x00000e00        0x0 build/drivers/pwm.o
                                 0x1f6 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/spi.o
-                                0x272 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/drivers/uart.o
+ .debug_str     0x00000e00        0x0 build/drivers/spi.o
+                                0x249 (size before relaxing)
+ .debug_str     0x00000e00        0x0 build/drivers/uart.o
                                 0x2f2 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/button.o
+ .debug_str     0x00000e00        0x0 build/app/button.o
                                 0x18a (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/main.o
-                                0x2fb (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/malfoid.o
+ .debug_str     0x00000e00        0x0 build/app/main.o
+                                0x304 (size before relaxing)
+ .debug_str     0x00000e00        0x0 build/app/malfoid.o
                                 0x18c (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/oled.o
+ .debug_str     0x00000e00        0x0 build/app/oled.o
                                 0x28d (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/potentiometer.o
+ .debug_str     0x00000e00        0x0 build/app/potentiometer.o
                                 0x181 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/shell.o
-                                0x3bf (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/stateMachine.o
+ .debug_str     0x00000e00        0x0 build/app/shell.o
+                                0x480 (size before relaxing)
+ .debug_str     0x00000e00        0x0 build/app/stateMachine.o
                                 0x248 (size before relaxing)
- .debug_str     0x00000df1        0x0 build/app/temperature.o
+ .debug_str     0x00000e00        0x0 build/app/temperature.o
                                 0x225 (size before relaxing)
 
 .comment        0x00000000       0x46
@@ -1128,7 +1126,7 @@ LOAD linker stubs
  .ARM.attributes
                 0x00000b01       0x2d /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
 
-.debug_frame    0x00000000     0x1a88
+.debug_frame    0x00000000     0x1a64
  .debug_frame   0x00000000       0x4c build/core/startup.o
  .debug_frame   0x0000004c      0x140 build/core/syscalls.o
  .debug_frame   0x0000018c       0x74 build/drivers/adc.o
@@ -1138,60 +1136,60 @@ LOAD linker stubs
  .debug_frame   0x000005d4       0xcc build/drivers/i2c.o
  .debug_frame   0x000006a0       0x70 build/drivers/port_pin.o
  .debug_frame   0x00000710       0x54 build/drivers/pwm.o
- .debug_frame   0x00000764       0xa4 build/drivers/spi.o
- .debug_frame   0x00000808      0x118 build/drivers/uart.o
- .debug_frame   0x00000920       0x30 build/app/button.o
- .debug_frame   0x00000950       0x30 build/app/main.o
- .debug_frame   0x00000980       0x38 build/app/malfoid.o
- .debug_frame   0x000009b8      0x130 build/app/oled.o
- .debug_frame   0x00000ae8       0x34 build/app/potentiometer.o
- .debug_frame   0x00000b1c      0x1d8 build/app/shell.o
- .debug_frame   0x00000cf4       0x54 build/app/stateMachine.o
- .debug_frame   0x00000d48       0x6c build/app/temperature.o
- .debug_frame   0x00000db4       0x6c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
- .debug_frame   0x00000e20       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
- .debug_frame   0x00000e5c       0x74 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
- .debug_frame   0x00000ed0       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
- .debug_frame   0x00000f10       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
- .debug_frame   0x00000f3c       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
- .debug_frame   0x00000f5c       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
- .debug_frame   0x00000f94       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
- .debug_frame   0x00000fd4       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
- .debug_frame   0x00000ff4       0xb0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
- .debug_frame   0x000010a4       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strcmp.o)
- .debug_frame   0x000010c4       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
- .debug_frame   0x00001104       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
- .debug_frame   0x0000113c       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
- .debug_frame   0x0000116c       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
- .debug_frame   0x000011bc       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
- .debug_frame   0x000011ec       0x90 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
- .debug_frame   0x0000127c       0xa8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
- .debug_frame   0x00001324       0x60 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
- .debug_frame   0x00001384       0x5c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
- .debug_frame   0x000013e0      0x144 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
- .debug_frame   0x00001524       0x64 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
- .debug_frame   0x00001588       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
- .debug_frame   0x000015c4       0x34 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
- .debug_frame   0x000015f8       0x58 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
- .debug_frame   0x00001650       0x88 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
- .debug_frame   0x000016d8       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
- .debug_frame   0x00001700       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
- .debug_frame   0x0000172c       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
- .debug_frame   0x00001764       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
- .debug_frame   0x00001790       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
- .debug_frame   0x000017bc       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
- .debug_frame   0x000017e8       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
- .debug_frame   0x00001814       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
- .debug_frame   0x00001840       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
- .debug_frame   0x0000186c       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
- .debug_frame   0x00001894       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
- .debug_frame   0x000018bc       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
- .debug_frame   0x000018e4       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
- .debug_frame   0x00001920       0xcc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
- .debug_frame   0x000019ec       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
- .debug_frame   0x00001a28       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
- .debug_frame   0x00001a48       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
- .debug_frame   0x00001a68       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
+ .debug_frame   0x00000764       0x58 build/drivers/spi.o
+ .debug_frame   0x000007bc      0x118 build/drivers/uart.o
+ .debug_frame   0x000008d4       0x30 build/app/button.o
+ .debug_frame   0x00000904       0x30 build/app/main.o
+ .debug_frame   0x00000934       0x38 build/app/malfoid.o
+ .debug_frame   0x0000096c      0x130 build/app/oled.o
+ .debug_frame   0x00000a9c       0x34 build/app/potentiometer.o
+ .debug_frame   0x00000ad0      0x200 build/app/shell.o
+ .debug_frame   0x00000cd0       0x54 build/app/stateMachine.o
+ .debug_frame   0x00000d24       0x6c build/app/temperature.o
+ .debug_frame   0x00000d90       0x6c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
+ .debug_frame   0x00000dfc       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
+ .debug_frame   0x00000e38       0x74 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
+ .debug_frame   0x00000eac       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
+ .debug_frame   0x00000eec       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
+ .debug_frame   0x00000f18       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+ .debug_frame   0x00000f38       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
+ .debug_frame   0x00000f70       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok_r.o)
+ .debug_frame   0x00000fb0       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
+ .debug_frame   0x00000fd0       0xb0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+ .debug_frame   0x00001080       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strcmp.o)
+ .debug_frame   0x000010a0       0x40 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+ .debug_frame   0x000010e0       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
+ .debug_frame   0x00001118       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
+ .debug_frame   0x00001148       0x50 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+ .debug_frame   0x00001198       0x30 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+ .debug_frame   0x000011c8       0x90 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+ .debug_frame   0x00001258       0xa8 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+ .debug_frame   0x00001300       0x60 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+ .debug_frame   0x00001360       0x5c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+ .debug_frame   0x000013bc      0x144 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+ .debug_frame   0x00001500       0x64 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
+ .debug_frame   0x00001564       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fvwrite.o)
+ .debug_frame   0x000015a0       0x34 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
+ .debug_frame   0x000015d4       0x58 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+ .debug_frame   0x0000162c       0x88 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+ .debug_frame   0x000016b4       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
+ .debug_frame   0x000016dc       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
+ .debug_frame   0x00001708       0x38 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
+ .debug_frame   0x00001740       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
+ .debug_frame   0x0000176c       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
+ .debug_frame   0x00001798       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
+ .debug_frame   0x000017c4       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
+ .debug_frame   0x000017f0       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
+ .debug_frame   0x0000181c       0x2c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
+ .debug_frame   0x00001848       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
+ .debug_frame   0x00001870       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
+ .debug_frame   0x00001898       0x28 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
+ .debug_frame   0x000018c0       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
+ .debug_frame   0x000018fc       0xcc /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+ .debug_frame   0x000019c8       0x3c /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+ .debug_frame   0x00001a04       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
+ .debug_frame   0x00001a24       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(sbrk.o)
+ .debug_frame   0x00001a44       0x20 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
 
 .debug_rnglists
                 0x00000000       0x39
