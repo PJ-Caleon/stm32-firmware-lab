@@ -77,6 +77,7 @@ typedef struct Rcc{
 #define RCC_APB2ENR_USART1EN (1U << 14)
 #define RCC_APB1ENR_TIM3EN (1UL << 1)
 #define RCC_APB1ENR_I2C1EN (1UL << 21)
+#define RCC_APB2ENR_SPI1EN (1UL << 12)
 
 // Flash 
 typedef struct Flash{
@@ -338,5 +339,29 @@ typedef struct I2c{
 #define I2C_SR1_TXE (1UL << 7)
 #define I2C_SR1_AF (1UL << 10)
 #define I2C_CR1_SWRST (1UL << 15)
+
+// SPI Register 
+typedef struct Spi{
+  volatile uint16_t CR1;
+  uint16_t RESERVED0;
+  volatile uint16_t CR2;
+  uint16_t RESERVED1;
+  volatile uint16_t SR;
+  uint16_t RESERVED2;
+  volatile uint16_t DR;
+  uint16_t RESERVED3;
+  volatile uint16_t CRCPR;
+  uint16_t RESERVED4;
+  volatile uint16_t RXCRCR;
+  uint16_t RESERVED5;
+  volatile uint16_t TXRCR;
+  uint16_t RESERVED6;
+  volatile uint16_t I2SCFGR;
+  uint16_t RESERVED7;
+  volatile uint16_t I2SPR;
+  uint16_t RESERVED8;
+} spi;
+
+#define SPI1 ((spi *) 0x40013000UL)
 
 #endif
