@@ -13,6 +13,7 @@
 #include "pwm.h"
 #include "i2c.h"
 #include "oled.h"
+#include "spi.h"
 
 int main(void){
 
@@ -29,7 +30,8 @@ int main(void){
   uart_init(PCLK2_HZ);    // USART1 + its DMA channels
   exti1_init();           // PA1 button interrupt
   exti1_latency_test();   // optional: fills dwt_start / dwt_isr for the debugger
-  i2c_init();             
+  i2c_init();          
+  spi_init();
 
   // Application
   shell_init();

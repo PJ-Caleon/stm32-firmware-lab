@@ -57,3 +57,8 @@ make
 ```
 openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c 'program app.elf verify reset exit'
 ```
+
+## To Debug
+```
+picocom -b 115200 /dev/ttyUSB0
+```

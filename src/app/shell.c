@@ -10,6 +10,8 @@
 #include "pwm.h"
 #include "adc.h"
 #include "i2c.h"
+#include "spi.h"
+#include "stm32f103.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -35,6 +37,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm_test    - Run 1000-sample loopback test (PA6 to PA2)\r\n");
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
+  uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -114,6 +117,52 @@ static void cmd_i2c_scan(int argc, char **argv){
   i2c_scan();
 }
 
+static void cmd_spi_test(int argc, char **argv){
+  (void)argc; (void)argv;
+  
+  uint8_t tx_buffer[256];
+  uint8_t rx_buffer[256];
+  for (int i = 0; i <= 255; i++){
+    tx_buffer[i] = (uint8_t)i;
+  }
+
+  uint8_t br_dividers[] = {5, 3, 1};
+  const char *br_names[] = {"div_64", "div_16", "div_4"};
+
+  uart_puts("Starting SPI Loopback test (bytes 0 to 255)...\r\n");
+
+  for (int s = 0; s < 3; s++){
+    CLEAR_BIT(SPI1->CR1, (1 << 6));
+    CLEAR_BIT(SPI1->CR1, (7 << 3));
+    SET_BIT(SPI1->CR1, (br_dividers[s] << 3));
+    SET_BIT(SPI1->CR1, (1 << 6));
+
+    printf("Running spi_xfer at %s... ", br_names[s]);
+
+    // Clear receive buffer
+    for (int i = 0; i < 256; i++) {
+      rx_buffer[i] = 0;
+    }
+
+    spi_xfer(tx_buffer, rx_buffer, 256);
+
+    // Verify results
+    int errors = 0;
+    for (int i = 0; i < 256; i++) {
+      if (rx_buffer[i] != tx_buffer[i]) {
+        errors++;
+      }
+    }
+
+    if (errors == 0) {
+      uart_puts("PASSED\r\n");
+    } else {
+      printf("FAILED (%d mismatches)\r\n", errors);
+    }
+  }
+  uart_puts("SPI Loopback Test Complete\r\n");
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -130,7 +179,8 @@ static const cmd_entry_t cmd_table[] = {
   {"pwm", cmd_pwm},
   {"pwm_test", cmd_pwm_test},
   {"pwm_led_dim", cmd_led_dim},
-  {"i2c_scan", cmd_i2c_scan}
+  {"i2c_scan", cmd_i2c_scan},
+  {"spi_test", cmd_spi_test}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
