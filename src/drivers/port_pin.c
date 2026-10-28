@@ -37,21 +37,26 @@ void port_pin_init(void){
   MODIFY_REG(GPIOA->CRL, (0xF << 8), (0x0 << 8));
 
   /*
-    Set PA6 to Alternate Function Push pull 
-    CNF[1:0] = 10 
-    MODE[1:0] = 11 
-    Combined: 1011 or 0xB
-    27:24
-  */
-  MODIFY_REG(GPIOA->CRL, (0xF << 24), (0xB << 24));
-
-  /*
     Set PB6 - to I2C1_SCL [27:24] 
     Set PB7 to I2C1_SDA [31:28]
     Alternate function open drain with 50 MHz 
   */
   MODIFY_REG(GPIOB->CRL, (0xF << 24), (0xF << 24));
   MODIFY_REG(GPIOB->CRL, (0xF << 28), (0xF << 28));
+
+  /*
+    Set PA4 - GPIOA O1utput (CS)
+    Set PA5 - Alternate Function Push-Pull (SCK) 
+    Set PA6 - Floating Input (MISO)
+    Set PA7 - Alternate Function Push Pull (MOSI) 
+  
+    AFPushPull - 1011
+    Floating Input - 0100
+  */
+  MODIFY_REG(GPIOA->CRL, (0xF << 16), (0x2 << 16));
+  MODIFY_REG(GPIOA->CRL, (0xF << 20), (0xB << 20));
+  MODIFY_REG(GPIOA->CRL, (0xF << 24), (0x4 << 24));
+  MODIFY_REG(GPIOA->CRL, (0xF << 28), (0xB << 28));
 }
 
 // LED is active-LOW: BRR (reset) lights it, BSRR (set) turns it off

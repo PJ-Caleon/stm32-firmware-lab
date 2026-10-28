@@ -18,6 +18,9 @@
 #define PINA9 (1UL << 9)
 #define PINA10 (1UL << 10)
 
+#define PINAA7 (1UL << 7)
+
+
 void port_pin_init(void);   // enables GPIO/AFIO clocks and configures every pin above
 void led_on(void);
 void led_off(void);
