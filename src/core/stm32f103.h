@@ -364,4 +364,9 @@ typedef struct Spi{
 
 #define SPI1 ((spi *) 0x40013000UL)
 
+#define SPI_MODE0 (0)
+#define SPI_MODE1 (1 << 0)
+#define SPI_MODE2 (1 << 1)
+#define SPI_MODE3 (1 << 0) | (1 << 1)
+
 #endif

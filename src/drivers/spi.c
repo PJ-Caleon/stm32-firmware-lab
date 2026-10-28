@@ -18,8 +18,8 @@ void spi_init(void){
   
     Mode 3: CPOL 1; CPHA 1
   */
-  SET_BIT(SPI1->CR1, (1 << 0)); // CPOL = 1 
-  SET_BIT(SPI1->CR1, (1 << 1)); // CPHA = 1
+  CLEAR_BIT(SPI1->CR1, (3 << 0));
+  SET_BIT(SPI1->CR1, SPI_MODE2);
   SET_BIT(SPI1->CR1, (1 << 2)); // Master Mode = 1 
   SET_BIT(SPI1->CR1, (3 << 3)); // Baud Rate[2:0] = 011
   CLEAR_BIT(SPI1->CR1, (1 << 7)); // LSBFirst = 0 
