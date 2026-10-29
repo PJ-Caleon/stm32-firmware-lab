@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include "stm32f103.h"
 #include "fault_handler.h"
+#include "uart.h"
 
 extern uint32_t __stack_limit;
 extern uint32_t _estack;
@@ -98,4 +99,33 @@ __attribute__((naked)) void MemManage_Handler(void){
     "mrsne r0, psp   \n\t"
     "b fault_handler_c \n\t"
   );
+}
+
+// Helper to print decimal line numbers at UART 
+static void print_dec(int num){
+  char buf[12];
+  int i = 10;
+  buf[11] = '\0';
+  if (num == 0){
+    uart_puts("0");
+    return;
+  }
+  while (num > 0 && i >= 0){
+    buf[i--] = (num % 10) + '0';
+    num /= 10;
+  }
+  uart_puts(&buf[i + 1]);
+}
+
+void assert_failed(const char *file, int line){
+  __asm__ volatile("cpsid i" : : : "memory");
+
+  uart_puts("ASSERTION FAILED\r\n");
+  uart_puts("File: ");
+  uart_puts((char *)file);
+  uart_puts("\r\nLine: ");
+  print_dec(line);
+
+  HALT_IF_DEBUGGING();
+  while(1){}
 }

@@ -7,7 +7,8 @@
 extern "C"{
 #endif
   void fault_handler_init(void);
-  #ifdef __cplusplus
+  void assert_failed(const char *file, int line);
+#ifdef __cplusplus
 }
 #endif
 
@@ -17,6 +18,18 @@ do { \
     __asm("bkpt 1"); \
   } \
 } while(0)
+
+/*
+  ASSERT Macro 
+  Eval the expression, if false, call the assert_failed 
+  with the current file and number line 
+*/
+#define ASSERT(expr) \
+  do { \
+    if (!(expr)) { \ 
+      assert_failed(__FILE__, __LINE__); \
+    } \
+  } while (0)
 
 typedef struct __attribute((packed)) ContextStateFrame {
   uint32_t r0;

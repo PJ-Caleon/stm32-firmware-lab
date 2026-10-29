@@ -39,7 +39,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
-  uart_puts("  bugs        - Triggers five failures one at a time\r\n");
+  uart_puts("  bugs <n>    - Triggers 6 failures one at a time\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -179,6 +179,7 @@ static void cmd_bugs(int argc, char **argv){
     uart_puts("  3: Unaligned Multi-Word Access (UsageFault)\r\n");
     uart_puts("  4: Integer Divide by Zero (UsageFault)\r\n");
     uart_puts("  5: Bad Function Pointer 0xDEADBEEF (UsageFault)\r\n");
+    uart_puts("  6: Trigger manual ASSERT \r\n");
     return;
   }
   char *bug_type = argv[1];
@@ -209,8 +210,14 @@ static void cmd_bugs(int argc, char **argv){
     uart_puts("Triggering call through bad function pointer (0xDEADBEEF)...\r\n");
     void (*bad_func)(void) = (void (*)(void))0xDEADBEEF;
     bad_func();
-  } else {
-    uart_puts("Unknown bug type. Use bugs 1 through 5.\r\n");
+  }
+  else if (strcmp(argv[1], "6") == 0){
+    uart_puts("Triggering manual ASSER... \r\n");
+    int val = 0;
+    ASSERT(val == 1);
+  }
+  else {
+    uart_puts("Unknown bug type. Use bugs 1 through 6.\r\n");
   }
 }
 
