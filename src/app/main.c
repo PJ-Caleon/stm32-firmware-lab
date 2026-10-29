@@ -14,6 +14,7 @@
 #include "i2c.h"
 #include "oled.h"
 #include "spi.h"
+#include "fault_handler.h"
 
 int main(void){
 
@@ -24,6 +25,7 @@ int main(void){
   ADC_init();
   pwm_init();
   temperature_init();
+  fault_handler_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks

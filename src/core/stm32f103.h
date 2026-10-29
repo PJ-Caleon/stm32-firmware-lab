@@ -369,12 +369,49 @@ typedef struct Spi{
 #define SPI_MODE2 (1 << 1)
 #define SPI_MODE3 (1 << 0) | (1 << 1)
 
+// SCB Register 
+typedef struct Scb{
+  volatile uint32_t CPUID;
+  volatile uint32_t ICSR;
+  volatile uint32_t VTOR;
+  volatile uint32_t AIRCR;
+  volatile uint32_t SCR;
+  volatile uint32_t CCR;
+  volatile uint8_t SHP[12];
+  volatile uint32_t SHCSR;
+  volatile uint32_t CFSR;
+  volatile uint32_t HFSR;
+  volatile uint32_t DFSR;
+  volatile uint32_t MMFAR;
+  volatile uint32_t BFAR;
+  volatile uint32_t AFSR;
+  volatile uint32_t PFR[2];
+  volatile uint32_t DFR;
+  volatile uint32_t ADR;
+  volatile uint32_t MMFR[4];
+  volatile uint32_t ISAR[5];
+  uint32_t RESERVED0 [5];
+  volatile uint32_t CPACR;
+} scb;
+
+#define SCB ((scb *) 0xE000ED00UL)
 // System Control Block (SCB) - set memory mapped registers 
 // provides system control, fault handling and core configuration
 // for Cortex-M3
 #ifndef SCB_SHCSR_USGFAULTENA_MASK
-#ifndef SCB_SHCSR_MEMFAULTENA_Pos (16U)
-#ifndef SCB_SHCSR_MEMFAULTENA_Msk (1UL << SCB_SHCSR_MEMFAULTENA_Pos)
+#define SCB_SHCSR_MEMFAULTENA_Pos (16U)
+#define SCB_SHCSR_MEMFAULTENA_Msk (1UL << SCB_SHCSR_MEMFAULTENA_Pos)
+#define SCB_SHCSR_BUSFAULTENA_Pos (17U)
+#define SCB_SHCSR_BUSFAULTENA_Msk (1UL << SCB_SHCSR_BUSFAULTENA_Pos)
+#define SCB_SHCSR_USGFAULTENA_Pos (18U)
+#define SCB_SHCSR_USGFAULTENA_Msk (1UL << SCB_SHCSR_USGFAULTENA_Pos)
+#endif 
 
+#ifndef SCB_CCR_DIV_0_TRP_Msk
+#define SCB_CCR_UNALIGN_TRP_Pos (3U)
+#define SCB_CCR_UNALIGN_TRP_Msk (1UL << SCB_CCR_UNALIGN_TRP_Pos)
+#define SCB_CCR_DIV_0_TRP_Pos (4U)
+#define SCB_CCR_DIV_0_TRP_Msk (1UL << SCB_CCR_DIV_0_TRP_Pos)
+#endif
 
 #endif
