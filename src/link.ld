@@ -40,6 +40,8 @@ SECTIONS{
     _edata = .; 
   } > RAM AT >ROM 
 
+  __stack_limit = _estack - STACK_SIZE;
+
   .stack (NOLOAD):
   {
     . = ALIGN(8);
