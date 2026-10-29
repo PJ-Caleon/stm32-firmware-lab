@@ -369,4 +369,12 @@ typedef struct Spi{
 #define SPI_MODE2 (1 << 1)
 #define SPI_MODE3 (1 << 0) | (1 << 1)
 
+// System Control Block (SCB) - set memory mapped registers 
+// provides system control, fault handling and core configuration
+// for Cortex-M3
+#ifndef SCB_SHCSR_USGFAULTENA_MASK
+#ifndef SCB_SHCSR_MEMFAULTENA_Pos (16U)
+#ifndef SCB_SHCSR_MEMFAULTENA_Msk (1UL << SCB_SHCSR_MEMFAULTENA_Pos)
+
+
 #endif
