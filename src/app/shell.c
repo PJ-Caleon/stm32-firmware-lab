@@ -12,6 +12,7 @@
 #include "i2c.h"
 #include "spi.h"
 #include "stm32f103.h"
+#include "fault_handler.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -38,6 +39,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
+  uart_puts("  bugs        - Triggers five failures one at a time\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -163,6 +165,55 @@ static void cmd_spi_test(int argc, char **argv){
   uart_puts("SPI Loopback Test Complete\r\n");
 }
 
+static void trigger_recursion(void){
+  volatile uint32_t stack_filler[8];
+  (void)stack_filler;
+  trigger_recursion();
+}
+
+static void cmd_bugs(int argc, char **argv){
+  if (argc < 2){
+    uart_puts("Usage: bugs <1-5>\r\n");
+    uart_puts("  1: Invalid Address Write (BusFault)\r\n");
+    uart_puts("  2: Runaway Recursion (HardFault)\r\n");
+    uart_puts("  3: Unaligned Multi-Word Access (UsageFault)\r\n");
+    uart_puts("  4: Integer Divide by Zero (UsageFault)\r\n");
+    uart_puts("  5: Bad Function Pointer 0xDEADBEEF (UsageFault)\r\n");
+    return;
+  }
+  char *bug_type = argv[1];
+
+  if (bug_type[0] == '1' || strcmp(bug_type, "invalid") == 0){
+    uart_puts("Triggering invalid address write (0x30000000)...\r\n");
+    volatile uint32_t *invalid_ptr = (volatile uint32_t *)0x30000000;
+    *invalid_ptr = 0xDEADBEEF;
+  }
+  else if (bug_type[0] == '2' || strcmp(bug_type, "recursion") == 0) {
+    uart_puts("Triggering runaway recursion...\r\n");
+    trigger_recursion();
+  }
+  else if (bug_type[0] == '3' || strcmp(bug_type, "unaligned") == 0) {
+    uart_puts("Triggering unaligned multi-word access (0x20000001)...\r\n");
+    volatile uint32_t *unaligned_ptr = (volatile uint32_t *)0x20000001;
+    volatile uint32_t val = *unaligned_ptr;
+    (void)val;
+  }
+  else if (bug_type[0] == '4' || strcmp(bug_type, "div0") == 0) {
+    uart_puts("Triggering integer divide by zero (10 / 0)...\r\n");
+    volatile int x = 10;
+    volatile int y = 0;
+    volatile int z = x / y;
+    (void)z;
+  }
+  else if (bug_type[0] == '5' || strcmp(bug_type, "badptr") == 0) {
+    uart_puts("Triggering call through bad function pointer (0xDEADBEEF)...\r\n");
+    void (*bad_func)(void) = (void (*)(void))0xDEADBEEF;
+    bad_func();
+  } else {
+    uart_puts("Unknown bug type. Use bugs 1 through 5.\r\n");
+  }
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -180,7 +231,8 @@ static const cmd_entry_t cmd_table[] = {
   {"pwm_test", cmd_pwm_test},
   {"pwm_led_dim", cmd_led_dim},
   {"i2c_scan", cmd_i2c_scan},
-  {"spi_test", cmd_spi_test}
+  {"spi_test", cmd_spi_test},
+  {"bugs", cmd_bugs}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
