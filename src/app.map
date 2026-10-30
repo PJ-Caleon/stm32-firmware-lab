@@ -829,51 +829,51 @@ END GROUP
 OUTPUT(app.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x3ee8
+.debug_info     0x00000000     0x3eea
  .debug_info    0x00000000      0x478 build/core/fault_handler.o
  .debug_info    0x00000478      0x1a9 build/core/startup.o
  .debug_info    0x00000621      0x457 build/core/syscalls.o
- .debug_info    0x00000a78      0x2f1 build/drivers/adc.o
- .debug_info    0x00000d69      0x282 build/drivers/clock.o
- .debug_info    0x00000feb      0x49e build/drivers/dma.o
- .debug_info    0x00001489      0x37d build/drivers/exti.o
- .debug_info    0x00001806      0x3ea build/drivers/i2c.o
- .debug_info    0x00001bf0      0x1af build/drivers/port_pin.o
- .debug_info    0x00001d9f      0x26e build/drivers/pwm.o
- .debug_info    0x0000200d      0x2ba build/drivers/spi.o
- .debug_info    0x000022c7      0x3ea build/drivers/uart.o
- .debug_info    0x000026b1       0xb2 build/app/add.o
- .debug_info    0x00002763       0xe5 build/app/button.o
- .debug_info    0x00002848      0x26b build/app/main.o
- .debug_info    0x00002ab3      0x18b build/app/malfoid.o
- .debug_info    0x00002c3e      0x404 build/app/oled.o
- .debug_info    0x00003042       0xcf build/app/potentiometer.o
- .debug_info    0x00003111      0x9b3 build/app/shell.o
- .debug_info    0x00003ac4      0x1e1 build/app/stateMachine.o
- .debug_info    0x00003ca5      0x243 build/app/temperature.o
+ .debug_info    0x00000a78      0x2f3 build/drivers/adc.o
+ .debug_info    0x00000d6b      0x282 build/drivers/clock.o
+ .debug_info    0x00000fed      0x49e build/drivers/dma.o
+ .debug_info    0x0000148b      0x37d build/drivers/exti.o
+ .debug_info    0x00001808      0x3ea build/drivers/i2c.o
+ .debug_info    0x00001bf2      0x1af build/drivers/port_pin.o
+ .debug_info    0x00001da1      0x26e build/drivers/pwm.o
+ .debug_info    0x0000200f      0x2ba build/drivers/spi.o
+ .debug_info    0x000022c9      0x3ea build/drivers/uart.o
+ .debug_info    0x000026b3       0xb2 build/app/add.o
+ .debug_info    0x00002765       0xe5 build/app/button.o
+ .debug_info    0x0000284a      0x26b build/app/main.o
+ .debug_info    0x00002ab5      0x18b build/app/malfoid.o
+ .debug_info    0x00002c40      0x404 build/app/oled.o
+ .debug_info    0x00003044       0xcf build/app/potentiometer.o
+ .debug_info    0x00003113      0x9b3 build/app/shell.o
+ .debug_info    0x00003ac6      0x1e1 build/app/stateMachine.o
+ .debug_info    0x00003ca7      0x243 build/app/temperature.o
 
-.debug_abbrev   0x00000000     0x1a85
+.debug_abbrev   0x00000000     0x1a84
  .debug_abbrev  0x00000000      0x1db build/core/fault_handler.o
  .debug_abbrev  0x000001db      0x106 build/core/startup.o
  .debug_abbrev  0x000002e1      0x159 build/core/syscalls.o
- .debug_abbrev  0x0000043a      0x131 build/drivers/adc.o
- .debug_abbrev  0x0000056b      0x12b build/drivers/clock.o
- .debug_abbrev  0x00000696      0x1dc build/drivers/dma.o
- .debug_abbrev  0x00000872      0x1b2 build/drivers/exti.o
- .debug_abbrev  0x00000a24      0x1ec build/drivers/i2c.o
- .debug_abbrev  0x00000c10       0xb2 build/drivers/port_pin.o
- .debug_abbrev  0x00000cc2      0x139 build/drivers/pwm.o
- .debug_abbrev  0x00000dfb      0x135 build/drivers/spi.o
- .debug_abbrev  0x00000f30      0x1ed build/drivers/uart.o
- .debug_abbrev  0x0000111d       0x67 build/app/add.o
- .debug_abbrev  0x00001184       0x80 build/app/button.o
- .debug_abbrev  0x00001204      0x103 build/app/main.o
- .debug_abbrev  0x00001307       0xcf build/app/malfoid.o
- .debug_abbrev  0x000013d6      0x18e build/app/oled.o
- .debug_abbrev  0x00001564       0x7a build/app/potentiometer.o
- .debug_abbrev  0x000015de      0x232 build/app/shell.o
- .debug_abbrev  0x00001810      0x138 build/app/stateMachine.o
- .debug_abbrev  0x00001948      0x13d build/app/temperature.o
+ .debug_abbrev  0x0000043a      0x130 build/drivers/adc.o
+ .debug_abbrev  0x0000056a      0x12b build/drivers/clock.o
+ .debug_abbrev  0x00000695      0x1dc build/drivers/dma.o
+ .debug_abbrev  0x00000871      0x1b2 build/drivers/exti.o
+ .debug_abbrev  0x00000a23      0x1ec build/drivers/i2c.o
+ .debug_abbrev  0x00000c0f       0xb2 build/drivers/port_pin.o
+ .debug_abbrev  0x00000cc1      0x139 build/drivers/pwm.o
+ .debug_abbrev  0x00000dfa      0x135 build/drivers/spi.o
+ .debug_abbrev  0x00000f2f      0x1ed build/drivers/uart.o
+ .debug_abbrev  0x0000111c       0x67 build/app/add.o
+ .debug_abbrev  0x00001183       0x80 build/app/button.o
+ .debug_abbrev  0x00001203      0x103 build/app/main.o
+ .debug_abbrev  0x00001306       0xcf build/app/malfoid.o
+ .debug_abbrev  0x000013d5      0x18e build/app/oled.o
+ .debug_abbrev  0x00001563       0x7a build/app/potentiometer.o
+ .debug_abbrev  0x000015dd      0x232 build/app/shell.o
+ .debug_abbrev  0x0000180f      0x138 build/app/stateMachine.o
+ .debug_abbrev  0x00001947      0x13d build/app/temperature.o
 
 .debug_aranges  0x00000000      0x2a0
  .debug_aranges
@@ -919,28 +919,28 @@ LOAD linker stubs
  .debug_aranges
                 0x00000280       0x20 build/app/temperature.o
 
-.debug_line     0x00000000     0x2db2
+.debug_line     0x00000000     0x2db4
  .debug_line    0x00000000      0x232 build/core/fault_handler.o
  .debug_line    0x00000232      0x185 build/core/startup.o
  .debug_line    0x000003b7      0x1f6 build/core/syscalls.o
- .debug_line    0x000005ad      0x19e build/drivers/adc.o
- .debug_line    0x0000074b      0x1e2 build/drivers/clock.o
- .debug_line    0x0000092d      0x255 build/drivers/dma.o
- .debug_line    0x00000b82      0x23f build/drivers/exti.o
- .debug_line    0x00000dc1      0x432 build/drivers/i2c.o
- .debug_line    0x000011f3      0x177 build/drivers/port_pin.o
- .debug_line    0x0000136a      0x17c build/drivers/pwm.o
- .debug_line    0x000014e6      0x1ea build/drivers/spi.o
- .debug_line    0x000016d0      0x232 build/drivers/uart.o
- .debug_line    0x00001902      0x126 build/app/add.o
- .debug_line    0x00001a28      0x150 build/app/button.o
- .debug_line    0x00001b78      0x20e build/app/main.o
- .debug_line    0x00001d86      0x182 build/app/malfoid.o
- .debug_line    0x00001f08      0x331 build/app/oled.o
- .debug_line    0x00002239      0x14d build/app/potentiometer.o
- .debug_line    0x00002386      0x66a build/app/shell.o
- .debug_line    0x000029f0      0x234 build/app/stateMachine.o
- .debug_line    0x00002c24      0x18e build/app/temperature.o
+ .debug_line    0x000005ad      0x1a0 build/drivers/adc.o
+ .debug_line    0x0000074d      0x1e2 build/drivers/clock.o
+ .debug_line    0x0000092f      0x255 build/drivers/dma.o
+ .debug_line    0x00000b84      0x23f build/drivers/exti.o
+ .debug_line    0x00000dc3      0x432 build/drivers/i2c.o
+ .debug_line    0x000011f5      0x177 build/drivers/port_pin.o
+ .debug_line    0x0000136c      0x17c build/drivers/pwm.o
+ .debug_line    0x000014e8      0x1ea build/drivers/spi.o
+ .debug_line    0x000016d2      0x232 build/drivers/uart.o
+ .debug_line    0x00001904      0x126 build/app/add.o
+ .debug_line    0x00001a2a      0x150 build/app/button.o
+ .debug_line    0x00001b7a      0x20e build/app/main.o
+ .debug_line    0x00001d88      0x182 build/app/malfoid.o
+ .debug_line    0x00001f0a      0x331 build/app/oled.o
+ .debug_line    0x0000223b      0x14d build/app/potentiometer.o
+ .debug_line    0x00002388      0x66a build/app/shell.o
+ .debug_line    0x000029f2      0x234 build/app/stateMachine.o
+ .debug_line    0x00002c26      0x18e build/app/temperature.o
 
 .debug_str      0x00000000      0xfce
  .debug_str     0x00000000      0xfce build/core/fault_handler.o

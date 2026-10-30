@@ -1,4 +1,6 @@
 #include <stdint.h>
+#include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include "oled.h"
 #include "i2c.h"
@@ -172,10 +174,10 @@ void oled_dashboard(uint32_t adc_val){
     oled_clear();
     oled_draw_string(0, 0, "DRACO MALFOID");
 
-    sprintf(buf, "CNT: %lu", counter);
+    sprintf(buf, "CNT: %" PRIu32, counter);
     oled_draw_string(0, 22, buf);
 
-    sprintf(buf, "ADC: %lu", adc_val);
+    sprintf(buf, "ADC: %" PRIu32, adc_val);
     oled_draw_string(0, 34, buf);
 
     oled_refresh();
