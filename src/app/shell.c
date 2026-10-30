@@ -39,7 +39,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
-  uart_puts("  bugs <n>    - Triggers 6 failures one at a time\r\n");
+  uart_puts("  bugs <n>    - Triggers 5 failures one at a time\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -56,7 +56,7 @@ static void cmd_led(int argc, char **argv){
 static void cmd_status(int argc, char **argv){
   (void)argc; (void)argv;
   uint32_t ms = millis();
-  printf("System Uptime: %lu seconds (%lu ms)\r\n", ms / 1000, ms);
+  printf("System Uptime: %lu seconds (%lu ms)\r\n", (unsigned long)(ms / 1000), (unsigned long)(ms));
 }
 
 static void cmd_pot(int argc, char **argv){
@@ -67,7 +67,7 @@ static void cmd_pot(int argc, char **argv){
 static void cmd_temp(int argc, char **argv){
   (void)argc; (void)argv;
   printf("MCU Temp: ~%ld °C | VREF Raw: %u \r\n", 
-         temperature_ReadCelsius(), internalVref_ReadRaw());
+         (long)temperature_ReadCelsius(), internalVref_ReadRaw());
 }
 
 static void cmd_pwm(int argc, char **argv){
@@ -86,7 +86,7 @@ static void cmd_pwm_test(int argc, char **argv){
 
   uint32_t average = sum/ samples;
   uint32_t measured_duty = (average * 1000UL)/ 4095UL;
-  printf("PWM Loop, Avg Raw: %lu | Duty: %lu / 1000\r\n", average, measured_duty);
+  printf("PWM Loop, Avg Raw: %lu | Duty: %lu / 1000\r\n", (unsigned long)average, (unsigned long)measured_duty);
 }
 
 static void cmd_led_dim(int argc, char **argv){
@@ -165,12 +165,6 @@ static void cmd_spi_test(int argc, char **argv){
   uart_puts("SPI Loopback Test Complete\r\n");
 }
 
-static void trigger_recursion(void){
-  volatile uint32_t stack_filler[8];
-  (void)stack_filler;
-  trigger_recursion();
-}
-
 static void cmd_bugs(int argc, char **argv){
   if (argc < 2){
     uart_puts("Usage: bugs <1-5>\r\n");
@@ -189,29 +183,25 @@ static void cmd_bugs(int argc, char **argv){
     volatile uint32_t *invalid_ptr = (volatile uint32_t *)0x30000000;
     *invalid_ptr = 0xDEADBEEF;
   }
-  else if (bug_type[0] == '2' || strcmp(bug_type, "recursion") == 0) {
-    uart_puts("Triggering runaway recursion...\r\n");
-    trigger_recursion();
-  }
-  else if (bug_type[0] == '3' || strcmp(bug_type, "unaligned") == 0) {
+  else if (bug_type[0] == '2' || strcmp(bug_type, "unaligned") == 0) {
     uart_puts("Triggering unaligned multi-word access (0x20000001)...\r\n");
     volatile uint32_t *unaligned_ptr = (volatile uint32_t *)0x20000001;
     volatile uint32_t val = *unaligned_ptr;
     (void)val;
   }
-  else if (bug_type[0] == '4' || strcmp(bug_type, "div0") == 0) {
+  else if (bug_type[0] == '3' || strcmp(bug_type, "div0") == 0) {
     uart_puts("Triggering integer divide by zero (10 / 0)...\r\n");
     volatile int x = 10;
     volatile int y = 0;
     volatile int z = x / y;
     (void)z;
   }
-  else if (bug_type[0] == '5' || strcmp(bug_type, "badptr") == 0) {
+  else if (bug_type[0] == '4' || strcmp(bug_type, "badptr") == 0) {
     uart_puts("Triggering call through bad function pointer (0xDEADBEEF)...\r\n");
     void (*bad_func)(void) = (void (*)(void))0xDEADBEEF;
     bad_func();
   }
-  else if (strcmp(argv[1], "6") == 0){
+  else if (strcmp(argv[1], "5") == 0){
     uart_puts("Triggering manual ASSER... \r\n");
     int val = 0;
     ASSERT(val == 1);
@@ -245,7 +235,7 @@ static const cmd_entry_t cmd_table[] = {
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
 
 // Split the line into words and run the matching command
-static void shell_run_line(char *line){
+void shell_run_line(char *line){
   char *argv[SHELL_MAX_ARGS];
   int argc = 0;
 

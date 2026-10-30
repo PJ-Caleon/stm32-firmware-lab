@@ -26,7 +26,7 @@ do { \
 */
 #define ASSERT(expr) \
   do { \
-    if (!(expr)) { \ 
+    if (!(expr)) { \
       assert_failed(__FILE__, __LINE__); \
     } \
   } while (0)
