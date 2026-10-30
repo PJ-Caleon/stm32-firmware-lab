@@ -152,7 +152,7 @@ void oled_dashboard(uint32_t adc_val){
   char buf[32];
 
   counter++;
-
+  
   if (adc_val > 4000) {
     if (high_adc_start_time == 0) {
       high_adc_start_time = millis();

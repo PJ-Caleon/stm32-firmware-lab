@@ -26,8 +26,8 @@ void test_oled_clear(void){
 } 
 
 void test_oled_draw_pixel1(void){
-  oled_draw_pixel(128,64,0);
-  TEST_ASSERT_EQUAL_INT(0, (framebuffer[1152]));
+  oled_draw_pixel(127,63,0);
+  TEST_ASSERT_EQUAL_INT(0, (framebuffer[1023]));
 }
 
 void test_oled_draw_pixel2(void){

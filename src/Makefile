@@ -40,7 +40,7 @@ UNITY_SRC = $(UNITY_DIR)/unity.c
 TEST_SRCS = $(wildcard $(TEST_DIR)/test_*.c)
 TEST_BINS = $(patsubst $(TEST_DIR)/%.c,$(BUILD)/test/%,$(TEST_SRCS))
 
-TEST_CFLAGS = -std=gnu11 -Wall -Wextra -g -I$(UNITY_DIR) $(INCLUDES)
+TEST_CFLAGS = -std=gnu11 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer -I$(UNITY_DIR) $(INCLUDES)
 
 # test_add -> finds add.c in core/, drivers/, or app/
 find_src = $(firstword $(foreach d,$(SRC_DIRS),$(wildcard $(d)/$(1).c)))
