@@ -1,6 +1,6 @@
 #include "unity.h"
-#include "clock.h"
 #include <stdint.h>
+#include "clock.h"
 
 extern volatile uint32_t ms_tick;
 static uint32_t virt_tick = 0;
@@ -48,11 +48,3 @@ int main(void){
   RUN_TEST(test_delay);
   return UNITY_END();
 }
-
-/*
-  Functions to test 
-
-  systick_init 
-  setClock 
-   
-*/
