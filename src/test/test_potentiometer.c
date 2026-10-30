@@ -4,8 +4,10 @@
 static uint16_t pot_raw_volt;
 
 void setUp() {
+  pot_raw_volt = 0;
 }
 void tearDown() {
+  pot_raw_volt = 0;
 }
 
 // Override 
