@@ -1,3 +1,4 @@
 doc/*
 .obsidian/*
 *.pdf
+src/*.txt
