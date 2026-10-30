@@ -2,12 +2,17 @@
 #include "stm32f103.h"
 #include "clock.h"
 
-volatile uint32_t ms_tick = 0;
+__attribute__((weak)) volatile uint32_t ms_tick = 0;
+
+// getter Function 
+__attribute__((weak)) uint32_t get_ms_tick(void){
+  return ms_tick;
+}
 
 void delay_ms(uint32_t ms){
-  uint32_t start_tick = ms_tick;
+  uint32_t start_tick = get_ms_tick();
 
-  while((ms_tick - start_tick) < ms);
+  while((get_ms_tick() - start_tick) < ms);
 }
 
 uint32_t millis(void){
