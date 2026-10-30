@@ -36,9 +36,8 @@ void port_pin_init(void){
   */
   MODIFY_REG(GPIOA->CRL, (0xF << 8), (0x0 << 8));
 
-  /*
-    Set PB6 - to I2C1_SCL [27:24] 
-    Set PB7 to I2C1_SDA [31:28]
+  /* 
+    Set PB6 - to I2C1_SCL [27:24] Set PB7 to I2C1_SDA [31:28]
     Alternate function open drain with 50 MHz 
   */
   MODIFY_REG(GPIOB->CRL, (0xF << 24), (0xF << 24));

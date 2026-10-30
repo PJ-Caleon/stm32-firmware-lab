@@ -31,5 +31,31 @@ app.bin: app.elf
 
 -include $(DEPS)
 
+# Unity Test
+HOST_CC   = gcc
+TEST_DIR  = test
+UNITY_DIR = $(TEST_DIR)/Unity/src
+UNITY_SRC = $(UNITY_DIR)/unity.c
+
+TEST_SRCS = $(wildcard $(TEST_DIR)/test_*.c)
+TEST_BINS = $(patsubst $(TEST_DIR)/%.c,$(BUILD)/test/%,$(TEST_SRCS))
+
+TEST_CFLAGS = -std=gnu11 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer -I$(UNITY_DIR) $(INCLUDES)
+
+# test_add -> finds add.c in core/, drivers/, or app/
+find_src = $(firstword $(foreach d,$(SRC_DIRS),$(wildcard $(d)/$(1).c)))
+
+.PHONY: test
+test: $(TEST_BINS)
+	@for t in $(TEST_BINS); do \
+		echo "==> $$t"; \
+		./$$t || exit 1; \
+	done
+
+.SECONDEXPANSION:
+$(BUILD)/test/test_%: $(TEST_DIR)/test_%.c $(UNITY_SRC) $$(call find_src,$$*)
+	@mkdir -p $(dir $@)
+	$(HOST_CC) $(TEST_CFLAGS) $^ -o $@
+
 clean:
 	rm -rf $(BUILD) *.elf *.map *.bin

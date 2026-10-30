@@ -65,7 +65,11 @@ void ADC_init(void){
                       (uint32_t)adc_dma_buffer,
                       ADC_DMA_BUFFER_SIZE,
                       DMA_CCR_MINC | DMA_CCR_CIRC | DMA_CCR_PSIZE_16 | DMA_CCR_MSIZE_16);
-      
+  // MINC - allows address to increment when new data is added 
+  // CIRC - enables circular mode for continuous data stream 
+  // PSIZE - Size of the peripheral transfer 
+  // MSIZE - Size of the memory data
+
   dma1_channel_enable(1);
 
   // Start continuous scan loop 
@@ -73,7 +77,7 @@ void ADC_init(void){
 }
 
 // DMA Buffer Getters
-uint16_t ADC_GetScanPotRaw(void) {
+__attribute__((weak)) uint16_t ADC_GetScanPotRaw(void) {
   return adc_dma_buffer[0];
 }
 

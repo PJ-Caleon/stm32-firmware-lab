@@ -3,5 +3,6 @@
 
 void shell_init(void);
 void shell_poll(void);   // call every pass of the main loop; never blocks
+void shell_run_line(char *line);
 
 #endif

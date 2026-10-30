@@ -1,4 +1,6 @@
 #include <stdint.h>
+#include <stdio.h>
+#include <inttypes.h>
 #include <string.h>
 #include "oled.h"
 #include "i2c.h"
@@ -8,7 +10,7 @@
 #define OLED_I2C_ADDR 0x3C
 
 // 1024 byte framebuffer
-static uint8_t framebuffer[1024];
+__attribute__((weak)) uint8_t framebuffer[1024];
 
 // Tiny 5x7 font lookup table for characters 0x20 to 0x7F
 static const uint8_t font5x7[][5] = {
@@ -88,9 +90,9 @@ void oled_draw_pixel(uint8_t x, uint8_t y, uint8_t color){
   if (x >= 128 || y >= 64) return;
     
   if (color) {
-    framebuffer[x + (y / 8) * 128] |= (1 << (y % 8));
+    framebuffer[x + (uint8_t)(y / 8) * 128] |= (1 << (y % 8));
   } else {
-    framebuffer[x + (y / 8) * 128] &= ~(1 << (y % 8));
+    framebuffer[x + (uint8_t)(y / 8) * 128] &= ~(1 << (y % 8));
   }
 }
 
@@ -122,6 +124,8 @@ void oled_draw_string(uint8_t x, uint8_t y, const char *str){
   }
 }
 
+__attribute__((weak)) uint8_t chunk_packet[65];
+
 void oled_refresh(void){
   oled_send_cmd(0x21);
   oled_send_cmd(0);
@@ -130,7 +134,6 @@ void oled_refresh(void){
   oled_send_cmd(0);
   oled_send_cmd(7);
 
-  uint8_t chunk_packet[65];
   chunk_packet[0] = 0x40;
 
   for(uint16_t i = 0; i < 1024; i += 64){
@@ -149,7 +152,7 @@ void oled_dashboard(uint32_t adc_val){
   char buf[32];
 
   counter++;
-
+  
   if (adc_val > 4000) {
     if (high_adc_start_time == 0) {
       high_adc_start_time = millis();
@@ -172,10 +175,10 @@ void oled_dashboard(uint32_t adc_val){
     oled_clear();
     oled_draw_string(0, 0, "DRACO MALFOID");
 
-    sprintf(buf, "CNT: %lu", counter);
+    sprintf(buf, "CNT: %" PRIu32, counter);
     oled_draw_string(0, 22, buf);
 
-    sprintf(buf, "ADC: %lu", adc_val);
+    sprintf(buf, "ADC: %" PRIu32, adc_val);
     oled_draw_string(0, 34, buf);
 
     oled_refresh();
