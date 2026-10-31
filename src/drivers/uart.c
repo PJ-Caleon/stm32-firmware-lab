@@ -157,7 +157,7 @@ static void uart_tx_kick(void){
 }
 
 // Called by the DMA driver (in interrupt context) when a chunk is fully sent.
-static void uart_tx_dma_done(void){
+void uart_tx_dma_done(void){
   // Those bytes are gone, so their slots are free again: move tail past them.
   tx_tail = (tx_tail + tx_chunk_len) % TX_QUEUE_SIZE;
 
@@ -168,15 +168,13 @@ static void uart_tx_dma_done(void){
   uart_tx_kick();
 }
 
-// Queue one byte for sending. Returns immediately, unless the queue is full.
-// Do NOT call from an interrupt: the wait loop below would wait forever.
-void uart_putc(char c){
+// Try to queue one byte. Returns 1 if queued, 0 if the queue is full.
+// Never waits, so it is the only putc that is safe to call from an interrupt.
+int uart_try_putc(char c){
   uint16_t next_head = (tx_head + 1) % TX_QUEUE_SIZE;
 
-  // Queue full? Wait here until the DMA frees a slot. The kick call is a
-  // safety net so the DMA is definitely running while we wait.
   if (next_head == tx_tail){
-    return;
+    return 0;
   }
 
   // Put the byte in the free slot, THEN publish it by moving head.
@@ -186,6 +184,21 @@ void uart_putc(char c){
   // Start the DMA if it's idle. (If it's busy, uart_tx_dma_done() will pick
   // this byte up when the current chunk ends.)
   uart_tx_kick();
+  return 1;
+}
+
+// Called while uart_putc() waits for a free slot. Does nothing on the MCU
+// (the DMA-done interrupt frees slots by itself). Host tests override it to
+// pretend the DMA finished.
+__attribute__((weak)) void uart_tx_wait_hook(void){}
+
+// Queue one byte, waiting if the queue is full so no byte is ever lost.
+// Do NOT call from an interrupt: the wait loop would wait forever.
+void uart_putc(char c){
+  while (!uart_try_putc(c)){
+    uart_tx_kick();        // make sure the DMA is running while we wait
+    uart_tx_wait_hook();
+  }
 }
 
 // Send a null-terminated string.
