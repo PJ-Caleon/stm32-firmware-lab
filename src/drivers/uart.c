@@ -90,8 +90,8 @@ char uart_read_char(void){
   slot unused, so the queue really holds 127 bytes.
 */
 static uint8_t           tx_buffer[TX_QUEUE_SIZE];
-static volatile uint16_t tx_head = 0;
-static volatile uint16_t tx_tail = 0;
+volatile uint16_t tx_head = 0;
+volatile uint16_t tx_tail = 0;
 
 // 1 while a DMA transfer is in flight, 0 when the DMA is idle.
 static volatile uint8_t  tx_busy = 0;
@@ -175,8 +175,8 @@ void uart_putc(char c){
 
   // Queue full? Wait here until the DMA frees a slot. The kick call is a
   // safety net so the DMA is definitely running while we wait.
-  while (next_head == tx_tail){
-    uart_tx_kick();
+  if (next_head == tx_tail){
+    return;
   }
 
   // Put the byte in the free slot, THEN publish it by moving head.
