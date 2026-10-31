@@ -31,10 +31,10 @@
 
 // The DMA writes here. The CPU only reads. "volatile" because the DMA changes
 // it behind the compiler's back.
-static volatile uint8_t dma_rx_buffer[UART_RX_BUFFER_SIZE];
+__attribute__((weak)) volatile uint8_t dma_rx_buffer[UART_RX_BUFFER_SIZE];
 
 // Our bookmark: index of the next byte WE will read.
-static uint16_t rx_tail = 0;
+volatile uint16_t rx_tail = 0;
 
 /*
   Where is the DMA right now? (index of the next hole it will write)
@@ -50,7 +50,7 @@ static uint16_t rx_head(void){
 
 // 1 if the DMA has written bytes we haven't read yet.
 // Example: head = 5, tail = 3  ->  holes 3 and 4 are unread  ->  returns 1.
-int uart_data_available(void){
+__attribute__((weak)) int uart_data_available(void){
   return (rx_tail != rx_head());
 }
 
@@ -68,7 +68,7 @@ char uart_read_char(void){
 }
 
 // Note: nothing stops the DMA from lapping us. If the CPU doesn't read for
-// 256 bytes, unread bytes are silently overwritten.
+// 256 bytes, unread bytes are silently overwritten
 
 // TX  (transmit)
 /*
@@ -149,8 +149,8 @@ static void uart_tx_kick(void){
   // DMA_CCR_TCIE = interrupt me when the whole chunk is sent
   // (item size is 8-bit by default, which is what a byte stream needs)
   dma1_channel_config(UART1_TX_DMA_CH,
-                      (uint32_t)&(UART1->DR),
-                      (uint32_t)&tx_buffer[tail],
+                      (uint32_t)(uintptr_t)&(UART1->DR),
+                      (uint32_t)(uintptr_t)&tx_buffer[tail],
                       tx_chunk_len,
                       DMA_CCR_DIR | DMA_CCR_MINC | DMA_CCR_TCIE);
   dma1_channel_enable(UART1_TX_DMA_CH);
@@ -218,8 +218,8 @@ void uart_init(uint32_t pclk_freq){
   // DMA_CCR_CIRC    -> after 256 bytes, jump back to hole 0 and keep going
   // No TCIE         -> no interrupt; the CPU just polls the position
   dma1_channel_config(UART1_RX_DMA_CH,
-                      (uint32_t)&(UART1->DR),
-                      (uint32_t)dma_rx_buffer,
+                      (uint32_t)(uintptr_t)&(UART1->DR),
+                      (uint32_t)(uintptr_t)dma_rx_buffer,
                       UART_RX_BUFFER_SIZE,
                       DMA_CCR_MINC | DMA_CCR_CIRC);
   dma1_channel_enable(UART1_RX_DMA_CH);
