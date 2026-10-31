@@ -78,6 +78,7 @@ typedef struct Rcc{
 #define RCC_APB1ENR_TIM3EN (1UL << 1)
 #define RCC_APB1ENR_I2C1EN (1UL << 21)
 #define RCC_APB2ENR_SPI1EN (1UL << 12)
+#define RCC_AHBENR_CRCEN (1UL << 6)
 
 // Flash 
 typedef struct Flash{
@@ -413,5 +414,14 @@ typedef struct Scb{
 #define SCB_CCR_DIV_0_TRP_Pos (4U)
 #define SCB_CCR_DIV_0_TRP_Msk (1UL << SCB_CCR_DIV_0_TRP_Pos)
 #endif
+
+// CRC 
+typedef struct Crc{
+  volatile uint32_t DR;
+  volatile uint32_t IDR;
+  volatile uint32_t CR;
+} crc;
+
+#define F1_CRC ((crc *) 0x40023000UL)
 
 #endif

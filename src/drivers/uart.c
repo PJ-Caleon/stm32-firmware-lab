@@ -31,10 +31,10 @@
 
 // The DMA writes here. The CPU only reads. "volatile" because the DMA changes
 // it behind the compiler's back.
-static volatile uint8_t dma_rx_buffer[UART_RX_BUFFER_SIZE];
+__attribute__((weak)) volatile uint8_t dma_rx_buffer[UART_RX_BUFFER_SIZE];
 
 // Our bookmark: index of the next byte WE will read.
-static uint16_t rx_tail = 0;
+volatile uint16_t rx_tail = 0;
 
 /*
   Where is the DMA right now? (index of the next hole it will write)
@@ -50,7 +50,7 @@ static uint16_t rx_head(void){
 
 // 1 if the DMA has written bytes we haven't read yet.
 // Example: head = 5, tail = 3  ->  holes 3 and 4 are unread  ->  returns 1.
-int uart_data_available(void){
+__attribute__((weak)) int uart_data_available(void){
   return (rx_tail != rx_head());
 }
 
@@ -68,7 +68,7 @@ char uart_read_char(void){
 }
 
 // Note: nothing stops the DMA from lapping us. If the CPU doesn't read for
-// 256 bytes, unread bytes are silently overwritten.
+// 256 bytes, unread bytes are silently overwritten
 
 // TX  (transmit)
 /*
@@ -90,8 +90,8 @@ char uart_read_char(void){
   slot unused, so the queue really holds 127 bytes.
 */
 static uint8_t           tx_buffer[TX_QUEUE_SIZE];
-static volatile uint16_t tx_head = 0;
-static volatile uint16_t tx_tail = 0;
+volatile uint16_t tx_head = 0;
+volatile uint16_t tx_tail = 0;
 
 // 1 while a DMA transfer is in flight, 0 when the DMA is idle.
 static volatile uint8_t  tx_busy = 0;
@@ -149,15 +149,15 @@ static void uart_tx_kick(void){
   // DMA_CCR_TCIE = interrupt me when the whole chunk is sent
   // (item size is 8-bit by default, which is what a byte stream needs)
   dma1_channel_config(UART1_TX_DMA_CH,
-                      (uint32_t)&(UART1->DR),
-                      (uint32_t)&tx_buffer[tail],
+                      (uint32_t)(uintptr_t)&(UART1->DR),
+                      (uint32_t)(uintptr_t)&tx_buffer[tail],
                       tx_chunk_len,
                       DMA_CCR_DIR | DMA_CCR_MINC | DMA_CCR_TCIE);
   dma1_channel_enable(UART1_TX_DMA_CH);
 }
 
 // Called by the DMA driver (in interrupt context) when a chunk is fully sent.
-static void uart_tx_dma_done(void){
+void uart_tx_dma_done(void){
   // Those bytes are gone, so their slots are free again: move tail past them.
   tx_tail = (tx_tail + tx_chunk_len) % TX_QUEUE_SIZE;
 
@@ -168,15 +168,13 @@ static void uart_tx_dma_done(void){
   uart_tx_kick();
 }
 
-// Queue one byte for sending. Returns immediately, unless the queue is full.
-// Do NOT call from an interrupt: the wait loop below would wait forever.
-void uart_putc(char c){
+// Try to queue one byte. Returns 1 if queued, 0 if the queue is full.
+// Never waits, so it is the only putc that is safe to call from an interrupt.
+int uart_try_putc(char c){
   uint16_t next_head = (tx_head + 1) % TX_QUEUE_SIZE;
 
-  // Queue full? Wait here until the DMA frees a slot. The kick call is a
-  // safety net so the DMA is definitely running while we wait.
-  while (next_head == tx_tail){
-    uart_tx_kick();
+  if (next_head == tx_tail){
+    return 0;
   }
 
   // Put the byte in the free slot, THEN publish it by moving head.
@@ -186,6 +184,21 @@ void uart_putc(char c){
   // Start the DMA if it's idle. (If it's busy, uart_tx_dma_done() will pick
   // this byte up when the current chunk ends.)
   uart_tx_kick();
+  return 1;
+}
+
+// Called while uart_putc() waits for a free slot. Does nothing on the MCU
+// (the DMA-done interrupt frees slots by itself). Host tests override it to
+// pretend the DMA finished.
+__attribute__((weak)) void uart_tx_wait_hook(void){}
+
+// Queue one byte, waiting if the queue is full so no byte is ever lost.
+// Do NOT call from an interrupt: the wait loop would wait forever.
+void uart_putc(char c){
+  while (!uart_try_putc(c)){
+    uart_tx_kick();        // make sure the DMA is running while we wait
+    uart_tx_wait_hook();
+  }
 }
 
 // Send a null-terminated string.
@@ -218,8 +231,8 @@ void uart_init(uint32_t pclk_freq){
   // DMA_CCR_CIRC    -> after 256 bytes, jump back to hole 0 and keep going
   // No TCIE         -> no interrupt; the CPU just polls the position
   dma1_channel_config(UART1_RX_DMA_CH,
-                      (uint32_t)&(UART1->DR),
-                      (uint32_t)dma_rx_buffer,
+                      (uint32_t)(uintptr_t)&(UART1->DR),
+                      (uint32_t)(uintptr_t)dma_rx_buffer,
                       UART_RX_BUFFER_SIZE,
                       DMA_CCR_MINC | DMA_CCR_CIRC);
   dma1_channel_enable(UART1_RX_DMA_CH);
