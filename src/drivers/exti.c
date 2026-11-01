@@ -1,6 +1,8 @@
 #include "stm32f103.h"
 #include "exti.h"
 #include "clock.h"
+#include "ring_buffer.h"
+#include "stateMachine.h"
 
 /*
   HOW EXTI WORKS
@@ -99,6 +101,10 @@ void EXTI1_IRQHandler(void){
   EXTI->PR = EXTI_LINE1; // Acknowledges interrupt occured (write 1 to clear). Forget this and it re-fires forever.
   interrupt_timestamp = millis();
   exti_flag = 1;
+
+  // Sample test
+  char button_event = 'W';
+  ring_buffer_queue(&event_ring_buffer,button_event);
 }
 
 // ------------------------------------------------------------------ debug
