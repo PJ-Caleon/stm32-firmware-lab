@@ -26,7 +26,7 @@ void port_pin_init(void){
     PA10 (USART1 RX): floating input                      -> nibble 0x4
     CRH: pin 8 = bits 3:0, pin 9 = bits 7:4, pin 10 = bits 11:8
   */
-  MODIFY_REG(GPIOA->CRH, (0xF << 4), (0xB << 4));
+  MODIFY_REG(GPIOA->CRH, (0xF << 4), (0xB <<24));
   MODIFY_REG(GPIOA->CRH, (0xF << 8), (0x4 << 8));
 
   /*

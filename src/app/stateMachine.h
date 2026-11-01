@@ -6,8 +6,8 @@
 
 #define EVENT_BUF_SIZE 32 
 
-static char event_buffer_storage[EVENT_BUF_SIZE];
-ring_buffer_t event_ring_buffer;
+extern char event_buffer_storage[EVENT_BUF_SIZE];
+extern ring_buffer_t event_ring_buffer;
 
 
 // Event Structure 
@@ -34,6 +34,11 @@ typedef struct{
   uint8_t led_status;
   uint8_t img_index;
   uint32_t uptime_seconds;
+  uint8_t is_blinking;
+  uint32_t last_blink_time;
 } Machine;
+
+void state_machine_init(Machine *sm);
+void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed);
 
 #endif

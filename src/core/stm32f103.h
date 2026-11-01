@@ -141,6 +141,7 @@ typedef struct Exti{
 #define EXTI_PORTC (0x2UL)
 #define EXTI_LINE0 (1U << 0)
 #define EXTI_LINE1 (1U << 1)
+#define EXTI_LINE2 (1U << 2)
 
 // NVIC
 typedef struct Nvic{

@@ -41,16 +41,15 @@ int main(void){
   shell_init();
   oled_init();
 
+  // State Machine 
+  Machine app_state;
+  state_machine_init(&app_state);
+
   while(1){
     shell_poll();
 
     uint8_t btn_event = button_poll();
-
-    char rx_data;
-    if(ring_buffer_dequeue(&event_ring_buffer, &rx_data)){
-
-    }
-
-    oled_dashboard(ADC_GetScanPotRaw());
+    uint16_t pol_val = ADC_GetScanPotRaw();
+    state_machine_run(&app_state, pol_val, btn_event);
   }
 }

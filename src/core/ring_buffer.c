@@ -27,6 +27,7 @@ void ring_buffer_queue_arr(ring_buffer_t *buffer, const char *data, ring_buffer_
   }
 }
 
+// Retrieves oldest pending event from queue for main.c to process 
 uint8_t ring_buffer_dequeue(ring_buffer_t *buffer, char *data){
   if(ring_buffer_empty(buffer)){
     return 0;
