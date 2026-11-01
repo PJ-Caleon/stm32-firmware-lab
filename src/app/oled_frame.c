@@ -28,7 +28,7 @@ void oled_draw_frame(const char *title){
   uint8_t title_x = (128 - title_px_width) / 2;
 
   if (title_x > x_min + 1){
-    draw_horizontal_line(x_min, title_x - 2, y_min);
+    draw_horizontal_line(x_min, title_x - 4, y_min);
     draw_horizontal_line(title_x + title_px_width + 2, x_max, y_min);
   } else{
     draw_horizontal_line(x_min, x_max, y_min);

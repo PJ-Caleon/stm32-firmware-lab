@@ -95,9 +95,9 @@ void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed){
 
       // Uptime UI 
       oled_clear();
-      oled_draw_string(0,0,"UPTIME");
+      oled_draw_frame("UPTIME");
       sprintf(buf, "TIME: %lu S", sm->uptime_seconds);
-      oled_draw_string(0,20,buf);
+      oled_draw_centered_text(28,buf);
       oled_refresh();
       break;
 
