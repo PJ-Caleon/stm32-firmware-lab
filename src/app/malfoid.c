@@ -1,14 +1,12 @@
 #include <stdint.h>
 #include "malfoid.h"
-#include "i2c.h"              // i2c_write()
+#include "i2c.h"              
 
-#define OLED_ADDR   0x3C
-#define OLED_PAGES  8
-#define OLED_COLS   128
+extern uint8_t framebuffer[1024];
 
-// 1 = drawing's ink is lit (white lines on black, easy on the OLED).
-// 0 = flipped: black lines on a lit background, like the paper original.
-#define MALFOID_INK_LIT  1
+#define OLED_PAGES 8 
+#define OLED_COLS 128 
+#define MALFOID_INK_LIT 1 
 
 // ART BY: Yunayu from @yunayuispink
 
@@ -85,25 +83,13 @@ static const uint8_t malfoid_img[OLED_PAGES * OLED_COLS] = {
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
+// Draw into software framebuffer
 void draco_malfoid(void){
-  // 0x00 = "commands follow"
-  // 0x20 0x00        horizontal addressing mode (pointer wraps page to page)
-  // 0x21 0 127       column range
-  // 0x22 0 7         page range
-  uint8_t setup[] = {0x00, 0x20, 0x00, 0x21, 0, 127, 0x22, 0, 7};
-  i2c_write(OLED_ADDR, setup, sizeof(setup));
-
-  uint8_t msg[OLED_COLS + 1];
-  msg[0] = 0x40;               // "everything after me is pixel data"
-
-  for (uint8_t p = 0; p < OLED_PAGES; p++){
-    for (uint8_t c = 0; c < OLED_COLS; c++){
-      uint8_t b = malfoid_img[p * OLED_COLS + c];
+  for(uint16_t i = 0; i<1024; i++){
+    uint8_t b = malfoid_img[i];
 #if !MALFOID_INK_LIT
-      b = (uint8_t)~b;
-#endif
-      msg[1 + c] = b;
-    }
-    i2c_write(OLED_ADDR, msg, sizeof(msg));
+    b = (uint8_t)~b;
+#endif 
+    framebuffer[i] = b;
   }
 }

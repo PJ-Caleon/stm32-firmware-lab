@@ -4,11 +4,6 @@
 /*
   port_pin - the ONE place that decides what every pin does.
   If a pin misbehaves, look here first.
-
-    PC13  LED (active-low)              output 2 MHz push-pull
-    PA0   Interrupt Button              input, pull-up
-    PA9   USART1 TX                     alternate function push-pull 50 MHz
-    PA10  USART1 RX                     floating input
 */
 
 #define PINC13 (1UL << 13)

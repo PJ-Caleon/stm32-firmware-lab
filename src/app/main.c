@@ -15,12 +15,14 @@
 #include "oled.h"
 #include "spi.h"
 #include "fault_handler.h"
+#include "ring_buffer.h"
 
 int main(void){
 
   // Core timing
   setClock();
   systick_init();
+  ring_buffer_init(&event_ring_buffer, event_buffer_storage, EVENT_BUF_SIZE);
   dwt_init();
   ADC_init();
   pwm_init();
@@ -39,18 +41,15 @@ int main(void){
   shell_init();
   oled_init();
 
-  // State Machine Var 
-  StateMachine reaction_game = {0};
-  reaction_game.current_state = IDLE;
+  // State Machine 
+  Machine app_state;
+  state_machine_init(&app_state);
 
   while(1){
     shell_poll();
 
-    uint32_t current_time = millis();
     uint8_t btn_event = button_poll();
-
-    stateMachine_update(&reaction_game, btn_event, current_time);
-
-    oled_dashboard(ADC_GetScanPotRaw());
+    uint16_t pol_val = ADC_GetScanPotRaw();
+    state_machine_run(&app_state, pol_val, btn_event);
   }
 }

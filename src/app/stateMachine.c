@@ -1,82 +1,138 @@
-#include <stdlib.h>
+#include <stdio.h>
 #include "stateMachine.h"
 #include "clock.h"
 #include "port_pin.h"
+#include "oled.h"
+#include "malfoid.h"
+#include "button.h"
+#include "oled_frame.h"
+#include "haimiya.h"
+#include "nixos.h"
 
-static uint32_t lcg_seed = 1;
+char event_buffer_storage[EVENT_BUF_SIZE];
+ring_buffer_t event_ring_buffer;
 
-static uint32_t pseudo_random(void){
-  lcg_seed = lcg_seed * 1103515245 + 12345;
-  return lcg_seed;
+void state_machine_init(Machine *sm){
+  sm->current_state = STATE_UPTIME;
+  sm->led_status = 0;
+  sm->img_index = 0;
+  sm->uptime_seconds = 0;
+  sm->is_blinking = 0;
+  sm->last_blink_time = 0;
 }
 
-void stateMachine_update(StateMachine *stateMachine, uint8_t button_pressed, uint32_t current_time){
-  switch (stateMachine->current_state){
-    case IDLE:
-      /*
-        NOTE: IDLE no longer forces the LED off on every pass. That used to
-        overwrite anything else driving PC13 (like the shell's "led on")
-        within microseconds. The LED is now turned off once, when the game
-        returns to IDLE (see RESULT / TOO_EARLY) and at boot (port_pin_init).
-      */
-      if (button_pressed){
-        // sets wait target in between 1-3 seconds 
-        stateMachine->random_wait_target = current_time + (pseudo_random() % 2000 + 1000);
-        stateMachine->current_state = WAIT_RANDOM;
-      } break;
-    
-    case WAIT_RANDOM:
-      // wait for 1-3 seconds 
-      if (current_time >= stateMachine->random_wait_target){
+void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed){
+  char buf[32];
 
-        // Turn Led On
+  // Store previous state to detect window switch 
+  state_machine_t previous_state = sm->current_state;
+
+  // Potentiometer Window 
+  if (pot_val < 1365){
+    sm->current_state = STATE_TOGGLE_LED;
+  } else if (pot_val < 2730){
+    sm->current_state = STATE_UPTIME;
+  } else{
+    sm->current_state = STATE_IMG;
+  }
+
+  // Detect if new window 
+  uint8_t window_changed = (sm->current_state != previous_state);
+
+  // Background Persist blinking
+  uint8_t blink_ticked = 0;
+  if (sm->is_blinking){
+    if ((millis() - sm->last_blink_time) >= 500){
+      sm->last_blink_time = millis();
+      sm->led_status = !sm->led_status;
+      if (sm->led_status){
         led_on();
-
-        // Start Timer 
-        stateMachine->timer_start_tick = current_time;
-        stateMachine->current_state = GO;
-      } break;
-
-    case GO:
-      if (button_pressed){
-        // Get reaction_time
-        stateMachine->reaction_time = current_time - stateMachine->timer_start_tick;
-
-        if (stateMachine->reaction_time >= 1000){
-          stateMachine->current_state = RESULT;
-        } else{
-          stateMachine->current_state = TOO_EARLY;
-        }
-      } break;
-
-    case RESULT:
-      for (int i = 0; i <= 5; i++){
-        led_on();
-        delay_ms(stateMachine->reaction_time / 2);
+      } else{
         led_off();
-        delay_ms(stateMachine->reaction_time/ 2);
+      }
+      blink_ticked = 1;
+    }
+  }
+
+  // Handle State Action
+  switch (sm->current_state){
+    case STATE_TOGGLE_LED:
+      if (btn_pressed == BTN_EVENT_HOLD){
+        sm->is_blinking = !sm->is_blinking;
+        if(!sm->is_blinking){
+          sm->led_status = 0;
+          led_off();
+        }
+      } else if (btn_pressed == BTN_EVENT_CLICK){
+        if (sm->is_blinking){
+          sm->is_blinking = 0;
+          sm->led_status = 0;
+          led_off();
+        } else{
+          sm->led_status = !sm->led_status;
+          if(sm->led_status){
+            led_on();
+          } else{
+            led_off();
+          }
+        }
       }
 
-      delay_ms(500);
-      led_off();
-      stateMachine->current_state = IDLE;
+      // LED UI
+      if (window_changed || (btn_pressed != BTN_EVENT_NONE) || (sm->is_blinking && blink_ticked)){
+        oled_clear();
+        oled_draw_frame("TOGGLE LED");
+        if (sm->is_blinking){
+          sprintf(buf, "LED: BLINKING");
+        } else{
+        sprintf(buf, "LED:%s", sm->led_status ? "ON" : "OFF");
+        }
+        oled_draw_centered_text(28,buf);
+        oled_refresh();
+      }
       break;
 
-    case TOO_EARLY:
-      for (int i = 0; i < 3; i++){
-        led_off();
-        delay_ms(100);
-        led_on();
-        delay_ms(100);
+    case STATE_UPTIME:
+      sm->uptime_seconds = millis()/ 1000;
+
+      // Uptime UI 
+      oled_clear();
+      oled_draw_frame("UPTIME");
+      sprintf(buf, "TIME: %lu S", sm->uptime_seconds);
+      oled_draw_centered_text(28,buf);
+      oled_refresh();
+      break;
+
+    case STATE_IMG:
+      static uint8_t last_img_index = 0xFF; // Force initial draw 
+      uint8_t image_changed = (sm->img_index != last_img_index);
+
+      if (btn_pressed == BTN_EVENT_CLICK){
+        sm->img_index = (sm->img_index+1) % 4;
       }
-      
-      delay_ms(500);
-      led_off();
-      stateMachine->current_state = IDLE;
+
+      // Image UI 
+      if (window_changed || image_changed || (btn_pressed == BTN_EVENT_CLICK)){
+        oled_clear();
+
+        if (sm->img_index == 0){
+          oled_draw_frame("IMAGE");
+          oled_draw_centered_text(28, "PRESS BTN");
+        } else if (sm->img_index == 1){
+          draco_malfoid();
+        } else if (sm->img_index == 2){
+          haimiya_mio();
+        } else if (sm->img_index == 3){
+          nixos();
+        }
+
+        oled_refresh();
+        last_img_index = sm->img_index;
+      }
       break;
 
     default:
-      stateMachine->current_state = IDLE;
       break;
   }
 }
+

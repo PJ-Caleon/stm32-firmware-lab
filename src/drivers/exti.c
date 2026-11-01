@@ -1,6 +1,8 @@
 #include "stm32f103.h"
 #include "exti.h"
 #include "clock.h"
+#include "ring_buffer.h"
+#include "stateMachine.h"
 
 /*
   HOW EXTI WORKS
@@ -80,9 +82,14 @@ void exti_enable_line(uint8_t port, uint8_t line, exti_edge_t edge){
   nvic_enable_irq(exti_irq_number(line));
 }
 
-// The PA1 button
+// PA1 button
 void exti1_init(void){
   exti_enable_line(EXTI_PORTA, 1, EXTI_FALLING);
+}
+
+// PA2 Potentiometer
+void exti2_init(void){
+  exti_enable_line(EXTI_PORTA, 2, EXTI_FALLING);
 }
 
 // ------------------------------------------------------------------ handlers
@@ -97,6 +104,13 @@ void exti1_init(void){
 void EXTI1_IRQHandler(void){
   dwt_isr = DWT_CYCCNT;
   EXTI->PR = EXTI_LINE1; // Acknowledges interrupt occured (write 1 to clear). Forget this and it re-fires forever.
+  interrupt_timestamp = millis();
+  exti_flag = 1;
+}
+
+void EXTI2_IRQHandler(void){
+  dwt_isr = DWT_CYCCNT;
+  EXTI->PR = EXTI_LINE2; // Acknowledges interrupt occured (write 1 to clear). Forget this and it re-fires forever.
   interrupt_timestamp = millis();
   exti_flag = 1;
 }
