@@ -44,12 +44,21 @@ int main(void){
   // State Machine 
   Machine app_state;
   state_machine_init(&app_state);
+  uint8_t state_start = 0;
 
   while(1){
     shell_poll();
 
     uint8_t btn_event = button_poll();
     uint16_t pol_val = ADC_GetScanPotRaw();
-    state_machine_run(&app_state, pol_val, btn_event);
+    
+    if (btn_event == BTN_EVENT_HOLD){
+      state_start = 1;
+    }
+
+    if (state_start == 1){
+
+      state_machine_run(&app_state, pol_val, btn_event);
+    }
   }
 }
