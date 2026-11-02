@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "ring_buffer.h"
 
-#define EVENT_BUF_SIZE 32 
+#define EVENT_BUF_SIZE 64 
 
 extern char event_buffer_storage[EVENT_BUF_SIZE];
 extern ring_buffer_t event_ring_buffer;

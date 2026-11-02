@@ -56,6 +56,12 @@ typedef struct Rcc{
 #define RCC_CR_HSERDY (1U << 17)
 #define RCC_CR_PLLON (1U << 24)
 #define RCC_CR_PLLRDY (1U << 25)
+#define RCC_CR_HSION  (1U << 0)
+#define RCC_CR_HSIRDY (1U << 1)
+#define RCC_CR_HSEON  (1U << 16)
+#define RCC_CR_HSERDY (1U << 17)
+#define RCC_CR_PLLON  (1U << 24)
+#define RCC_CR_PLLRDY (1U << 25)
 
 // RCC->CFGR
 #define RCC_CFGR_PLLSRC (1U << 16)

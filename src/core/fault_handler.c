@@ -8,11 +8,12 @@ extern uint32_t _estack;
 
 void stack_guard_init(void){
   volatile uint32_t *stack_ptr = &__stack_limit;
-  volatile uint32_t *stack_top = &_estack;
+  volatile uint32_t *current_sp;
+  
+  __asm__ volatile ("mov %0, sp" : "=r" (current_sp));
 
-  while (stack_ptr < stack_top){
-    *stack_ptr = 0xDEADBEEF;
-    stack_ptr++;
+  while (stack_ptr < (current_sp - 8)) {
+        *stack_ptr++ = 0xdeadbeee;
   }
 }
 

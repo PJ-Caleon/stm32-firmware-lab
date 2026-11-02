@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+#include "FreeRTOS.h"
+#include "task.h"
 #include "clock.h"
 #include "port_pin.h"
 #include "exti.h"
@@ -17,17 +19,18 @@
 #include "fault_handler.h"
 #include "ring_buffer.h"
 
+static void vAppTask(void *pvParameters);
+
 int main(void){
 
   // Core timing
   setClock();
-  systick_init();
+  fault_handler_init();
   ring_buffer_init(&event_ring_buffer, event_buffer_storage, EVENT_BUF_SIZE);
   dwt_init();
   ADC_init();
   pwm_init();
   temperature_init();
-  fault_handler_init();
 
   // Hardware
   port_pin_init();        // every pin + GPIO/AFIO clocks
@@ -41,24 +44,39 @@ int main(void){
   shell_init();
   oled_init();
 
-  // State Machine 
+  // Create FreeRTOS application task with a safer stack size (512 words = 2KB)
+  xTaskCreate(vAppTask, "AppTask", 512, NULL, tskIDLE_PRIORITY + 1, NULL);
+  
+  // Start the real-time scheduler
+  vTaskStartScheduler();
+}
+
+static void vAppTask(void *pvParameters){
+  (void)pvParameters;
+
+  led_on();
   Machine app_state;
   state_machine_init(&app_state);
   uint8_t state_start = 0;
+
+  const TickType_t xFrequency = pdMS_TO_TICKS(10); // 10ms poll rate 
+  TickType_t xLastWakeTime = xTaskGetTickCount();
 
   while(1){
     shell_poll();
 
     uint8_t btn_event = button_poll();
     uint16_t pol_val = ADC_GetScanPotRaw();
-    
+  
     if (btn_event == BTN_EVENT_HOLD){
       state_start = 1;
     }
 
     if (state_start == 1){
-
       state_machine_run(&app_state, pol_val, btn_event);
     }
+
+    // Yield control cooperatively using FreeRTOS ticks
+    vTaskDelayUntil(&xLastWakeTime, xFrequency);
   }
 }

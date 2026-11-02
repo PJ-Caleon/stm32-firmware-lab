@@ -3,11 +3,9 @@ _estack = ORIGIN(RAM) + LENGTH(RAM);
 ENTRY(Reset_Handler)
 
 MEMORY{
-  ROM (rx): ORIGIN = 0x08000000, LENGTH = 32K 
-  RAM (rwx): ORIGIN = 0x20000000, LENGTH = 10K
+  ROM (rx)  : ORIGIN = 0x08000000, LENGTH = 32K 
+  RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 10K
 }
-
-STACK_SIZE = 0x400;
 
 SECTIONS{
   .isr_vector (READONLY) : 
@@ -40,15 +38,18 @@ SECTIONS{
     _edata = .; 
   } > RAM AT >ROM 
 
+  _end = . ;
+  PROVIDE(end = _end);
+
+  STACK_SIZE = 0x400;
+
+  /* Explicitly reserve the top of RAM for the stack and check limits */
   __stack_limit = _estack - STACK_SIZE;
 
-  .stack (NOLOAD):
+  .stack __stack_limit (NOLOAD):
   {
     . = ALIGN(8);
     . = . + STACK_SIZE;
     . = ALIGN(8);
-  } > RAM 
-
-  _end = . ;
-  PROVIDE(end = _end);
+  } > RAM
 }
