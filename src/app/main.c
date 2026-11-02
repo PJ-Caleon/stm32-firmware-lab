@@ -45,8 +45,8 @@ int main(void){
   oled_init();
 
   // Create FreeRTOS application task with a safer stack size (512 words = 2KB)
-  xTaskCreate(vAppTask, "AppTask", 512, NULL, tskIDLE_PRIORITY + 1, NULL);
-  
+  xTaskCreate(vAppTask, "AppTask", 128, NULL, tskIDLE_PRIORITY + 1, NULL);
+
   // Start the real-time scheduler
   vTaskStartScheduler();
 }
@@ -54,7 +54,6 @@ int main(void){
 static void vAppTask(void *pvParameters){
   (void)pvParameters;
 
-  led_on();
   Machine app_state;
   state_machine_init(&app_state);
   uint8_t state_start = 0;
