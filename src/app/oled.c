@@ -124,7 +124,7 @@ void oled_draw_string(uint8_t x, uint8_t y, const char *str){
   }
 }
 
-__attribute__((weak)) uint8_t chunk_packet[65];
+__attribute__((aligned(4))) static uint8_t chunk_packet[65];
 
 void oled_refresh(void){
   oled_send_cmd(0x21);
@@ -137,8 +137,11 @@ void oled_refresh(void){
   chunk_packet[0] = 0x40;
 
   for(uint16_t i = 0; i < 1024; i += 64){
+    volatile uint8_t *dst = &chunk_packet[1];
+    const uint8_t *src = &framebuffer[i];
+
     for (uint16_t j = 0; j < 64; j++){
-      chunk_packet[1 + j] = framebuffer[i + j];
+      dst[j] = src[j];
     }
     i2c_write(OLED_I2C_ADDR, chunk_packet, 65);
   }
@@ -186,7 +189,7 @@ void oled_dashboard(uint32_t adc_val){
 }
 
 void oled_init(void){
-  uint8_t init_sequence[] = {
+  static const uint8_t init_sequence[] = {
     0x00, // Control byte: Command
     0xAE, // Display OFF (sleep mode)
     0xD5, 0x80, // Set Display Clock Divide Ratio / Oscillator Frequency

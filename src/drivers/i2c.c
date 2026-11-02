@@ -38,7 +38,7 @@ void i2c_init(void){
   STOP 
   every waut loop needs a timeout that returns an error code 
 */
-void i2c_write(uint8_t addr, uint8_t *buf, uint16_t len){
+void i2c_write(uint8_t addr, const uint8_t *buf, uint16_t len){
   uint32_t timeout;
 
   // Start condition 
