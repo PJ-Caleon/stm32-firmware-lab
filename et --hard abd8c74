@@ -1,0 +1,135 @@
+[33me3f921d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mday17-freeRTOS-I[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to e3f921d47cd1a9dd3a3eed837feeb121b4e01053
+[33m661bf1f[m HEAD@{1}: commit: abort
+[33mabd8c74[m HEAD@{2}: commit: Forgot to commit: FreeRTOS implementation. Everything is broken
+[33me3f921d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mday17-freeRTOS-I[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{3}: checkout: moving from main to day17-freeRTOS-I
+[33me3f921d[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mday17-freeRTOS-I[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m HEAD@{4}: commit: trigger state for state machine
+[33m32d0a0d[m HEAD@{5}: commit: readme update
+[33m74d1add[m HEAD@{6}: checkout: moving from day16-embedded-design-pattern to main
+[33m8672752[m[33m ([m[1;31morigin/day16-embedded-design-pattern[m[33m, [m[1;32mday16-embedded-design-pattern[m[33m)[m HEAD@{7}: checkout: moving from main to day16-embedded-design-pattern
+[33m74d1add[m HEAD@{8}: pull: Fast-forward
+[33m0195fad[m HEAD@{9}: checkout: moving from day16-embedded-design-pattern to main
+[33m8672752[m[33m ([m[1;31morigin/day16-embedded-design-pattern[m[33m, [m[1;32mday16-embedded-design-pattern[m[33m)[m HEAD@{10}: commit: Day 16: Embedded Design Pattern
+[33m65d5e33[m HEAD@{11}: commit: Enhance Img frame with 3 new images
+[33m041fef5[m HEAD@{12}: commit: Added frame for uptime
+[33ma6d8fdf[m HEAD@{13}: commit: Revised the state machine engine
+[33mb4436c7[m HEAD@{14}: commit: created a ring buffer
+[33m10c6a46[m HEAD@{15}: commit: Define an event
+[33m0195fad[m HEAD@{16}: checkout: moving from main to day16-embedded-design-pattern
+[33m0195fad[m HEAD@{17}: pull: Fast-forward
+[33md99dbf3[m HEAD@{18}: checkout: moving from day15-unit-testing-part2 to main
+[33m98357e4[m[33m ([m[1;31morigin/day15-unit-testing-part2[m[33m, [m[1;32mday15-unit-testing-part2[m[33m)[m HEAD@{19}: commit: improve test script for uart to allow long strings to be written
+[33mfb1260b[m HEAD@{20}: commit: improve test script for uart to allow long strings to be written
+[33m9ca4a33[m HEAD@{21}: commit: crc test script
+[33m3b02764[m HEAD@{22}: commit: ringbuffer test script done
+[33m76f502c[m HEAD@{23}: commit: uart unit testing script WIP
+[33md99dbf3[m HEAD@{24}: Branch: renamed refs/heads/day15-unittesting2 to refs/heads/day15-unit-testing-part2
+[33md99dbf3[m HEAD@{26}: Branch: renamed refs/heads/day15-vendor-stack to refs/heads/day15-unittesting2
+[33md99dbf3[m HEAD@{28}: checkout: moving from main to day15-vendor-stack
+[33md99dbf3[m HEAD@{29}: pull: Fast-forward
+[33m817f0e0[m HEAD@{30}: checkout: moving from day14-unittest to main
+[33md42f721[m[33m ([m[1;31morigin/day14-unittest[m[33m, [m[1;32mday14-unittest[m[33m)[m HEAD@{31}: commit: Clock Test Script
+[33mce58a8b[m HEAD@{32}: commit: WIP: unit testing on clock functions
+[33ma08c6ea[m HEAD@{33}: checkout: moving from main to day14-unittest
+[33m817f0e0[m HEAD@{34}: commit: Revert
+[33mb0ac1d4[m HEAD@{35}: commit: Updating ignore file
+[33m344f150[m HEAD@{36}: pull: Fast-forward
+[33m38292c2[m HEAD@{37}: checkout: moving from day14-unittest to main
+[33ma08c6ea[m HEAD@{38}: commit: Day 14: Unit Testing
+[33m9b8deb5[m HEAD@{39}: commit: Created unit test for shell script
+[33m325a854[m HEAD@{40}: commit: Created unit test for oled framebuffer
+[33mb14deea[m HEAD@{41}: commit: Created unit test for raw to voltage conversion
+[33m115395e[m HEAD@{42}: commit: Add Unity Test Framework as submodule
+[33m38292c2[m HEAD@{43}: checkout: moving from main to day14-unittest
+[33m38292c2[m HEAD@{44}: pull: Fast-forward
+[33mb3befc0[m HEAD@{45}: checkout: moving from day13-debugging to main
+[33mb085407[m[33m ([m[1;31morigin/day13-debugging[m[33m, [m[1;32mday13-debugging[m[33m)[m HEAD@{46}: commit: Day 13: Debugging
+[33m4dc132d[m HEAD@{47}: commit: bug shell script. Note: bugs 2 will loop forever cause the STM32F103 does not have MPU to stop the recursion loop
+[33m0213969[m HEAD@{48}: commit: naked hardfault handler
+[33m5718af6[m HEAD@{49}: commit: WIP: Fault Handler Implementation
+[33m5212594[m HEAD@{50}: commit: New Branch
+[33mb3befc0[m HEAD@{51}: checkout: moving from main to day13-debugging
+[33mb3befc0[m HEAD@{52}: pull: Fast-forward
+[33mda65993[m HEAD@{53}: checkout: moving from day12-SPI to main
+[33m9800be7[m[33m ([m[1;31morigin/day12-SPI[m[33m, [m[1;32mday12-SPI[m[33m)[m HEAD@{54}: commit: Day 12: SPI
+[33m86be3bb[m HEAD@{55}: commit: loopback test
+[33mcbb24ef[m HEAD@{56}: commit: write spi_xfer
+[33m17b4362[m HEAD@{57}: commit: write spi_xfer
+[33mbd9c5c0[m HEAD@{58}: commit: enable spi1 clock
+[33m4fb7e7c[m HEAD@{59}: commit: wire mosi/miso
+[33m60f05a3[m HEAD@{60}: commit: new branch
+[33mda65993[m HEAD@{61}: checkout: moving from main to day12-SPI
+[33mda65993[m HEAD@{62}: pull: Fast-forward
+[33m0a35371[m HEAD@{63}: checkout: moving from day11-I2C to main
+[33m816bb5e[m[33m ([m[1;31morigin/day11-I2C[m[33m, [m[1;32mday11-I2C[m[33m)[m HEAD@{64}: commit: readme update
+[33mf11c01e[m HEAD@{65}: commit: Day11-I2C
+[33m950ccce[m HEAD@{66}: commit: Writeable I2C
+[33mbaee07f[m HEAD@{67}: commit: Bus Scanner
+[33mb7792bf[m HEAD@{68}: commit: i2c read and write
+[33mf7c2bb5[m HEAD@{69}: commit: Configure I2C1
+[33m7f69a58[m HEAD@{70}: commit: Enable GPIOB and I2C clocks
+[33m26a98c8[m HEAD@{71}: commit: New breanch
+[33m751c93b[m[33m ([m[1;31morigin/day10-ADC-PWM[m[33m, [m[1;32mday10-ADC-PWM[m[33m)[m HEAD@{72}: checkout: moving from day10-ADC-PWM to day11-I2C
+[33m751c93b[m[33m ([m[1;31morigin/day10-ADC-PWM[m[33m, [m[1;32mday10-ADC-PWM[m[33m)[m HEAD@{73}: commit: Day 10: ADC & PWM
+[33ma190640[m HEAD@{74}: commit: LED dimming PWM
+[33ma04f37e[m HEAD@{75}: commit: DMA integrated
+[33mf2427bd[m HEAD@{76}: commit: Internal temp implemented
+[33mfce78b0[m HEAD@{77}: commit: Potentiometer readability
+[33maf3ee42[m HEAD@{78}: commit: ADC Clock enabled
+[33ma59796c[m HEAD@{79}: commit: WIP: Prescaler setup
+[33m0a35371[m HEAD@{80}: checkout: moving from main to day10-ADC-PWM
+[33m0a35371[m HEAD@{81}: pull: Fast-forward
+[33m976416d[m HEAD@{82}: checkout: moving from optimize to main
+[33mc2cab4e[m[33m ([m[1;31morigin/optimize[m[33m, [m[1;32moptimize[m[33m)[m HEAD@{83}: commit: Modularized
+[33mf81c544[m HEAD@{84}: commit: Modularized
+[33mdc528a6[m[33m ([m[1;31morigin/Day9-DMA-RingBuffer[m[33m, [m[1;32mDay9-DMA-RingBuffer[m[33m)[m HEAD@{85}: checkout: moving from Day9-DMA-RingBuffer to optimize
+[33mdc528a6[m[33m ([m[1;31morigin/Day9-DMA-RingBuffer[m[33m, [m[1;32mDay9-DMA-RingBuffer[m[33m)[m HEAD@{86}: commit: Day 9: DMA
+[33mabda7f5[m HEAD@{87}: commit: stress test script
+[33mbaadd3c[m HEAD@{88}: commit: Channel 4 enabled
+[33mc286058[m HEAD@{89}: commit: Add Idle line detection
+[33mc81280b[m HEAD@{90}: commit: Track the last position of where DMA writes
+[33m3401cb4[m HEAD@{91}: commit: UART1 receive uses DMA1 Channel 5
+[33m2fcc210[m HEAD@{92}: commit: Enable DMA1 clock
+[33m88159ef[m HEAD@{93}: commit: Enable DMA1 clock
+[33m976416d[m HEAD@{94}: checkout: moving from main to Day9-DMA-RingBuffer
+[33m976416d[m HEAD@{95}: pull: Fast-forward
+[33m2eeb77e[m HEAD@{96}: checkout: moving from Day8-UART to main
+[33mffea9cc[m[33m ([m[1;31morigin/Day8-UART[m[33m, [m[1;32mDay8-UART[m[33m)[m HEAD@{97}: commit: Day8:UART
+[33m8e4268e[m HEAD@{98}: commit: UART Commands
+[33m3b37f4f[m HEAD@{99}: commit: Override printf to send TX data to RX
+[33me0e78f8[m HEAD@{100}: commit: UART clock enable/baud rate setup
+[33m2eeb77e[m HEAD@{101}: checkout: moving from main to Day8-UART
+[33m2eeb77e[m HEAD@{102}: commit: moved diagram to img folder
+[33m5eefb6c[m HEAD@{103}: commit: Added more delay for debounce button
+[33mce24255[m HEAD@{104}: pull: Fast-forward
+[33m8fe556b[m HEAD@{105}: checkout: moving from Day7-Reaction-Time-Game to main
+[33m0ec611b[m[33m ([m[1;31morigin/Day7-Reaction-Time-Game[m[33m, [m[1;32mDay7-Reaction-Time-Game[m[33m)[m HEAD@{106}: commit: Documentation Adjustment
+[33m35fdf5c[m HEAD@{107}: commit: Day7:Consolidate with a reaction-time game
+[33m4aeeae2[m HEAD@{108}: commit: Day7:Consolidate with a reaction-time game
+[33m37057f4[m HEAD@{109}: commit: State Machine Implemented
+[33m8fe556b[m HEAD@{110}: checkout: moving from main to Day7-Reaction-Time-Game
+[33m8fe556b[m HEAD@{111}: commit: Added Test Driven Development reference link
+[33m85b5a19[m HEAD@{112}: pull: Fast-forward
+[33m36e4233[m HEAD@{113}: checkout: moving from Day6-Interrupts-NVIC to main
+[33mcbee248[m[33m ([m[1;31morigin/Day6-Interrupts-NVIC[m[33m, [m[1;32mDay6-Interrupts-NVIC[m[33m)[m HEAD@{114}: commit: Day 6: Interrupts and the NVIC
+[33m4be8b41[m HEAD@{115}: commit: DWT Debug Interrupt
+[33me752ae4[m HEAD@{116}: commit: DWT Cycle enabled
+[33mf314cb3[m HEAD@{117}: commit: Added debounce within 20 ms
+[33m2357b83[m HEAD@{118}: commit: Added exti flag to acknowledge interrupt
+[33m17e9736[m HEAD@{119}: commit: Set PA0 to interrupt
+[33m36e4233[m HEAD@{120}: checkout: moving from main to Day6-Interrupts-NVIC
+[33m36e4233[m HEAD@{121}: commit: Day 05: Clocks, SysTick, Timers
+[33m7c94a7b[m HEAD@{122}: pull: Fast-forward
+[33m02cd7de[m HEAD@{123}: checkout: moving from Day5-clocks,sysTick,timers to main
+[33ma0d00b0[m[33m ([m[1;31morigin/Day5-clocks,sysTick,timers[m[33m, [m[1;32mDay5-clocks,sysTick,timers[m[33m)[m HEAD@{124}: commit: non blocking led
+[33mfb2abe8[m HEAD@{125}: commit: systick load 72000
+[33mc89577b[m HEAD@{126}: commit: configure PLL
+[33mfd06960[m HEAD@{127}: commit: set flash to 2 wait
+[33m679dac6[m HEAD@{128}: commit: Added a clock script to turn on the 8MHz crystal
+[33m02cd7de[m HEAD@{129}: checkout: moving from main to Day5-clocks,sysTick,timers
+[33m02cd7de[m HEAD@{130}: commit: Day 4: Real Hardware, GPIO
+[33m90a1d1e[m HEAD@{131}: commit: Day 3: C for registers
+[33m07f7616[m HEAD@{132}: commit: chore: update .gitignore
+[33m52a4873[m HEAD@{133}: commit: Zero to main()
+[33m2c4f2af[m HEAD@{134}: commit: day 1: toolchain and first emulated run
+[33m5ed236a[m HEAD@{135}: Branch: renamed refs/heads/master to refs/heads/main
+[33m5ed236a[m HEAD@{137}: commit (initial): Initialization
