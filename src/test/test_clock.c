@@ -2,44 +2,41 @@
 #include <stdint.h>
 #include "clock.h"
 
-extern volatile uint32_t ms_tick;
-static uint32_t virt_tick = 0;
-static int poll_count = 0;
+typedef uint32_t TickType_t;
+
+static uint32_t simulated_ticks = 0;
+static uint32_t delayed_ms = 0;
+
+uint32_t get_ms_tick(void);
+
+uint32_t xTaskGetTickCount(void) {
+  return simulated_ticks;
+}
+
+void vTaskDelay(TickType_t xTicksToDelay) {
+  delayed_ms += xTicksToDelay;
+  simulated_ticks += xTicksToDelay;
+}
 
 void setUp(void){
-  ms_tick = 0;
-  virt_tick = 0;
-  poll_count = 0;
-}
-void tearDown(void){
-  ms_tick = 0;
+  simulated_ticks = 0;
+  delayed_ms = 0;
 }
 
-// Getter function from clock.c override
-uint32_t get_ms_tick(void){
-  poll_count++;
-  if (poll_count > 2){
-    virt_tick += 5;
-  }
-  return virt_tick;
+void tearDown(void){
 }
 
 void test_millis(void){
-  ms_tick = 10;
-
-  for (int i = 0; i < 5; i++){
-    SysTick_Handler();
-  }
-  TEST_ASSERT_EQUAL_INT(15, millis());
+  simulated_ticks = 1234;
+  TEST_ASSERT_EQUAL_UINT32(1234, millis());
+  TEST_ASSERT_EQUAL_UINT32(1234, get_ms_tick());
 }
 
 void test_delay(void){
-  virt_tick = 100;
-  poll_count = 0;
-
-  delay_ms(5);
-  TEST_ASSERT_TRUE(poll_count > 2);
-  TEST_ASSERT_EQUAL_INT32(105, virt_tick);
+  simulated_ticks = 100;
+  delay_ms(25);
+  TEST_ASSERT_EQUAL_UINT32(125, simulated_ticks);
+  TEST_ASSERT_EQUAL_UINT32(25, delayed_ms);
 }
 
 int main(void){

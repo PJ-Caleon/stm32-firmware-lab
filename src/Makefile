@@ -4,15 +4,15 @@ MACH    = cortex-m3
 
 # Every .c file inside these folders is built automatically.
 # Adding a new driver = drop two files in a folder, no Makefile edit.
-SRC_DIRS = core drivers app
+SRC_DIRS = core drivers app rtos
 BUILD    = build
 
 SRC  = $(foreach d,$(SRC_DIRS),$(wildcard $(d)/*.c))
 OBJS = $(patsubst %.c,$(BUILD)/%.o,$(SRC))
 DEPS = $(OBJS:.o=.d)
 
-INCLUDES = $(addprefix -I,$(SRC_DIRS))
-CFLAGS   = -mcpu=$(MACH) -mthumb -std=gnu11 -O0 -Wall -g -MMD -MP $(INCLUDES)
+INCLUDES = $(addprefix -I,$(SRC_DIRS)) -Irtos/include
+CFLAGS   = -mcpu=$(MACH) -mthumb -std=gnu11 -Os -Wall -g -MMD -MP $(INCLUDES)
 LDFLAGS  = -mcpu=$(MACH) -mthumb -T link.ld -nostartfiles --specs=nano.specs --specs=nosys.specs -Wl,-Map=app.map
 
 .PHONY: all clean
@@ -40,7 +40,7 @@ UNITY_SRC = $(UNITY_DIR)/unity.c
 TEST_SRCS = $(wildcard $(TEST_DIR)/test_*.c)
 TEST_BINS = $(patsubst $(TEST_DIR)/%.c,$(BUILD)/test/%,$(TEST_SRCS))
 
-TEST_CFLAGS = -std=gnu11 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer -I$(UNITY_DIR) $(INCLUDES)
+TEST_CFLAGS = -std=gnu11 -Wall -Wextra -g -fsanitize=address,undefined -fno-omit-frame-pointer -I$(UNITY_DIR) $(INCLUDES) -DUNIT_TEST
 
 # test_add -> finds add.c in core/, drivers/, or app/
 find_src = $(firstword $(foreach d,$(SRC_DIRS),$(wildcard $(d)/$(1).c)))
@@ -55,7 +55,7 @@ test: $(TEST_BINS)
 .SECONDEXPANSION:
 $(BUILD)/test/test_%: $(TEST_DIR)/test_%.c $(UNITY_SRC) $$(call find_src,$$*)
 	@mkdir -p $(dir $@)
-	$(HOST_CC) $(TEST_CFLAGS) $^ -o $@
+	@$(HOST_CC) $(TEST_CFLAGS) $^ -o $@
 
 clean:
 	rm -rf $(BUILD) *.elf *.map *.bin

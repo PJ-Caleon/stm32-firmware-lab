@@ -1,38 +1,23 @@
 #include <stdbool.h>
 #include "stm32f103.h"
 #include "clock.h"
-
-__attribute__((weak)) volatile uint32_t ms_tick = 0;
+#include "FreeRTOS.h"
+#include "task.h"
 
 // getter Function 
 __attribute__((weak)) uint32_t get_ms_tick(void){
-  return ms_tick;
+  return (uint32_t)xTaskGetTickCount();
 }
 
-void delay_ms(uint32_t ms){
-  uint32_t start_tick = get_ms_tick();
-
-  while((get_ms_tick() - start_tick) < ms);
+__attribute__((weak)) void delay_ms(uint32_t ms){
+  vTaskDelay(pdMS_TO_TICKS(ms));
 }
 
-uint32_t millis(void){
-  return ms_tick;
+__attribute__((weak)) uint32_t millis(void){
+  return (uint32_t)xTaskGetTickCount();
 }
 
-void systick_init(void){
-  // Set reload value for 1ms tick (72,000 cycles)
-  SYSTICK->LOAD = (SYSCLK_HZ / 1000) - 1;
-
-  // Clear current counter value 
-  SYSTICK->VAL = 0;
-
-  // Enable systick, interupt, set clksrc to processor clock 
-  SYSTICK->CTRL = SYSTICK_EN | SYSTICK_TICKINT | SYSTICK_CLKSRC;
-}
-
-void SysTick_Handler(void){
-  ms_tick++;
-}
+__attribute__ ((weak)) void systick_init(void){}
 
 /*
   Init DWT - counts how many cycles occured since startup

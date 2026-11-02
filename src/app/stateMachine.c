@@ -6,8 +6,6 @@
 #include "malfoid.h"
 #include "button.h"
 #include "oled_frame.h"
-#include "haimiya.h"
-#include "nixos.h"
 
 char event_buffer_storage[EVENT_BUF_SIZE];
 ring_buffer_t event_ring_buffer;
@@ -108,7 +106,7 @@ void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed){
       uint8_t image_changed = (sm->img_index != last_img_index);
 
       if (btn_pressed == BTN_EVENT_CLICK){
-        sm->img_index = (sm->img_index+1) % 4;
+        sm->img_index = (sm->img_index+1) % 2;
       }
 
       // Image UI 
@@ -120,11 +118,7 @@ void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed){
           oled_draw_centered_text(28, "PRESS BTN");
         } else if (sm->img_index == 1){
           draco_malfoid();
-        } else if (sm->img_index == 2){
-          haimiya_mio();
-        } else if (sm->img_index == 3){
-          nixos();
-        }
+        } 
 
         oled_refresh();
         last_img_index = sm->img_index;
