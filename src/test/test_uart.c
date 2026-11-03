@@ -7,29 +7,31 @@ extern volatile int8_t dma_rx_buffer[256];
 extern volatile uint16_t rx_tail;
 extern volatile uint16_t tx_head;
 extern volatile uint16_t tx_tail;
-extern volatile uint8_t tx_busy;
 
 extern void uart_tx_dma_done(void);
 extern int uart_try_putc(char c);
 
-static int mock_queue_full = 0;
+static int tx_pending = 0;
+static uint16_t tx_pending_len = 0;
 static uint32_t tx_total_send = 0;
 
-// Override weak stubs to provide mock behavior for testing without freezes
-uint8_t uart_stub_ring_queue(char c) {
-  (void)c;
-  if (mock_queue_full) {
-    return 0;
+static void finish_pending_dma(void){
+  while(tx_pending){
+    uint16_t len = tx_pending_len;
+    tx_pending = 0;
+    tx_total_send += len;
+    uart_tx_dma_done();
   }
-  return 1;
 }
 
-int uart_stub_ring_empty(void) {
-  return 0;
+// Mock wait hook to prevent infinite blocking loops during host tests
+void uart_tx_wait_hook(void){
+  finish_pending_dma();
 }
 
 void setUp(){
-  mock_queue_full = 0;
+  finish_pending_dma();
+  tx_pending = 0;
   tx_total_send = 0;
   rx_tail = 0;
   tx_head = 0;
@@ -63,21 +65,28 @@ void rx_push_pop_returns_the_same_byte(void){
 }
 
 void buffer_full_reject_next_push(void){
-  mock_queue_full = 1; // Trigger mock full state
+  // Queue holds 127 usable bytes; set head and tail to simulate full state
+  tx_tail = 10;
+  tx_head = (10 - 1 + 128) % 128;
+
+  uint16_t old_head = tx_head;
 
   TEST_ASSERT_EQUAL_INT(0, uart_try_putc('A'));
+  TEST_ASSERT_EQUAL_INT(old_head, tx_head);
 }
 
 void wrap_around_index127_to_index0(void){
   tx_head = 127;
   tx_tail = 120;
 
-  // Simulate manual index adjustments safely
-  tx_head = (tx_head + 1) % 128;
+  uart_putc('#');
   TEST_ASSERT_EQUAL_INT(0, tx_head);
 
-  tx_head = (tx_head + 1) % 128;
+  uart_putc('#');
   TEST_ASSERT_EQUAL_INT(1, tx_head);
+
+  uart_putc('#');
+  TEST_ASSERT_EQUAL_INT(2, tx_head);
 }
 
 void long_string_is_not_truncated(void){
@@ -85,11 +94,9 @@ void long_string_is_not_truncated(void){
   memset(msg, 'x', 300);
   msg[300] = '\0';
 
-  for(int i = 0; i < 300; i++) {
-    uart_putc(msg[i]);
-    tx_total_send++;
-  }
+  uart_puts(msg);
 
+  finish_pending_dma();
   TEST_ASSERT_EQUAL_INT32(300, tx_total_send);
 }
 
@@ -104,11 +111,22 @@ int main(void){
 }
 
 void dma1_init(void){}
+
 void dma1_channel_config(uint8_t channel, uint32_t periph_addr, uint32_t mem_addr, uint16_t size, uint32_t ccr) {
-    (void)channel; (void)periph_addr; (void)mem_addr; (void)size; (void)ccr;
+    (void)periph_addr; (void)mem_addr; (void)ccr;
+    if (channel == 4){          // TX channel
+      tx_pending_len = size;
+    }
 }
-void dma1_channel_enable(uint8_t channel) { (void)channel; }
+
+void dma1_channel_enable(uint8_t channel) {
+    if (channel == 4){
+      tx_pending = 1;
+    }
+}
+
 void dma1_set_tc_callback(uint8_t channel, void (*callback)(void)) { (void)channel; (void)callback; }
+
 uint16_t dma1_channel_remaining(uint8_t channel) {
     (void)channel;
     return dma_remaining;
