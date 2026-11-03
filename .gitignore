@@ -1,7 +1,3 @@
 doc/*
 .obsidian/*
 *.pdf
-src/*.elf
-src/*.bin 
-src/*.map 
-src/*.o
