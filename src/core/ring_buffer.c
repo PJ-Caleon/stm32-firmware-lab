@@ -13,7 +13,7 @@
 #define CRITICAL_EXIT() __asm__ volatile ("msr primask, %0" :: "r" (primask) : "memory")
 #else 
 #define CRITICAL_ENTER() do {} while(0)
-#define CRITICAL_EXIT() do {} while(0)
+#define CRITICAL_EXIT() do {} while(0) 
 #endif
 
 void ring_buffer_init(ring_buffer_t *buffer, char *buf, size_t buf_size){
