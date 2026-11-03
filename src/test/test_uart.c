@@ -16,31 +16,33 @@ static uint16_t tx_pending_len = 0;
 static uint32_t tx_total_send = 0;
 
 static void finish_pending_dma(void){
-  if(tx_pending){
+  while(tx_pending){
+    uint16_t len = tx_pending_len;
     tx_pending = 0;
-    tx_total_send += tx_pending_len;
+    tx_total_send += len;
     uart_tx_dma_done();
   }
 }
 
+// Mock wait hook to prevent infinite blocking loops during host tests
 void uart_tx_wait_hook(void){
   finish_pending_dma();
 }
 
 void setUp(){
-  while(tx_pending){
-    finish_pending_dma();
-  }
+  finish_pending_dma();
+  tx_pending = 0;
   tx_total_send = 0;
   rx_tail = 0;
   tx_head = 0;
   tx_tail = 0;
   dma_remaining = 256;
 }
+
 void tearDown(){}
 
 void rx_empty_buffer_pop(void){
-  dma_remaining = 256; // head = 0, tail = 0 (empty)
+  dma_remaining = 256;
   dma_rx_buffer[rx_tail] = 'A';
 
   TEST_ASSERT_EQUAL_CHAR('\0', uart_read_char());
@@ -63,9 +65,9 @@ void rx_push_pop_returns_the_same_byte(void){
 }
 
 void buffer_full_reject_next_push(void){
-  // Full if head and tail are the same 
+  // Queue holds 127 usable bytes; set head and tail to simulate full state
   tx_tail = 10;
-  tx_head = 9;
+  tx_head = (10 - 1 + 128) % 128;
 
   uint16_t old_head = tx_head;
 
@@ -94,9 +96,7 @@ void long_string_is_not_truncated(void){
 
   uart_puts(msg);
 
-  while(tx_pending){
-    finish_pending_dma();
-  }
+  finish_pending_dma();
   TEST_ASSERT_EQUAL_INT32(300, tx_total_send);
 }
 
@@ -118,6 +118,7 @@ void dma1_channel_config(uint8_t channel, uint32_t periph_addr, uint32_t mem_add
       tx_pending_len = size;
     }
 }
+
 void dma1_channel_enable(uint8_t channel) {
     if (channel == 4){
       tx_pending = 1;
@@ -125,6 +126,7 @@ void dma1_channel_enable(uint8_t channel) {
 }
 
 void dma1_set_tc_callback(uint8_t channel, void (*callback)(void)) { (void)channel; (void)callback; }
+
 uint16_t dma1_channel_remaining(uint8_t channel) {
     (void)channel;
     return dma_remaining;
