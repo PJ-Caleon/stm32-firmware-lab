@@ -12,10 +12,10 @@ This repo is meant to enhance my embedded skills in preparation for my career go
 Each day has a project to commit to this repo with its own documentation and change to the src folder
 
 # Overview of Daily Task 
-- Learn (2h)
-- Build (4h)
-- Debug and Test (1.5h)
-- Write-up (1h)
+- Learn
+- Build
+- Debug and Test 
+- Write-up
 
 # Daily Documentation 
 I make a documentation of my learnings per day and they are all made through excalidraw so to access them. Open them with excalidraw to properly see the documentation 
@@ -45,6 +45,18 @@ Branch: `day11-I2C`
 During the implementation of the I2C with OLED, I decided to add this cool artwork just for fun. Original artwork goes to `@yunayuispink`
 
 ![455](img/malfoid.jpg)
+
+## Event Driven Programming
+
+Branch: `day16-embedded-design-pattern`
+
+Enhanced the state machine UI
+- Sliding window function
+- led toggle, uptimer counter, image index
+- Using the ring buffer for efficiency
+
+[![Watch this Instagram Reel](https://img.shields.io/badge/Instagram-Watch%20Reel-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/reel/DfMv-hFpHJA/)
+
 # Reference
 - Test Driven Development: https://pragprog.com/titles/jgade/test-driven-development-for-embedded-c/
 
@@ -61,4 +73,9 @@ openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c 'program app.elf verif
 ## To Debug
 ```
 picocom -b 115200 /dev/ttyUSB0
+```
+
+## To Test
+```
+make test
 ```

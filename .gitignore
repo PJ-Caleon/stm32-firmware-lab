@@ -1,3 +1,7 @@
 doc/*
 .obsidian/*
 *.pdf
+*.elf
+*.bin 
+*.map 
+*.o
