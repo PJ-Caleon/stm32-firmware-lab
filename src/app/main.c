@@ -52,11 +52,13 @@ int main(void){
 
   while(1){
     shell_poll();
+    oled_poll();
 
     uint8_t btn_event = button_poll();
     uint16_t pol_val = ADC_GetScanPotRaw();
+
     state_machine_run(&app_state, pol_val, btn_event);
-    
+   
     // run supervisor every 1000ms (1 Hz)
     if ((millis() - last_supervisor_run) >= 1000){
       last_supervisor_run = millis();

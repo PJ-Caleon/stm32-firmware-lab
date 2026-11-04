@@ -143,8 +143,6 @@ void oled_refresh(void){
     }
     i2c_write(OLED_I2C_ADDR, chunk_packet, 65);
   }
-
-  supervisor_kick_bit(FLAG_OLED);
 }
 
 void oled_dashboard(uint32_t adc_val){
@@ -212,4 +210,8 @@ void oled_init(void){
   i2c_write(OLED_I2C_ADDR, init_sequence, sizeof(init_sequence));
   oled_clear();
   oled_refresh();
+}
+
+void oled_poll(void){
+  supervisor_kick_bit(FLAG_OLED);
 }

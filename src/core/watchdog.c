@@ -27,7 +27,7 @@ void watchdog_init(void){
   IWDG->KR = 0xAAAA;
 
   // Start watchdog 
-  IWDG->SR = 0xCCCC;
+  IWDG->KR = 0xCCCC;
 }
 
 void watchdog_pat(void){
