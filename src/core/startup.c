@@ -76,8 +76,9 @@ void Reset_Handler(void){
   uint32_t size_b = (uint32_t) &_ebss - (uint32_t) &_sbss;
   pDst = (uint8_t *) &_sbss;
 
+  // Fill free ram between .bss and _sstack;
   for (uint32_t i=0; i < size_b; i++){
-    *pDst++ = 0;
+    *pDst++ = 0xDEADBEEF;
   }
 
   main();

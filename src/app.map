@@ -994,32 +994,32 @@ LOAD linker stubs
  .debug_aranges
                 0x00000300       0x20 build/app/temperature.o
 
-.debug_line     0x00000000     0x3ac9
+.debug_line     0x00000000     0x3acb
  .debug_line    0x00000000      0x2c2 build/core/crc.o
- .debug_line    0x000002c2      0x232 build/core/fault_handler.o
- .debug_line    0x000004f4      0x37f build/core/ring_buffer.o
- .debug_line    0x00000873      0x185 build/core/startup.o
- .debug_line    0x000009f8      0x1f6 build/core/syscalls.o
- .debug_line    0x00000bee      0x1a0 build/drivers/adc.o
- .debug_line    0x00000d8e      0x1f2 build/drivers/clock.o
- .debug_line    0x00000f80      0x255 build/drivers/dma.o
- .debug_line    0x000011d5      0x267 build/drivers/exti.o
- .debug_line    0x0000143c      0x432 build/drivers/i2c.o
- .debug_line    0x0000186e      0x177 build/drivers/port_pin.o
- .debug_line    0x000019e5      0x17c build/drivers/pwm.o
- .debug_line    0x00001b61      0x1ea build/drivers/spi.o
- .debug_line    0x00001d4b      0x250 build/drivers/uart.o
- .debug_line    0x00001f9b      0x1aa build/app/button.o
- .debug_line    0x00002145      0x14a build/app/haimiya.o
- .debug_line    0x0000228f      0x287 build/app/main.o
- .debug_line    0x00002516      0x14a build/app/malfoid.o
- .debug_line    0x00002660      0x148 build/app/nixos.o
- .debug_line    0x000027a8      0x33d build/app/oled.o
- .debug_line    0x00002ae5      0x29d build/app/oled_frame.o
- .debug_line    0x00002d82      0x14d build/app/potentiometer.o
- .debug_line    0x00002ecf      0x64d build/app/shell.o
- .debug_line    0x0000351c      0x41f build/app/stateMachine.o
- .debug_line    0x0000393b      0x18e build/app/temperature.o
+ .debug_line    0x000002c2      0x234 build/core/fault_handler.o
+ .debug_line    0x000004f6      0x37f build/core/ring_buffer.o
+ .debug_line    0x00000875      0x185 build/core/startup.o
+ .debug_line    0x000009fa      0x1f6 build/core/syscalls.o
+ .debug_line    0x00000bf0      0x1a0 build/drivers/adc.o
+ .debug_line    0x00000d90      0x1f2 build/drivers/clock.o
+ .debug_line    0x00000f82      0x255 build/drivers/dma.o
+ .debug_line    0x000011d7      0x267 build/drivers/exti.o
+ .debug_line    0x0000143e      0x432 build/drivers/i2c.o
+ .debug_line    0x00001870      0x177 build/drivers/port_pin.o
+ .debug_line    0x000019e7      0x17c build/drivers/pwm.o
+ .debug_line    0x00001b63      0x1ea build/drivers/spi.o
+ .debug_line    0x00001d4d      0x250 build/drivers/uart.o
+ .debug_line    0x00001f9d      0x1aa build/app/button.o
+ .debug_line    0x00002147      0x14a build/app/haimiya.o
+ .debug_line    0x00002291      0x287 build/app/main.o
+ .debug_line    0x00002518      0x14a build/app/malfoid.o
+ .debug_line    0x00002662      0x148 build/app/nixos.o
+ .debug_line    0x000027aa      0x33d build/app/oled.o
+ .debug_line    0x00002ae7      0x29d build/app/oled_frame.o
+ .debug_line    0x00002d84      0x14d build/app/potentiometer.o
+ .debug_line    0x00002ed1      0x64d build/app/shell.o
+ .debug_line    0x0000351e      0x41f build/app/stateMachine.o
+ .debug_line    0x0000393d      0x18e build/app/temperature.o
 
 .debug_str      0x00000000     0x137b
  .debug_str     0x00000000     0x137b build/core/crc.o

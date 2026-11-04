@@ -5,11 +5,13 @@
 
 extern uint32_t __stack_limit;
 extern uint32_t _estack;
+extern uint32_t _sstack;
 
 void stack_guard_init(void){
   volatile uint32_t *stack_ptr = &__stack_limit;
   volatile uint32_t *stack_top = &_estack;
 
+  // Fill free ram between current stack pointer to top 
   while (stack_ptr < stack_top){
     *stack_ptr = 0xDEADBEEF;
     stack_ptr++;
