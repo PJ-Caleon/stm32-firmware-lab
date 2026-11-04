@@ -17,8 +17,12 @@
 #include "spi.h"
 #include "fault_handler.h"
 #include "ring_buffer.h"
+#include "stm32f103.h"
 
 int main(void){
+  // IWDG Reboot reason fail 
+  uint8_t is_iwdg_reset = (RCC->CSR & (1 << 29)) ? 1 : 0;
+  CLEAR_BIT(RCC->CR, (1 << 24));
 
   // Core timing
   watchdog_init();
@@ -38,6 +42,12 @@ int main(void){
   exti1_latency_test();   // optional: fills dwt_start / dwt_isr for the debugger
   i2c_init();          
   spi_init();
+
+  if (is_iwdg_reset){
+    printf("\r\nIWDG Reset Triggered\r\n");
+  } else{
+    printf("\r\nNormal Power-On Reset\r\n");
+  }
 
   // Watchdog config 
   uint32_t last_supervisor_run = 0;
