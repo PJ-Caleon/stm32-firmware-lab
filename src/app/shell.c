@@ -217,14 +217,27 @@ static void cmd_bugs(int argc, char **argv){
 static void cmd_ram(int argc, char **argv){
   (void)argc; (void)argv;
   // prints .data, .bss, free RAM, peak stack in bytes 
-  uint32_t data_size = (uint32_t) &_edata - (uint32_t) &_sdata;
-  printf(".data: %lu\r\n", (unsigned long)data_size);
+  uint32_t data_size = (uint32_t)((uintptr_t) &_edata) - (uint32_t)((uintptr_t) &_sdata);
+  printf(".data: %lu bytes\r\n", (unsigned long)data_size);
  
-  uint32_t bss_size = (uint32_t) &_ebss - (uint32_t) &_sbss;
-  printf(".bss: %lu\r\n", (unsigned long)bss_size);
+  uint32_t bss_size = (uint32_t)((uintptr_t) &_ebss) - (uint32_t)((uintptr_t) &_sbss);
+  printf(".bss: %lu bytes\r\n", (unsigned long)bss_size);
 
-  uint32_t free_ram_size = (uint32_t) &_la_data - (uint32_t) &_edata;
-  printf("Free Ram: %lu\r\n", (unsigned long)free_ram_size);
+  uint32_t free_ram_size = (uint32_t)((uintptr_t) &_estack) - (uint32_t)((uintptr_t) &_ebss);
+  printf("Free Ram: %lu bytes\r\n", (unsigned long)free_ram_size);
+
+  uint32_t *ptr = &__stack_limit;
+  uint32_t unused_bytes = 0;
+
+  while(ptr < &_estack && *ptr == 0xDEADBEEF){
+    unused_bytes += 4;
+    ptr++;
+  }
+
+  uint32_t total_stack = (uint32_t)((uintptr_t)&_estack - (uintptr_t)&__stack_limit);
+  uint32_t peak_stack = total_stack - unused_bytes;
+
+  printf("Peak Stack: %lu out of %lu bytes\r\n", (unsigned long)peak_stack, (unsigned long)total_stack);
 }
 
 typedef void (*cmd_func_t)(int argc, char **argv);

@@ -42,4 +42,7 @@ typedef struct __attribute((packed)) ContextStateFrame {
   uint32_t xpsr;
 } sContextStateFrame;
 
+extern uint32_t __stack_limit;
+extern uint32_t _estack;
+
 #endif
