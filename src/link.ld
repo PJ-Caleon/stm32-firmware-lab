@@ -38,7 +38,7 @@ SECTIONS{
     _sdata = .;
     *(.data*);
     _edata = .; 
-  } > RAM AT >ROM 
+  } > RAM AT >ROM
 
   __stack_limit = _estack - STACK_SIZE;
 
