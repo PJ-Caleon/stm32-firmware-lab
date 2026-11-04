@@ -74,14 +74,14 @@ char uart_read_char(void){
 /*
   The queue is a ring (128 slots). Two indexes chase each other around it:
 
-      tx_head  next FREE slot.  Moved only by uart_putc()      (main code)
+      tx_head  next FREE slot.  Moved only by uart_putc()     (main code)
       tx_tail  oldest byte NOT YET SENT. Moved only by the DMA-done interrupt
 
   Bytes between tail and head are waiting to go out:
 
       index:   0   1   2   3   4   5   6   7
       slot:   [ ] [ ] [A] [B] [C] [ ] [ ] [ ]
-                       ^tail       ^head       -> A, B, C are waiting
+                      ^tail       ^head       -> A, B, C are waiting
 
   tail only moves AFTER the DMA finished sending, so bytes still being sent
   can never be overwritten by uart_putc().
@@ -89,7 +89,7 @@ char uart_read_char(void){
   head == tail means EMPTY. To tell "full" from "empty" we always leave one
   slot unused, so the queue really holds 127 bytes.
 */
-static uint8_t           tx_buffer[TX_QUEUE_SIZE];
+static uint8_t             tx_buffer[TX_QUEUE_SIZE];
 volatile uint16_t tx_head = 0;
 volatile uint16_t tx_tail = 0;
 
