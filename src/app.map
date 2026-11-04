@@ -7,7 +7,7 @@ Archive member included to satisfy reference by file (symbol)
 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-printf.o)
                               build/app/shell.o (printf)
 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-puts.o)
-                              build/app/main.o (puts)
+                              build/app/shell.o (puts)
 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
                               build/drivers/i2c.o (sprintf)
 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
@@ -161,7 +161,7 @@ END GROUP
  .ARM.exidx     0x080000e0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strlen.o)
                                   0x8 (size before relaxing)
 
-.text           0x080000e0     0x5fb5
+.text           0x080000e0     0x5fb9
  *(.vectors .vectors.*)
  *(.text*)
  .text          0x080000e0      0x200 build/core/crc.o
@@ -624,51 +624,51 @@ END GROUP
  *fill*         0x08004add        0x3 
  .rodata        0x08004ae0       0x54 build/drivers/i2c.o
  .rodata        0x08004b34      0x400 build/app/haimiya.o
- .rodata        0x08004f34       0x31 build/app/main.o
- *fill*         0x08004f65        0x3 
- .rodata        0x08004f68      0x400 build/app/malfoid.o
- .rodata        0x08005368      0x400 build/app/nixos.o
- .rodata        0x08005768      0x16a build/app/oled.o
- *fill*         0x080058d2        0x2 
- .rodata        0x080058d4      0x678 build/app/shell.o
- .rodata        0x08005f4c       0x52 build/app/stateMachine.o
+ .rodata        0x08004f34       0x36 build/app/main.o
+ *fill*         0x08004f6a        0x2 
+ .rodata        0x08004f6c      0x400 build/app/malfoid.o
+ .rodata        0x0800536c      0x400 build/app/nixos.o
+ .rodata        0x0800576c      0x16a build/app/oled.o
+ *fill*         0x080058d6        0x2 
+ .rodata        0x080058d8      0x678 build/app/shell.o
+ .rodata        0x08005f50       0x52 build/app/stateMachine.o
  .rodata.__assert_func.str1.1
-                0x08005f9e       0xf7 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x08005fa2       0xf7 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
                                  0x3d (size before relaxing)
  .rodata.strtok.str1.1
-                0x08006095        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
+                0x08006099        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtok.o)
                                  0x88 (size before relaxing)
  .rodata._svfprintf_r.str1.1
-                0x08006095        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08006099        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._vfprintf_r.str1.1
-                0x08006095        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08006099        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
                                  0x11 (size before relaxing)
  .rodata._printf_i.str1.1
-                0x08006095        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08006099        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
                                  0x22 (size before relaxing)
-                0x08006095                        _etext = .
+                0x08006099                        _etext = .
 
-.glue_7         0x08006098        0x0
- .glue_7        0x08006098        0x0 linker stubs
+.glue_7         0x0800609c        0x0
+ .glue_7        0x0800609c        0x0 linker stubs
 
-.glue_7t        0x08006098        0x0
- .glue_7t       0x08006098        0x0 linker stubs
+.glue_7t        0x0800609c        0x0
+ .glue_7t       0x0800609c        0x0 linker stubs
 
-.vfp11_veneer   0x08006098        0x0
- .vfp11_veneer  0x08006098        0x0 linker stubs
+.vfp11_veneer   0x0800609c        0x0
+ .vfp11_veneer  0x0800609c        0x0 linker stubs
 
-.v4_bx          0x08006098        0x0
- .v4_bx         0x08006098        0x0 linker stubs
+.v4_bx          0x0800609c        0x0
+ .v4_bx         0x0800609c        0x0 linker stubs
 
-.iplt           0x08006098        0x0
- .iplt          0x08006098        0x0 build/core/crc.o
+.iplt           0x0800609c        0x0
+ .iplt          0x0800609c        0x0 build/core/crc.o
 
-.igot.plt       0x08006098        0x0
- .igot.plt      0x08006098        0x0 build/core/crc.o
+.igot.plt       0x0800609c        0x0
+ .igot.plt      0x0800609c        0x0 build/core/crc.o
 
-.rel.dyn        0x08006098        0x0
- .rel.iplt      0x08006098        0x0 build/core/crc.o
+.rel.dyn        0x0800609c        0x0
+ .rel.iplt      0x0800609c        0x0 build/core/crc.o
 
 .bss            0x20000000      0x7e4
                 0x20000000                        _sbss = .
@@ -801,9 +801,9 @@ END GROUP
  .bss           0x200007e4        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libnosys.a(_exit.o)
  *(COMMON)
                 0x200007e4                        _ebss = .
-                0x08006095                        _la_data = LOADADDR (.DATA)
+                0x08006099                        _la_data = LOADADDR (.DATA)
 
-.DATA           0x200007e4       0x60 load address 0x08006095
+.DATA           0x200007e4       0x60 load address 0x08006099
                 0x200007e4                        _sdata = .
  *(.data*)
  .data          0x200007e4        0x0 build/core/crc.o
@@ -890,7 +890,7 @@ END GROUP
                 0x20000844                        _edata = .
                 0x20002400                        __stack_limit = (_estack - STACK_SIZE)
 
-.stack          0x20000844      0x404 load address 0x080060f5
+.stack          0x20000844      0x404 load address 0x080060f9
                 0x20000848                        . = ALIGN (0x8)
  *fill*         0x20000844        0x4 
                 0x20000c48                        . = (. + STACK_SIZE)
@@ -901,7 +901,7 @@ END GROUP
 OUTPUT(app.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x50c7
+.debug_info     0x00000000     0x50e2
  .debug_info    0x00000000      0x409 build/core/crc.o
  .debug_info    0x00000409      0x478 build/core/fault_handler.o
  .debug_info    0x00000881      0x3dd build/core/ring_buffer.o
@@ -919,17 +919,17 @@ LOAD linker stubs
  .debug_info    0x00002c63      0x43a build/drivers/uart.o
  .debug_info    0x0000309d      0x1c4 build/app/button.o
  .debug_info    0x00003261      0x130 build/app/haimiya.o
- .debug_info    0x00003391      0x42a build/app/main.o
- .debug_info    0x000037bb      0x130 build/app/malfoid.o
- .debug_info    0x000038eb      0x130 build/app/nixos.o
- .debug_info    0x00003a1b      0x422 build/app/oled.o
- .debug_info    0x00003e3d      0x26a build/app/oled_frame.o
- .debug_info    0x000040a7       0xcf build/app/potentiometer.o
- .debug_info    0x00004176      0x99e build/app/shell.o
- .debug_info    0x00004b14      0x36e build/app/stateMachine.o
- .debug_info    0x00004e82      0x245 build/app/temperature.o
+ .debug_info    0x00003391      0x445 build/app/main.o
+ .debug_info    0x000037d6      0x130 build/app/malfoid.o
+ .debug_info    0x00003906      0x130 build/app/nixos.o
+ .debug_info    0x00003a36      0x422 build/app/oled.o
+ .debug_info    0x00003e58      0x26a build/app/oled_frame.o
+ .debug_info    0x000040c2       0xcf build/app/potentiometer.o
+ .debug_info    0x00004191      0x99e build/app/shell.o
+ .debug_info    0x00004b2f      0x36e build/app/stateMachine.o
+ .debug_info    0x00004e9d      0x245 build/app/temperature.o
 
-.debug_abbrev   0x00000000     0x2284
+.debug_abbrev   0x00000000     0x228b
  .debug_abbrev  0x00000000      0x17c build/core/crc.o
  .debug_abbrev  0x0000017c      0x1db build/core/fault_handler.o
  .debug_abbrev  0x00000357      0x16a build/core/ring_buffer.o
@@ -947,15 +947,15 @@ LOAD linker stubs
  .debug_abbrev  0x00001325      0x22c build/drivers/uart.o
  .debug_abbrev  0x00001551      0x10e build/app/button.o
  .debug_abbrev  0x0000165f       0xac build/app/haimiya.o
- .debug_abbrev  0x0000170b      0x16d build/app/main.o
- .debug_abbrev  0x00001878       0xac build/app/malfoid.o
- .debug_abbrev  0x00001924       0xac build/app/nixos.o
- .debug_abbrev  0x000019d0      0x1a6 build/app/oled.o
- .debug_abbrev  0x00001b76      0x11d build/app/oled_frame.o
- .debug_abbrev  0x00001c93       0x7a build/app/potentiometer.o
- .debug_abbrev  0x00001d0d      0x269 build/app/shell.o
- .debug_abbrev  0x00001f76      0x1be build/app/stateMachine.o
- .debug_abbrev  0x00002134      0x150 build/app/temperature.o
+ .debug_abbrev  0x0000170b      0x174 build/app/main.o
+ .debug_abbrev  0x0000187f       0xac build/app/malfoid.o
+ .debug_abbrev  0x0000192b       0xac build/app/nixos.o
+ .debug_abbrev  0x000019d7      0x1a6 build/app/oled.o
+ .debug_abbrev  0x00001b7d      0x11d build/app/oled_frame.o
+ .debug_abbrev  0x00001c9a       0x7a build/app/potentiometer.o
+ .debug_abbrev  0x00001d14      0x269 build/app/shell.o
+ .debug_abbrev  0x00001f7d      0x1be build/app/stateMachine.o
+ .debug_abbrev  0x0000213b      0x150 build/app/temperature.o
 
 .debug_aranges  0x00000000      0x340
  .debug_aranges
@@ -1075,7 +1075,7 @@ LOAD linker stubs
  .debug_str     0x0000144c        0x0 build/app/haimiya.o
                                 0x186 (size before relaxing)
  .debug_str     0x0000144c        0x0 build/app/main.o
-                                0x46a (size before relaxing)
+                                0x474 (size before relaxing)
  .debug_str     0x0000144c        0x0 build/app/malfoid.o
                                 0x188 (size before relaxing)
  .debug_str     0x0000144c        0x0 build/app/nixos.o

@@ -44,9 +44,9 @@ int main(void){
   spi_init();
 
   if (is_iwdg_reset){
-    printf("\r\nIWDG Reset Triggered\r\n");
+    uart_puts("\r\nIWDG Reset Triggered\r\n");
   } else{
-    printf("\r\nNormal Power-On Reset\r\n");
+    uart_puts("\r\nNormal Power-On Reset\r\n");
   }
 
   // Watchdog config 
