@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "startup.h"
 #include "shell.h"
 #include "uart.h"
 #include "clock.h"
@@ -214,6 +216,15 @@ static void cmd_bugs(int argc, char **argv){
 
 static void cmd_ram(int argc, char **argv){
   (void)argc; (void)argv;
+  // prints .data, .bss, free RAM, peak stack in bytes 
+  uint32_t data_size = (uint32_t) &_edata - (uint32_t) &_sdata;
+  printf(".data: %lu\r\n", (unsigned long)data_size);
+ 
+  uint32_t bss_size = (uint32_t) &_ebss - (uint32_t) &_sbss;
+  printf(".bss: %lu\r\n", (unsigned long)bss_size);
+
+  uint32_t free_ram_size = (uint32_t) &_la_data - (uint32_t) &_edata;
+  printf("Free Ram: %lu\r\n", (unsigned long)free_ram_size);
 }
 
 typedef void (*cmd_func_t)(int argc, char **argv);
