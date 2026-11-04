@@ -75,6 +75,11 @@ int main(void){
   data the script can operate with
 */
 
+uint32_t _sbss = 0;
+uint32_t _ebss = 0;
+uint32_t _sdata = 0;
+uint32_t _la_data = 0;
+
 void uart_puts(const char *s) { (void)s; }
 void uart_putc(char c) { (void)c; }
 int uart_data_available(void) { return 0; }
