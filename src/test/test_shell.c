@@ -103,3 +103,6 @@ void assert_failed(const uint8_t *file, uint32_t line) {
   (void)file;
   (void)line;
 }
+
+void supervisor_kick_bit(void){}
+void watchdog_pat(void){}
