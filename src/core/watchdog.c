@@ -28,6 +28,9 @@ void watchdog_init(void){
 
   // Start watchdog 
   IWDG->KR = 0xCCCC;
+
+  // Enable freeze during debug 
+  (*(volatile uint32_t *)0xE0042008) |= (1 << 10);
 }
 
 void watchdog_pat(void){
