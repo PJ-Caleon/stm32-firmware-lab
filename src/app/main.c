@@ -16,7 +16,6 @@
 #include "spi.h"
 #include "fault_handler.h"
 #include "ring_buffer.h"
-#include "canary.h"
 
 int main(void){
 
@@ -41,7 +40,6 @@ int main(void){
   // Application
   shell_init();
   oled_init();
-  counter(10);
 
   // State Machine 
   Machine app_state;

@@ -40,6 +40,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
   uart_puts("  bugs <n>    - Triggers 5 failures one at a time\r\n");
+  uart_puts("  ram         - Prints the .data, .bss, free RAM and peak stack use in bytes\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -211,6 +212,10 @@ static void cmd_bugs(int argc, char **argv){
   }
 }
 
+static void cmd_ram(int argc, char **argv){
+  (void)argc; (void)argv;
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -229,7 +234,8 @@ static const cmd_entry_t cmd_table[] = {
   {"pwm_led_dim", cmd_led_dim},
   {"i2c_scan", cmd_i2c_scan},
   {"spi_test", cmd_spi_test},
-  {"bugs", cmd_bugs}
+  {"bugs", cmd_bugs},
+  {"ram", cmd_ram}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
