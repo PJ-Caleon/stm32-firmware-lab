@@ -6,6 +6,7 @@
 #include "i2c.h"
 #include "clock.h"
 #include "malfoid.h"
+#include "watchdog.h"
 
 #define OLED_I2C_ADDR 0x3C
 
@@ -209,4 +210,8 @@ void oled_init(void){
   i2c_write(OLED_I2C_ADDR, init_sequence, sizeof(init_sequence));
   oled_clear();
   oled_refresh();
+}
+
+void oled_poll(void){
+  supervisor_kick_bit(FLAG_OLED);
 }

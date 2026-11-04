@@ -57,6 +57,24 @@ Enhanced the state machine UI
 
 [![Watch this Instagram Reel](https://img.shields.io/badge/Instagram-Watch%20Reel-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/reel/DfMv-hFpHJA/)
 
+# Memory Budget Table
+## Expected Memory
+
+```
+❯ arm-none-eabi-size app.elf
+   text	  data	   bss	   dec	   hex	filename
+  25301	    96	  3040	 28437	  6f15	app.elf
+```
+## Actual Memory
+
+```
+✿ ~ ❯  ram
+.data: 96 bytes
+.bss: 2016 bytes
+Free Ram: 8224 bytes
+Peak Stack: 644 out of 1024 bytes
+```
+
 # Reference
 - Test Driven Development: https://pragprog.com/titles/jgade/test-driven-development-for-embedded-c/
 

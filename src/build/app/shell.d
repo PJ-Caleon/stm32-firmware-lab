@@ -1,7 +1,8 @@
-build/app/shell.o: app/shell.c app/shell.h drivers/uart.h drivers/clock.h \
- drivers/port_pin.h app/potentiometer.h app/temperature.h drivers/pwm.h \
- drivers/adc.h drivers/i2c.h drivers/port_pin.h drivers/spi.h \
- core/stm32f103.h core/fault_handler.h
+build/app/shell.o: app/shell.c core/startup.h app/shell.h drivers/uart.h \
+ drivers/clock.h drivers/port_pin.h app/potentiometer.h app/temperature.h \
+ drivers/pwm.h drivers/adc.h drivers/i2c.h drivers/port_pin.h \
+ drivers/spi.h core/stm32f103.h core/fault_handler.h core/watchdog.h
+core/startup.h:
 app/shell.h:
 drivers/uart.h:
 drivers/clock.h:
@@ -15,3 +16,4 @@ drivers/port_pin.h:
 drivers/spi.h:
 core/stm32f103.h:
 core/fault_handler.h:
+core/watchdog.h:

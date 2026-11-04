@@ -86,3 +86,4 @@ unsigned long millis(void){
 }
 
 void draco_malfoid(void){}
+void supervisor_kick_bit(void){}

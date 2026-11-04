@@ -64,11 +64,11 @@ const uint32_t vectors[] __attribute__((section(".isr_vector"))) = {
 
 void Reset_Handler(void){
   // Copy the section .data in the SRAM 
-  uint32_t size = (uint32_t) &_edata - (uint32_t) &_sdata; 
+  uint32_t size_d = (uint32_t) &_edata - (uint32_t) &_sdata; 
   uint8_t *pSrc = (uint8_t *) &_la_data; // source is ROM load address  
   uint8_t *pDst = (uint8_t *) &_sdata; // destination is RAM start address 
 
-  for (uint32_t i=0; i<size; i++){
+  for (uint32_t i=0; i<size_d; i++){
     *pDst++ = *pSrc++;
   }
 

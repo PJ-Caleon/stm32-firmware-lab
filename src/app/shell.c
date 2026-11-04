@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+
+#include "startup.h"
 #include "shell.h"
 #include "uart.h"
 #include "clock.h"
@@ -13,6 +15,7 @@
 #include "spi.h"
 #include "stm32f103.h"
 #include "fault_handler.h"
+#include "watchdog.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -39,7 +42,8 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  pwm_led_dim - Run 20-second interactive LED dimming via pot\r\n");
   uart_puts("  i2c_scan    - Scans the I2C bus for any connection and output addr\r\n");
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
-  uart_puts("  bugs <n>    - Triggers 5 failures one at a time\r\n");
+  uart_puts("  hang        - cause a hang to trigger watchdog\r\n");
+  uart_puts("  ram         - Prints the .data, .bss, free RAM and peak stack use in bytes\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -109,6 +113,8 @@ static void cmd_led_dim(int argc, char **argv){
       led_off();
       delay_ms(off_time_ms);
     }
+    shell_poll();
+    watchdog_pat();
   }
   led_off();
   printf("LED dimming test completed\r\n");
@@ -165,50 +171,37 @@ static void cmd_spi_test(int argc, char **argv){
   uart_puts("SPI Loopback Test Complete\r\n");
 }
 
-static void cmd_bugs(int argc, char **argv){
-  if (argc < 2){
-    uart_puts("Usage: bugs <1-5>\r\n");
-    uart_puts("  1: Invalid Address Write (BusFault)\r\n");
-    uart_puts("  2: Runaway Recursion (HardFault)\r\n");
-    uart_puts("  3: Unaligned Multi-Word Access (UsageFault)\r\n");
-    uart_puts("  4: Integer Divide by Zero (UsageFault)\r\n");
-    uart_puts("  5: Bad Function Pointer 0xDEADBEEF (UsageFault)\r\n");
-    uart_puts("  6: Trigger manual ASSERT \r\n");
-    return;
-  }
-  char *bug_type = argv[1];
+static void cmd_hang(int argc, char **argv){
+  (void)argc; (void)argv;
 
-  if (bug_type[0] == '1' || strcmp(bug_type, "invalid") == 0){
-    uart_puts("Triggering invalid address write (0x30000000)...\r\n");
-    volatile uint32_t *invalid_ptr = (volatile uint32_t *)0x30000000;
-    *invalid_ptr = 0xDEADBEEF;
+  uart_puts("Hang is starting...\r\n");
+  delay_ms(5000);
+}
+
+static void cmd_ram(int argc, char **argv){
+  (void)argc; (void)argv;
+  // prints .data, .bss, free RAM, peak stack in bytes 
+  uint32_t data_size = (uint32_t)((uintptr_t) &_edata) - (uint32_t)((uintptr_t) &_sdata);
+  printf(".data: %lu bytes\r\n", (unsigned long)data_size);
+ 
+  uint32_t bss_size = (uint32_t)((uintptr_t) &_ebss) - (uint32_t)((uintptr_t) &_sbss);
+  printf(".bss: %lu bytes\r\n", (unsigned long)bss_size);
+
+  uint32_t free_ram_size = (uint32_t)((uintptr_t) &_estack) - (uint32_t)((uintptr_t) &_ebss);
+  printf("Free Ram: %lu bytes\r\n", (unsigned long)free_ram_size);
+
+  uint32_t *ptr = &__stack_limit;
+  uint32_t unused_bytes = 0;
+
+  while(ptr < &_estack && *ptr == 0xDEADBEEF){
+    unused_bytes += 4;
+    ptr++;
   }
-  else if (bug_type[0] == '2' || strcmp(bug_type, "unaligned") == 0) {
-    uart_puts("Triggering unaligned multi-word access (0x20000001)...\r\n");
-    volatile uint32_t *unaligned_ptr = (volatile uint32_t *)0x20000001;
-    volatile uint32_t val = *unaligned_ptr;
-    (void)val;
-  }
-  else if (bug_type[0] == '3' || strcmp(bug_type, "div0") == 0) {
-    uart_puts("Triggering integer divide by zero (10 / 0)...\r\n");
-    volatile int x = 10;
-    volatile int y = 0;
-    volatile int z = x / y;
-    (void)z;
-  }
-  else if (bug_type[0] == '4' || strcmp(bug_type, "badptr") == 0) {
-    uart_puts("Triggering call through bad function pointer (0xDEADBEEF)...\r\n");
-    void (*bad_func)(void) = (void (*)(void))0xDEADBEEF;
-    bad_func();
-  }
-  else if (strcmp(argv[1], "5") == 0){
-    uart_puts("Triggering manual ASSER... \r\n");
-    int val = 0;
-    ASSERT(val == 1);
-  }
-  else {
-    uart_puts("Unknown bug type. Use bugs 1 through 6.\r\n");
-  }
+
+  uint32_t total_stack = (uint32_t)((uintptr_t)&_estack - (uintptr_t)&__stack_limit);
+  uint32_t peak_stack = total_stack - unused_bytes;
+
+  printf("Peak Stack: %lu out of %lu bytes\r\n", (unsigned long)peak_stack, (unsigned long)total_stack);
 }
 
 typedef void (*cmd_func_t)(int argc, char **argv);
@@ -229,7 +222,8 @@ static const cmd_entry_t cmd_table[] = {
   {"pwm_led_dim", cmd_led_dim},
   {"i2c_scan", cmd_i2c_scan},
   {"spi_test", cmd_spi_test},
-  {"bugs", cmd_bugs}
+  {"hang", cmd_hang},
+  {"ram", cmd_ram}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
@@ -274,6 +268,8 @@ void shell_init(void){
 
 void shell_poll(void){
   shell_led_timer();
+
+  supervisor_kick_bit(FLAG_SHELL);
 
   while (uart_data_available()){
     char c = uart_read_char();

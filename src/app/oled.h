@@ -10,5 +10,6 @@ void oled_draw_char(uint8_t x, uint8_t y, char c);
 void oled_draw_string(uint8_t x, uint8_t y, const char *str);
 void oled_refresh(void);
 void oled_dashboard(uint32_t adc_val);
+void oled_poll(void);
 
 #endif
