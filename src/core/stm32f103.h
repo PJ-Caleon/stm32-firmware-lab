@@ -425,4 +425,14 @@ typedef struct Crc{
 
 #define F1_CRC ((crc *) 0x40023000UL)
 
+// IWDG 
+typedef struct Iwdf{
+  volatile uint32_t KR;
+  volatile uint32_t PR;
+  volatile uint32_t RLR;
+  volatile uint32_t SR;
+} iwdg;
+
+#define IWDG ((iwdg *) 0x40003000L)
+
 #endif
