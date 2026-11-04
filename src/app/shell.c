@@ -15,6 +15,7 @@
 #include "spi.h"
 #include "stm32f103.h"
 #include "fault_handler.h"
+#include "watchdog.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -304,6 +305,8 @@ void shell_init(void){
 
 void shell_poll(void){
   shell_led_timer();
+
+  supervisor_kick_bit(FLAG_SHELL);
 
   while (uart_data_available()){
     char c = uart_read_char();

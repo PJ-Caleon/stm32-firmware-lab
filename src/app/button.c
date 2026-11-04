@@ -3,6 +3,7 @@
 #include "clock.h"
 #include "stm32f103.h"
 #include "port_pin.h"
+#include "watchdog.h"
 
 #define BUTTON_DEBOUNCE_MS 300
 #define BUTTON_HOLD_MS 1000
@@ -10,6 +11,8 @@
 static uint32_t last_valid_time = 0;
 
 button_event button_poll(void){
+  supervisor_kick_bit(FLAG_BUTTON);
+
   // Triggered if PA1 is pressed 
   if (exti_flag){
     exti_flag = 0;

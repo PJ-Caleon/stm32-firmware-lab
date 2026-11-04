@@ -1,6 +1,7 @@
 #include <stdint.h>
 
 #include "clock.h"
+#include "watchdog.h"
 #include "port_pin.h"
 #include "exti.h"
 #include "uart.h"
@@ -20,6 +21,7 @@
 int main(void){
 
   // Core timing
+  watchdog_init();
   setClock();
   systick_init();
   ring_buffer_init(&event_ring_buffer, event_buffer_storage, EVENT_BUF_SIZE);
@@ -37,6 +39,9 @@ int main(void){
   i2c_init();          
   spi_init();
 
+  // Watchdog config 
+  uint32_t last_supervisor_run = 0;
+
   // Application
   shell_init();
   oled_init();
@@ -51,5 +56,12 @@ int main(void){
     uint8_t btn_event = button_poll();
     uint16_t pol_val = ADC_GetScanPotRaw();
     state_machine_run(&app_state, pol_val, btn_event);
+    
+    // run supervisor every 1000ms (1 Hz)
+    if ((millis() - last_supervisor_run) >= 1000){
+      last_supervisor_run = millis();
+      supervisor_task();
+    }
+
   }
 }
