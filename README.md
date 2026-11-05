@@ -1,5 +1,7 @@
 This repo is meant to enhance my embedded skills in preparation for my career goals. The project uses STM32F103C6T6 and scoped to be accomplish within 30 days. This was build from m3y54m Embedded Engineering Roadmap trimmed to the software side of C, microcontrollers, protocols, RTOS, debugging, build systems and embedded Linux
 
+[![CI](https://github.com/PJ-Caleon/stm32-firmware-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/PJ-Caleon/stm32-firmware-lab/actions/workflows/ci.yml)
+
 # Part List 
 - STM32F103C6T6
 - ST-Link V2 dongle

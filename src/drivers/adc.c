@@ -61,8 +61,8 @@ void ADC_init(void){
 
   // Configure DMA1 channel 1 for ADC1 
   dma1_channel_config(1,
-                      (uint32_t)&(ADC1->DR),
-                      (uint32_t)adc_dma_buffer,
+                      (uint32_t)(uintptr_t)&(ADC1->DR),
+                      (uint32_t)(uintptr_t)adc_dma_buffer,
                       ADC_DMA_BUFFER_SIZE,
                       DMA_CCR_MINC | DMA_CCR_CIRC | DMA_CCR_PSIZE_16 | DMA_CCR_MSIZE_16);
   // MINC - allows address to increment when new data is added 

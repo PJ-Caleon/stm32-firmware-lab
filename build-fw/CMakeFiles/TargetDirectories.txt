@@ -1,0 +1,3 @@
+/src/build-fw/CMakeFiles/firmware.elf.dir
+/src/build-fw/CMakeFiles/edit_cache.dir
+/src/build-fw/CMakeFiles/rebuild_cache.dir

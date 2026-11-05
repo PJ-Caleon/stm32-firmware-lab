@@ -25,7 +25,7 @@ void test_readable_input(void){
   shell_run_line(input);
   fflush(stdout);
 
-  freopen("/dev/tty", "w", stdout);
+  (void)freopen("dev/tty", "w", stdout);
 
   char buf[128] = {0};
   FILE *read_f = fopen("test_output.txt", "r");
@@ -43,7 +43,7 @@ void test_validate_cmd(void){
   shell_run_line(invalid_cmd);
   fflush(stdout);
 
-  freopen("/dev/tty", "w", stdout);
+  (void)freopen("/dev/tty", "w", stdout);
 
   char buf[128] = {0};
   FILE *read_f = fopen("test_output.txt", "r");

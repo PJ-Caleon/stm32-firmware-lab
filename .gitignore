@@ -1,3 +1,9 @@
 doc/*
 .obsidian/*
 *.pdf
+
+build-fw/
+build-host/
+/build/
+.github/*
+.clang-format

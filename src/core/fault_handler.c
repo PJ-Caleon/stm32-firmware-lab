@@ -12,7 +12,7 @@ void stack_guard_init(void){
   volatile uint32_t *stack_top = &_estack;
 
   // Fill free ram between current stack pointer to top 
-  while (stack_ptr < stack_top){
+  while ((uintptr_t)stack_ptr < (uintptr_t)stack_top){
     *stack_ptr = 0xDEADBEEF;
     stack_ptr++;
   }
