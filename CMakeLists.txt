@@ -52,20 +52,46 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Generic")
 
 else()
     message(STATUS "Configuring for Host Test Target...")
-
     enable_testing()
 
-    file(GLOB TEST_SOURCES 
-      src/test/*.c
-    )
+    set(UNITY_DIR "src/test/Unity/src")
 
-    add_executable(unit_tests
-      ${TEST_SOURCES}
-    )
+    function(add_stm32_test TEST_NAME TEST_SOURCE EXTRA_SOURCES)
+        add_executable(${TEST_NAME}
+            ${TEST_SOURCE}
+            ${UNITY_DIR}/unity.c
+            ${EXTRA_SOURCES}
+        )
 
-    target_include_directories(unit_tests PRIVATE
-      src/test
-    )
+        target_include_directories(${TEST_NAME} PRIVATE
+            ${UNITY_DIR}
+            src/test
+            src/app
+            src/core
+            src/drivers
+        )
 
-    add_test(NAME RunUnitTests COMMAND unit_tests)
+        target_compile_options(${TEST_NAME} PRIVATE
+            -Wall -Wextra -g 
+            -fsanitize=address -fsanitize=undefined 
+            -fno-omit-frame-pointer
+            -Wno-conversion -Wno-sign-conversion -Wno-shadow
+        )
+
+        target_link_options(${TEST_NAME} PRIVATE
+            -fsanitize=address -fsanitize=undefined
+        )
+
+        add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+    endfunction()
+    
+    # Define each test uniquely with all required source dependencies
+    add_stm32_test(test_clock src/test/test_clock.c "src/drivers/clock.c")
+    add_stm32_test(test_crc src/test/test_crc.c "src/core/crc.c")
+    add_stm32_test(test_oled src/test/test_oled.c "src/app/oled.c;src/app/oled_frame.c")
+    add_stm32_test(test_potentiometer src/test/test_potentiometer.c "src/drivers/adc.c;src/app/potentiometer.c;src/drivers/dma.c;src/drivers/clock.c")
+    add_stm32_test(test_ring_buffer src/test/test_ring_buffer.c "src/core/ring_buffer.c")
+    add_stm32_test(test_shell src/test/test_shell.c "src/app/shell.c")
+    add_stm32_test(test_uart src/test/test_uart.c "src/drivers/uart.c")
+
 endif()

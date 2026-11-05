@@ -1,0 +1,1 @@
+/run/current-system/sw/bin/cc -fsanitize=address -fsanitize=undefined -Wl,--dependency-file=CMakeFiles/test_oled.dir/link.d CMakeFiles/test_oled.dir/src/test/test_oled.c.o CMakeFiles/test_oled.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_oled.dir/src/app/oled.c.o CMakeFiles/test_oled.dir/src/app/oled_frame.c.o -o test_oled

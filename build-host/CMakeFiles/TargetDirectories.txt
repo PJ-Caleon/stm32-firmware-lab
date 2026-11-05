@@ -1,0 +1,10 @@
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_clock.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_crc.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_oled.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_potentiometer.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_ring_buffer.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_shell.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test_uart.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/test.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/edit_cache.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/CMakeFiles/rebuild_cache.dir
