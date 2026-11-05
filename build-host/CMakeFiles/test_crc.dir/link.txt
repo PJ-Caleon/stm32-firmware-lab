@@ -1,1 +1,0 @@
-/run/current-system/sw/bin/cc -fsanitize=address -fsanitize=undefined -Wl,--dependency-file=CMakeFiles/test_crc.dir/link.d CMakeFiles/test_crc.dir/src/test/test_crc.c.o CMakeFiles/test_crc.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_crc.dir/src/core/crc.c.o -o test_crc

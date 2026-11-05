@@ -1,1 +1,0 @@
-/run/current-system/sw/bin/cc -fsanitize=address -fsanitize=undefined -Wl,--dependency-file=CMakeFiles/test_uart.dir/link.d CMakeFiles/test_uart.dir/src/test/test_uart.c.o CMakeFiles/test_uart.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_uart.dir/src/drivers/uart.c.o -o test_uart

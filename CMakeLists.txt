@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.21)
 
+if(CMAKE_SYSTEM_NAME STREQUAL "Generic")
+    set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+endif()
+
 project(stm32-firmware-lab LANGUAGES C ASM)
 
 set(CMAKE_C_STANDARD 11)

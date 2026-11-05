@@ -1,1 +1,0 @@
-/run/current-system/sw/bin/cc -fsanitize=address -fsanitize=undefined -Wl,--dependency-file=CMakeFiles/test_clock.dir/link.d CMakeFiles/test_clock.dir/src/test/test_clock.c.o CMakeFiles/test_clock.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_clock.dir/src/drivers/clock.c.o -o test_clock

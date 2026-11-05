@@ -1,3 +1,3 @@
-/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/firmware.elf.dir
-/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/edit_cache.dir
-/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/rebuild_cache.dir
+/src/build-fw/CMakeFiles/firmware.elf.dir
+/src/build-fw/CMakeFiles/edit_cache.dir
+/src/build-fw/CMakeFiles/rebuild_cache.dir

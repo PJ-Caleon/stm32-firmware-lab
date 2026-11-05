@@ -1,7 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-host/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
