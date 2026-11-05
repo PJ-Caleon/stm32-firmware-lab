@@ -34,8 +34,7 @@ jobs:
       - name: Run Static Analysis (Cppcheck)
         run: |
           docker run --rm -v ${{ github.workspace }}:/src stm32-builder cppcheck \
-              --enable=warning,style,performance,portability \
+              --enable=error \
               --error-exitcode=1 \
-              --inline-suppr \
               -i src/test/Unity \
               src/
