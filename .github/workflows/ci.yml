@@ -37,4 +37,5 @@ jobs:
               --enable=warning,style,performance,portability \
               --error-exitcode=1 \
               --inline-suppr \
+              -i src/test/Unity \
               src/
