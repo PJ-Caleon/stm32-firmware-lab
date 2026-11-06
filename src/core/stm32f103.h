@@ -435,4 +435,16 @@ typedef struct Iwdf{
 
 #define IWDG ((iwdg *) 0x40003000L)
 
+// System Control block 
+typedef struct Scb {
+  volatile uint32_t CPUID;
+  volatile uint32_t ICSR;
+  volatile uint32_t VTOR;
+  volatile uint32_t AIRCR;
+  volatile uint32_t SCR;
+  volatile uint32_t CCR;
+} scb;
+
+#define SCB ((scb *) 0xE000EED0UL)
+
 #endif
