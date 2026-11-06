@@ -1,0 +1,156 @@
+Start testing: Nov 06 05:32 UTC
+----------------------------------------------------------
+1/7 Testing: test_clock
+1/7 Test: test_clock
+Command: "/workspace/build-test/test_clock"
+Directory: /workspace/build-test
+"test_clock" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_clock.c:47:test_millis:PASS
+/workspace/src/test/test_clock.c:48:test_delay:PASS
+
+-----------------------
+2 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_clock" end time: Nov 06 05:32 UTC
+"test_clock" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/7 Testing: test_crc
+2/7 Test: test_crc
+Command: "/workspace/build-test/test_crc"
+Directory: /workspace/build-test
+"test_crc" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_crc.c:49:crc16_ccitt_false_standard_vector:PASS
+/workspace/src/test/test_crc.c:50:crc32_ccitt_standard_vector:PASS
+/workspace/src/test/test_crc.c:51:crc32_bit_flip_and_table_vs_bitbybit_match:PASS
+
+-----------------------
+3 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_crc" end time: Nov 06 05:32 UTC
+"test_crc" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/7 Testing: test_oled
+3/7 Test: test_oled
+Command: "/workspace/build-test/test_oled"
+Directory: /workspace/build-test
+"test_oled" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_oled.c:58:test_oled_clear:PASS
+/workspace/src/test/test_oled.c:59:test_oled_draw_pixel1:PASS
+/workspace/src/test/test_oled.c:60:test_oled_draw_pixel2:PASS
+/workspace/src/test/test_oled.c:61:test_oled_draw_pixel3:PASS
+/workspace/src/test/test_oled.c:62:test_oled_refresh:PASS
+
+-----------------------
+5 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_oled" end time: Nov 06 05:32 UTC
+"test_oled" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/7 Testing: test_potentiometer
+4/7 Test: test_potentiometer
+Command: "/workspace/build-test/test_potentiometer"
+Directory: /workspace/build-test
+"test_potentiometer" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_potentiometer.c:35:test_Conversion_Case_Low:PASS
+/workspace/src/test/test_potentiometer.c:36:test_Conversion_Case_Mid:PASS
+/workspace/src/test/test_potentiometer.c:37:test_Conversion_Case_High:PASS
+
+-----------------------
+3 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_potentiometer" end time: Nov 06 05:32 UTC
+"test_potentiometer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/7 Testing: test_ring_buffer
+5/7 Test: test_ring_buffer
+Command: "/workspace/build-test/test_ring_buffer"
+Directory: /workspace/build-test
+"test_ring_buffer" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_ring_buffer.c:116:ring_buffer__should_init:PASS
+/workspace/src/test/test_ring_buffer.c:117:ring_buffer_queue_dequeue:PASS
+/workspace/src/test/test_ring_buffer.c:118:test_ring_buffer_full:PASS
+/workspace/src/test/test_ring_buffer.c:119:test_ring_buffer_queue_dequeue_arr:PASS
+/workspace/src/test/test_ring_buffer.c:120:test_ring_buffer_peek:PASS
+/workspace/src/test/test_ring_buffer.c:121:test_ring_buffer_wrap_around:PASS
+
+-----------------------
+6 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_ring_buffer" end time: Nov 06 05:32 UTC
+"test_ring_buffer" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/7 Testing: test_shell
+6/7 Test: test_shell
+Command: "/workspace/build-test/test_shell"
+Directory: /workspace/build-test
+"test_shell" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_shell" end time: Nov 06 05:32 UTC
+"test_shell" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/7 Testing: test_uart
+7/7 Test: test_uart
+Command: "/workspace/build-test/test_uart"
+Directory: /workspace/build-test
+"test_uart" start time: Nov 06 05:32 UTC
+Output:
+----------------------------------------------------------
+/workspace/src/test/test_uart.c:105:rx_empty_buffer_pop:PASS
+/workspace/src/test/test_uart.c:106:rx_push_pop_returns_the_same_byte:PASS
+/workspace/src/test/test_uart.c:107:buffer_full_reject_next_push:PASS
+/workspace/src/test/test_uart.c:108:wrap_around_index127_to_index0:PASS
+/workspace/src/test/test_uart.c:109:long_string_is_not_truncated:PASS
+
+-----------------------
+5 Tests 0 Failures 0 Ignored 
+OK
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"test_uart" end time: Nov 06 05:32 UTC
+"test_uart" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 06 05:32 UTC

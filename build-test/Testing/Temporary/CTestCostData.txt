@@ -1,0 +1,8 @@
+test_clock 1 0.00852324
+test_crc 1 0.0078735
+test_oled 1 0.00540315
+test_potentiometer 1 0.00792936
+test_ring_buffer 1 0.00632736
+test_shell 1 0.0103236
+test_uart 1 0.00685061
+---

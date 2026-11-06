@@ -1,3 +1,10 @@
-/src/build-fw/CMakeFiles/firmware.elf.dir
-/src/build-fw/CMakeFiles/edit_cache.dir
-/src/build-fw/CMakeFiles/rebuild_cache.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_clock.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_crc.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_oled.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_potentiometer.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_ring_buffer.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_shell.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test_uart.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/test.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/edit_cache.dir
+/home/exfemboy/Documents/Coding/stm32-firmware-lab/build-fw/CMakeFiles/rebuild_cache.dir

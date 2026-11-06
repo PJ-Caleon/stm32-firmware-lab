@@ -1,0 +1,1 @@
+Unknown command: power. Try: status | led on

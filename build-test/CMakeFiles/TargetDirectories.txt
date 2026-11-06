@@ -1,0 +1,10 @@
+/workspace/build-test/CMakeFiles/test_clock.dir
+/workspace/build-test/CMakeFiles/test_crc.dir
+/workspace/build-test/CMakeFiles/test_oled.dir
+/workspace/build-test/CMakeFiles/test_potentiometer.dir
+/workspace/build-test/CMakeFiles/test_ring_buffer.dir
+/workspace/build-test/CMakeFiles/test_shell.dir
+/workspace/build-test/CMakeFiles/test_uart.dir
+/workspace/build-test/CMakeFiles/test.dir
+/workspace/build-test/CMakeFiles/edit_cache.dir
+/workspace/build-test/CMakeFiles/rebuild_cache.dir
