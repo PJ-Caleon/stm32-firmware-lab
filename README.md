@@ -81,13 +81,27 @@ Peak Stack: 644 out of 1024 bytes
 - Test Driven Development: https://pragprog.com/titles/jgade/test-driven-development-for-embedded-c/
 
 ## To Compile
+- Do this both inside the directory of `bootloader/` and `src/`
 ```
-make
+make clean && make
 ```
 
 ## To Flash to board
 ```
 openocd -f interface/stlink.cfg -f target/stm32f1x.cfg -c 'program app.elf verify reset exit'
+```
+
+## To Flash to board with bootloader
+Implemented at `day22-bootloader`
+```
+openocd -f interface/stlink.cfg -f target/stm32f1x.cfg \
+        -c "init" \
+        -c "reset init" \
+        -c "flash write_image erase bootloader/bootloader.elf" \
+        -c "flash write_image erase src/app_meta.bin 0x08001000 bin" \
+        -c "flash write_image erase src/app.bin 0x08001400 bin" \
+        -c "reset run" \
+        -c "shutdown"
 ```
 
 ## To Debug
