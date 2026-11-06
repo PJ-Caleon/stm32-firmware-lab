@@ -1,1 +1,0 @@
-/usr/bin/cc -g -fsanitize=address -fsanitize=undefined CMakeFiles/test_clock.dir/src/test/test_clock.c.o CMakeFiles/test_clock.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_clock.dir/src/drivers/clock.c.o -o test_clock 

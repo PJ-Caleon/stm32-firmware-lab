@@ -1,1 +1,0 @@
-/usr/bin/cc -g -fsanitize=address -fsanitize=undefined CMakeFiles/test_crc.dir/src/test/test_crc.c.o CMakeFiles/test_crc.dir/src/test/Unity/src/unity.c.o CMakeFiles/test_crc.dir/src/core/crc.c.o -o test_crc 

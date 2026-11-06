@@ -7,3 +7,5 @@ build-host/
 /build/
 .github/*
 .clang-format
+build-fw/
+build-host/
