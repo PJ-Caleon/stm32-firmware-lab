@@ -20,7 +20,10 @@
 #include "stm32f103.h"
 
 int main(void){
-  // IWDG Reboot reason fail 
+  SCB->VTOR = 0x08001400;
+
+  __asm__ volatile("cpsie i" : : : "memory");
+
   uint8_t is_iwdg_reset = (RCC->CSR & (1 << 29)) ? 1 : 0;
   CLEAR_BIT(RCC->CR, (1 << 24));
 
