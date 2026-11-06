@@ -21,7 +21,7 @@
 
 int main(void){
   // Relocate vector table offset 
-  SCB->VTOR = 0x08001C00;
+  SCB->VTOR = 0x08001400;
 
   // IWDG Reboot reason fail 
   uint8_t is_iwdg_reset = (RCC->CSR & (1 << 29)) ? 1 : 0;
