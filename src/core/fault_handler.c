@@ -8,13 +8,14 @@ extern uint32_t _estack;
 extern uint32_t _sstack;
 
 void stack_guard_init(void){
-  volatile uint32_t *stack_ptr = &__stack_limit;
-  volatile uint32_t *stack_top = &_estack;
+// Get the current stack pointer address
+  volatile uint32_t *current_sp = (uint32_t *)__builtin_frame_address(0);
+  volatile uint32_t *stack_limit = &__stack_limit;
 
-  // Fill free ram between current stack pointer to top 
-  while ((uintptr_t)stack_ptr < (uintptr_t)stack_top){
-    *stack_ptr = 0xDEADBEEF;
-    stack_ptr++;
+  // Fill unused stack space from the current stack pointer down to the limit
+  while (current_sp > stack_limit) {
+    current_sp--;
+    *current_sp = 0xDEADBEEF;
   }
 }
 

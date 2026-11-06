@@ -12,7 +12,6 @@ typedef struct {
     uint32_t magic;
     uint32_t size;
     uint32_t crc32;
-    uint32_t version;
 } app_meta_t;
 
 // Function pointer type for the application entry point
@@ -24,10 +23,10 @@ void boot_jump_to_app(uint32_t app_address) {
     uint32_t app_reset_handler = *(volatile uint32_t *)(app_address + 4);
 
     // Disable global interrupts before altering core registers
-    __asm volatile("cpsid i");
+    __asm volatile("cpsid i" : : : "memory");
 
     // Set the Main Stack Pointer to the application's stack
-    __asm volatile("msr msp, %0" : : "r" (app_msp));
+    __asm volatile("msr msp, %0" : : "r" (app_msp) : "memory");
 
     // Branch to the application's Reset Handler
     pFunction app_entry = (pFunction)app_reset_handler;

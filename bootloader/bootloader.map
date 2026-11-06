@@ -125,10 +125,10 @@ END GROUP
 OUTPUT(bootloader.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000      0x8d6
- .debug_info    0x00000000      0x213 build/main.o
- .debug_info    0x00000213      0x1cc build/startup.o
- .debug_info    0x000003df      0x4f7 build/crc.o
+.debug_info     0x00000000      0x8cb
+ .debug_info    0x00000000      0x208 build/main.o
+ .debug_info    0x00000208      0x1cc build/startup.o
+ .debug_info    0x000003d4      0x4f7 build/crc.o
 
 .debug_abbrev   0x00000000      0x3b4
  .debug_abbrev  0x00000000      0x11c build/main.o
@@ -166,12 +166,12 @@ LOAD linker stubs
  .debug_line    0x00000235      0x1c9 build/startup.o
  .debug_line    0x000003fe      0x374 build/crc.o
 
-.debug_str      0x00000000      0x320
- .debug_str     0x00000000      0x320 build/main.o
-                                0x1fb (size before relaxing)
- .debug_str     0x00000320        0x0 build/startup.o
+.debug_str      0x00000000      0x318
+ .debug_str     0x00000000      0x318 build/main.o
+                                0x1f3 (size before relaxing)
+ .debug_str     0x00000318        0x0 build/startup.o
                                 0x1da (size before relaxing)
- .debug_str     0x00000320        0x0 build/crc.o
+ .debug_str     0x00000318        0x0 build/crc.o
                                 0x267 (size before relaxing)
 
 .comment        0x00000000       0x46

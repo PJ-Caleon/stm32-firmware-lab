@@ -12,7 +12,7 @@ OBJS = $(patsubst %.c,$(BUILD)/%.o,$(SRC))
 DEPS = $(OBJS:.o=.d)
 
 INCLUDES = $(addprefix -I,$(SRC_DIRS))
-CFLAGS   = -mcpu=$(MACH) -mthumb -std=gnu11 -Os -Wall -g -MMD -MP $(INCLUDES)
+CFLAGS = -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Os -Wall -g -MMD -MP $(INCLUDES)
 LDFLAGS  = -mcpu=$(MACH) -mthumb -T app.ld -nostartfiles --specs=nano.specs --specs=nosys.specs -Wl,-Map=app.map
 
 .PHONY: all clean
