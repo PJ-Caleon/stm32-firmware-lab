@@ -41,7 +41,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Generic")
         ${MCU_OPTIONS}
         -specs=nano.specs
         -specs=nosys.specs
-        -T${CMAKE_SOURCE_DIR}/src/link.ld
+        -T${CMAKE_SOURCE_DIR}/src/app.ld
         -Wl,-Map=${PROJECT_NAME}.map,--cref
         -Wl,--gc-sections
     )
