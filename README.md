@@ -113,3 +113,20 @@ picocom -b 115200 /dev/ttyUSB0
 ```
 make test
 ```
+
+## GDB Debug
+- Terminal 1
+```
+openocd -f interface/stlink.cfg -f target/stm32f1x.cfg
+```
+
+- Terminal 2
+```
+arm-none-eabi-gdb build/bootloader.elf
+```
+- In GDB
+```
+target remoted-extended :3333
+symbol-file bootloader/bootloader.elf
+
+```

@@ -4,6 +4,7 @@
 #include "../src/drivers/port_pin.h"
 #include "../src/drivers/clock.h"
 #include "../src/app/button.h"
+#include "flash.h"
 
 #define APP_START_ADDRESS    0x08001400
 #define META_START_ADDRESS   0x08001000
@@ -55,7 +56,7 @@ int main(void) {
     // Check if the button on PA1 is held down for the duration of BOOT_HOLD_TIMEOUT_MS at reset
     if ((GPIOA->IDR & PINA1) == 0) {
         uint32_t press_start = millis();
-        uint8_t held_confirmed = 1;
+        uint8_t held_confirmed = 0;
 
         while ((GPIOA->IDR & PINA1) == 0) {
             if ((millis() - press_start) >= BOOT_HOLD_TIMEOUT_MS) {
@@ -94,6 +95,19 @@ int main(void) {
     if (computed_crc != meta->crc32) {
         bootloader_lock_fail();
     }
+
+    // Flash 
+  flash_status status = flash_unlock();
+  if (status == FLASH_OK) {
+    flash_erase_page(0x08002000);
+
+    flash_write_halfword(0x08002000, 0x1234);
+    flash_write_halfword(0x08002002, 0x5678);
+    flash_write_halfword(0x08002004, 0x9ABC);
+    flash_write_halfword(0x08002006, 0xDEF0);
+
+    flash_lock();
+  }
 
     // All checks passed! Perform the handover to the application.
     boot_jump_to_app(APP_START_ADDRESS);

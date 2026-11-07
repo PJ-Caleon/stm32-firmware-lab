@@ -5,12 +5,14 @@ MACH    = cortex-m3
 BUILD   = build
 
 SRC = main.c \
+			flash.c \
       ../src/core/startup.c \
       ../src/core/crc.c \
       ../src/drivers/clock.c \
       ../src/drivers/port_pin.c
 
 OBJS = $(BUILD)/main.o \
+			 $(BUILD)/flash.o \
        $(BUILD)/startup.o \
        $(BUILD)/crc.o \
        $(BUILD)/clock.o \
@@ -27,6 +29,10 @@ LDFLAGS  = -mcpu=$(MACH) -mthumb -mfloat-abi=soft -T link.ld -nostartfiles --spe
 all: bootloader.elf bootloader.bin
 
 $(BUILD)/main.o: main.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/flash.o: flash.c 
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
