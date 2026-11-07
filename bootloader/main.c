@@ -53,7 +53,7 @@ int main(void) {
     port_pin_init();
 
     uart_boot_init(72000000UL);
-    uart_boot_echo_loop();
+    uart_boot_protocol_loop();
 
     boot_delay_ms(10);
 

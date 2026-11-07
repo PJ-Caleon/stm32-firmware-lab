@@ -26,12 +26,48 @@ int uart_boot_getc(uint8_t *byte, uint32_t timeout_ms){
   return 0;
 }
 
-// Echo loop test 
-void uart_boot_echo_loop(void){
-  uint8_t rx_byte;
+int uart_boot_read_line(char *buf, uint32_t max_len, uint32_t timeout_ms){
+  uint32_t idx = 0;
+  uint8_t c;
+  uint32_t start = millis();
+
+  while(idx < (max_len - 1)){
+    uint32_t elapsed = millis() - start;
+    if (timeout_ms != 0 && elapsed >= timeout_ms){
+      break;
+    }
+    uint32_t remaining = (timeout_ms != 0) ? (timeout_ms - elapsed) : 0;
+
+    if (uart_boot_getc(&c, remaining) == 0){
+      if (c == '\n' || c == '\r'){
+        if (idx > 0){
+          break;
+        }
+        continue;
+      }
+      buf[idx++] = (char)c;
+    } else{
+      break;
+    }
+  }
+  buf[idx] = '\0';
+  return idx;
+}
+
+void uart_boot_protocol_loop(void){
+  char cmd_buf[32];
   while(1){
-    if(uart_boot_getc(&rx_byte, 1000) == 0){
-      uart_boot_putc(rx_byte);
+    // wait for command from python update script 
+    int len = uart_boot_read_line(cmd_buf, sizeof(cmd_buf), 2000);
+  
+    if (len > 0){
+      // check for HELLO command 
+      if (cmd_buf[0] == 'H' && cmd_buf[1] == 'E' && cmd_buf[2] == 'L' && cmd_buf[3] == 'L' && cmd_buf[4] == 'O') {
+        const char *version_reply = "BOOT_V1.0\n";
+        for (int i = 0; version_reply[i] != '\0'; i++){
+          uart_boot_putc(version_reply[i]);
+        }
+      }
     }
   }
 }
