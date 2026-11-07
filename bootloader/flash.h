@@ -12,6 +12,7 @@ typedef enum {
   FLASH_ERR_PROTECTION
 } flash_status;
 
+void flash_init(void);
 flash_status flash_unlock(void);
 flash_status flash_lock(void);
 flash_status flash_erase_page(uint32_t page_address);

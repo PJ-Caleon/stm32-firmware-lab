@@ -71,10 +71,10 @@ Enhanced the state machine UI
 
 ```
 ✿ ~ ❯  ram
-.data: 96 bytes
-.bss: 2016 bytes
-Free Ram: 8224 bytes
-Peak Stack: 644 out of 1024 bytes
+.data: 120 bytes
+.bss: 2020 bytes
+Free Ram: 8220 bytes
+Peak Stack: 488 out of 1024 bytes
 ```
 
 # Reference

@@ -81,7 +81,7 @@ void state_machine_run(Machine *sm, uint16_t pot_val, uint8_t btn_pressed){
       // LED UI
       if (window_changed || (btn_pressed != BTN_EVENT_NONE) || (sm->is_blinking && blink_ticked)){
         oled_clear();
-        oled_draw_frame("TOGGLE LED");
+        oled_draw_frame("LED");
         if (sm->is_blinking){
           sprintf(buf, "LED: BLINKING");
         } else{

@@ -116,3 +116,7 @@ flash_status flash_write_halfword(uint32_t address, uint16_t data){
 
   return FLASH_OK;
 }
+
+void flash_init(void){
+
+}
