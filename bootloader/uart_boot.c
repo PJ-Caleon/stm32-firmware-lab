@@ -105,7 +105,31 @@ void uart_boot_protocol_loop(void){
       }
       // Receives binary chunk and writes to flash
       else if (cmd_buf[0] == 'D' && cmd_buf[1] == 'A' && cmd_buf[2] == 'T' && cmd_buf[3] == 'A') {
-        // Expected format from Python: DATA <length> followed by raw bytes
+        uint8_t len_low, len_high;
+        if (uart_boot_getc(&len_low, 1000) == 0 && uart_boot_getc(&len_high, 1000) == 0) {
+          uint16_t chunk_len = (uint16_t)len_low | ((uint16_t)len_high << 8);
+
+          if (flash_unlock() == FLASH_OK) {
+            for (uint16_t i = 0; i < chunk_len; i += 2) {
+              uint8_t b0 = 0, b1 = 0;
+              uart_boot_getc(&b0, 1000);
+              if (i + 1 < chunk_len) {
+                uart_boot_getc(&b1, 1000);
+              }
+              uint16_t halfword = (uint16_t)b0 | ((uint16_t)b1 << 8);
+              
+              flash_write_halfword(target_flash_addr, halfword);
+              target_flash_addr += 2;
+            }
+            flash_lock();
+
+            const char *reply = "ACK_DATA\n";
+            for (int i = 0; reply[i] != '\0'; i++) uart_boot_putc(reply[i]);
+          } else {
+            const char *reply = "ERR_FLASH\n";
+            for (int i = 0; reply[i] != '\0'; i++) uart_boot_putc(reply[i]);
+          }
+        }
       }
       // Writes metadata last: Magic, Size, CRC32, Version
       else if (cmd_buf[0] == 'F' && cmd_buf[1] == 'I' && cmd_buf[2] == 'N' && cmd_buf[3] == 'I' && cmd_buf[4] == 'S' && cmd_buf[5] == 'H') {
