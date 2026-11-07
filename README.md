@@ -71,10 +71,10 @@ Enhanced the state machine UI
 
 ```
 ✿ ~ ❯  ram
-.data: 96 bytes
-.bss: 2016 bytes
-Free Ram: 8224 bytes
-Peak Stack: 644 out of 1024 bytes
+.data: 120 bytes
+.bss: 2020 bytes
+Free Ram: 8220 bytes
+Peak Stack: 488 out of 1024 bytes
 ```
 
 # Reference
@@ -104,7 +104,7 @@ openocd -f interface/stlink.cfg -f target/stm32f1x.cfg \
         -c "shutdown"
 ```
 
-## To Debug
+## To Access UART
 ```
 picocom -b 115200 /dev/ttyUSB0
 ```
@@ -112,4 +112,21 @@ picocom -b 115200 /dev/ttyUSB0
 ## To Test
 ```
 make test
+```
+
+## GDB Debug
+- Terminal 1
+```
+openocd -f interface/stlink.cfg -f target/stm32f1x.cfg
+```
+
+- Terminal 2
+```
+arm-none-eabi-gdb build/bootloader.elf
+```
+- In GDB
+```
+target remoted-extended :3333
+symbol-file bootloader/bootloader.elf
+
 ```
