@@ -5,6 +5,7 @@
 #include "../src/drivers/clock.h"
 #include "../src/app/button.h"
 #include "flash.h"
+#include "uart_boot.h"
 
 #define APP_START_ADDRESS    0x08001400
 #define META_START_ADDRESS   0x08001000
@@ -50,6 +51,9 @@ int main(void) {
     setClock();
     systick_init();
     port_pin_init();
+
+    uart_boot_init(72000000UL);
+    uart_boot_echo_loop();
 
     boot_delay_ms(10);
 

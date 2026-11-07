@@ -104,7 +104,7 @@ openocd -f interface/stlink.cfg -f target/stm32f1x.cfg \
         -c "shutdown"
 ```
 
-## To Debug
+## To Access UART
 ```
 picocom -b 115200 /dev/ttyUSB0
 ```
