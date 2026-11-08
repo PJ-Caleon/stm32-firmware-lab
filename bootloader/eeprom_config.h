@@ -9,10 +9,12 @@
 #define CONFIG_PAGE_ADDR2 0x08007C00 
 #define CONFIG_SIZE 1024
 #define NUM_PAGES 2
+#define DEVICE_NAME_MAX_LEN 100
 
 typedef struct {
   uint32_t device_id;
   uint32_t baud_rate;
+  char device_name[DEVICE_NAME_MAX_LEN];
   uint32_t calibration_mode;
   uint8_t reserved[3];
 } AppConfig;

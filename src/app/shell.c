@@ -16,6 +16,7 @@
 #include "stm32f103.h"
 #include "fault_handler.h"
 #include "watchdog.h"
+#include "eeprom_config.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -27,6 +28,32 @@ static char prev_char = 0;          // lets us treat "\r\n" as one Enter, not tw
 
 static uint8_t led_timer_active = 0;
 static uint32_t led_off_time = 0;
+
+static AppConfig cached_config;
+
+static bool config_load(AppConfig *config_out){
+  if (EEPROM_Read(config_out)){
+    cached_config = *config_out;
+    return true;
+  }
+  
+  // default
+  config_out->device_id = 0x0001;
+  config_out->baud_rate = 115200;
+  strcpy(config_out->device_name, "STM32");
+  config_out->calibration_mode = 0;
+
+  cached_config = *config_out;
+  return false;
+}
+
+static bool config_save(const AppConfig *config_in){
+  if (EEPROM_Write(config_in)){
+    cached_config = *config_in;
+    return true;
+  }
+  return false;
+}
 
 // Commands 
 
@@ -44,6 +71,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  spi_test    - Send bytes 0 to 255 and expect them back unchanged\r\n");
   uart_puts("  hang        - cause a hang to trigger watchdog\r\n");
   uart_puts("  ram         - Prints the .data, .bss, free RAM and peak stack use in bytes\r\n");
+  uart_puts("  config      - Adjust the EEPROM memory\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -204,6 +232,39 @@ static void cmd_ram(int argc, char **argv){
   printf("Peak Stack: %lu out of %lu bytes\r\n", (unsigned long)peak_stack, (unsigned long)total_stack);
 }
 
+static void cmd_config(int argc, char **argv){
+  AppConfig cfg;
+  config_load(&cfg);
+
+  if (argc < 2){
+    uart_puts("config show - Display current device config\r\n");
+    uart_puts("config set name <str> - Display current device config\r\n");
+    return;
+  }
+  
+  if (strcmp(argv[1], "show") == 0) {
+    printf("Device Name : %s\r\n", cfg.device_name);
+    printf("Device ID   : 0x%04lX\r\n", (unsigned long)cfg.device_id);
+    printf("Baud Rate   : %lu\r\n", (unsigned long)cfg.baud_rate);
+  }
+  else if (strcmp(argv[1], "set") == 0 && argc >= 4) {
+    if (strcmp(argv[2], "name") == 0) {
+      strncpy(cfg.device_name, argv[3], sizeof(cfg.device_name) - 1);
+      cfg.device_name[sizeof(cfg.device_name) - 1] = '\0';
+      
+      if (config_save(&cfg)) {
+        printf("Saved Device Name -> %s\r\n", cfg.device_name);
+      } else {
+        uart_puts("Error: Failed to write configuration to flash.\r\n");
+      }
+    } else {
+      uart_puts("Unknown property. Use 'config set name <str>'.\r\n");
+    }
+  } else {
+    uart_puts("Invalid arguments. Type 'config' for usage.\r\n");
+  }
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -223,7 +284,8 @@ static const cmd_entry_t cmd_table[] = {
   {"i2c_scan", cmd_i2c_scan},
   {"spi_test", cmd_spi_test},
   {"hang", cmd_hang},
-  {"ram", cmd_ram}
+  {"ram", cmd_ram},
+  {"config", cmd_config}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
