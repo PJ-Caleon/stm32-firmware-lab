@@ -24,8 +24,8 @@ typedef struct {
   uint32_t crc32;
 } ConfigRecord;
 
-bool EEPPROM_Read(AppConfig *config_out);
-bool EEPPROM_Write(AppConfig *new_config);
+bool EEPROM_Read(AppConfig *config_out);
+bool EEPROM_Write(const AppConfig *new_config);
 
 #endif
 
