@@ -29,6 +29,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Generic")
 
     target_compile_options(firmware.elf PRIVATE
       ${MCU_OPTIONS}
+      -Os
       -Wall 
       -Wextra 
       -g 
