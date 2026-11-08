@@ -10,7 +10,7 @@
 extern const uint16_t crc16_ccitt_table[256];
 
 // Function prototypes
-uint16_t ccr16_ccitt(const uint8_t *data, size_t length, uint16_t init);
+__attribute__((weak)) uint16_t ccr16_ccitt(const uint8_t *data, size_t length, uint16_t init);
 uint16_t crc16_xmodem(const uint8_t *data, size_t length);
 uint16_t ccr16_ccitt_false(const uint8_t *data, size_t length);
 
