@@ -54,7 +54,9 @@ test: $(TEST_BINS)
 	done
 
 .SECONDEXPANSION:
-$(BUILD)/test/test_%: $(TEST_DIR)/test_%.c $(UNITY_SRC) $$(call find_src,$$*) $$(if $$(filter uart,$$*),core/ring_buffer.c)
+$(BUILD)/test/test_%: $(TEST_DIR)/test_%.c $(UNITY_SRC) $$(call find_src,$$*) \
+                      $$(if $$(filter uart,$$*),core/ring_buffer.c) \
+                      $$(if $$(filter parser,$$*),core/cobs.c core/crc.c)
 	@mkdir -p $(dir $@)
 	$(HOST_CC) $(TEST_CFLAGS) $^ -o $@
 
