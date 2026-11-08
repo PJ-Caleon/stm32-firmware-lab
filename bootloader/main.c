@@ -6,11 +6,14 @@
 #include "../src/drivers/port_pin.h"
 #include "flash.h"
 #include "uart_boot.h"
+#include "eeprom_config.h"
 
 #define META_START_ADDRESS 0x08001000
 #define APP_START_ADDRESS  0x08001400
 #define MAX_APP_SIZE       0x6C00
 #define BOOT_MAGIC         0x424F4F54
+
+AppConfig g_device_config;
 
 typedef struct {
     uint32_t magic;
@@ -56,6 +59,14 @@ int main(void) {
     flash_init();
 
     boot_delay_ms(10);
+
+    if (EEPROM_Read(&g_device_config)){
+
+    } else{
+      g_device_config.baud_rate = 115200;
+      g_device_config.device_id = 0x0001;
+      EEPROM_Write(&g_device_config);
+    }
 
     // Check if the button on PA1 is held down to force update mode
     bool force_update = false;

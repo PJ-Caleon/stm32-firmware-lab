@@ -7,6 +7,7 @@ BUILD   = build
 SRC = main.c \
 			flash.c \
 			uart_boot.c \
+			eeprom_config.c \
       ../src/core/startup.c \
       ../src/core/crc.c \
       ../src/drivers/clock.c \
@@ -17,6 +18,7 @@ SRC = main.c \
 OBJS = $(BUILD)/main.o \
 			 $(BUILD)/flash.o \
 			 $(BUILD)/uart_boot.o \
+			 $(BUILD)/eeprom_config.o \
        $(BUILD)/startup.o \
        $(BUILD)/crc.o \
        $(BUILD)/clock.o \
@@ -43,6 +45,10 @@ $(BUILD)/flash.o: flash.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BUILD)/uart_boot.o: uart_boot.c 
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(BUILD)/eeprom_config.o: eeprom_config.c 
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 

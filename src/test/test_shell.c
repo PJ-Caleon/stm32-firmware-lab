@@ -81,6 +81,13 @@ uint32_t _sdata = 0;
 uint32_t _la_data = 0;
 uint32_t __stack_limit = 0;
 uint32_t _estack = 0;
+uint32_t EEPROM_Read = 0;
+uint32_t EEPROM_Write = 0;
+uint32_t flash_unlock = 0;
+uint32_t flash_erase_page = 0;
+uint32_t flash_lock = 0;
+uint32_t crc32_bit_by_bit = 0;
+uint32_t flash_write_halfword = 0;
 
 void uart_puts(const char *s) { (void)s; }
 void uart_putc(char c) { (void)c; }
@@ -106,3 +113,5 @@ void assert_failed(const uint8_t *file, uint32_t line) {
 
 void supervisor_kick_bit(void){}
 void watchdog_pat(void){}
+void config_load(void){}
+void config_save(void){}
