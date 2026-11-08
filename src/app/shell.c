@@ -17,6 +17,8 @@
 #include "fault_handler.h"
 #include "watchdog.h"
 #include "eeprom_config.h"
+#include "flash.h"
+#include "crc.h"
 
 #define SHELL_LINE_MAX 64
 #define SHELL_MAX_ARGS 4
@@ -72,6 +74,7 @@ static void cmd_help(int argc, char **argv){
   uart_puts("  hang        - cause a hang to trigger watchdog\r\n");
   uart_puts("  ram         - Prints the .data, .bss, free RAM and peak stack use in bytes\r\n");
   uart_puts("  config      - Adjust the EEPROM memory\r\n");
+  uart_puts("  config_fail - Simulate a write (name = fail) and cutoff midway, never reaching CRC\r\n");
 }
 
 static void cmd_led(int argc, char **argv){
@@ -265,6 +268,90 @@ static void cmd_config(int argc, char **argv){
   }
 }
 
+static void cmd_config_fail(int argc, char **argv) {
+    (void)argc; (void)argv;
+    
+    AppConfig cfg;
+    config_load(&cfg);
+
+    // Modify the name to a test string to show what would have been written
+    strncpy(cfg.device_name, "fail", sizeof(cfg.device_name) - 1);
+    cfg.device_name[sizeof(cfg.device_name) - 1] = '\0';
+
+    uint32_t next_seq = 1;
+    const uint32_t pages[NUM_PAGES] = {CONFIG_PAGE_ADDR1, CONFIG_PAGE_ADDR2};
+    uint32_t target_slot_addr = 0;
+    bool slot_found = false;
+
+    for (int p = 0; p < NUM_PAGES; p++) {
+        uint32_t addr = pages[p];
+        uint32_t page_end = addr + CONFIG_SIZE;
+
+        while (addr + sizeof(ConfigRecord) <= page_end) {
+            ConfigRecord *candidate = (ConfigRecord *)(uintptr_t)addr;
+            
+            if (candidate->magic == 0xFFFFFFFF) {
+                target_slot_addr = addr;
+                slot_found = true;
+                break;
+            }
+
+            if (candidate->magic == CONFIG_MAGIC) {
+                size_t crc_data_len = offsetof(ConfigRecord, crc32);
+                if (crc32_bit_by_bit((const uint8_t *)candidate, crc_data_len, 0) == candidate->crc32) {
+                    if (candidate->sequence_number >= next_seq) {
+                        next_seq = candidate->sequence_number + 1;
+                    }
+                }
+            }
+            addr += sizeof(ConfigRecord);
+        }
+        if (slot_found) break;
+    }
+
+    if (!slot_found) {
+        target_slot_addr = CONFIG_PAGE_ADDR1;
+        if (flash_unlock() == FLASH_OK) {
+            flash_erase_page(CONFIG_PAGE_ADDR1);
+            flash_erase_page(CONFIG_PAGE_ADDR2);
+            flash_lock();
+        }
+    }
+
+    ConfigRecord new_record;
+    new_record.magic = CONFIG_MAGIC;
+    new_record.sequence_number = next_seq;
+    new_record.config = cfg;
+    
+    // Compute valid CRC but we WON'T flash it
+    size_t crc_data_len = offsetof(ConfigRecord, crc32);
+    new_record.crc32 = crc32_bit_by_bit((const uint8_t *)&new_record, crc_data_len, 0);
+
+    // Write ONLY the body bytes (Stop before writing the CRC field)
+    if (flash_unlock() != FLASH_OK) {
+        uart_puts("Error: Flash unlock failed.\r\n");
+        return;
+    }
+
+    const uint16_t *data_ptr = (const uint16_t *)&new_record;
+    size_t crc_field_offset = offsetof(ConfigRecord, crc32);
+
+    for (uint32_t i = 0; i < crc_field_offset; i += 2) {
+        watchdog_pat();
+        uint16_t half_word = *data_ptr++;
+        if (flash_write_halfword(target_slot_addr + i, half_word) != FLASH_OK) {
+            flash_lock();
+            uart_puts("Error: Flash write failed during body write.\r\n");
+            return;
+        }
+    }
+
+    flash_lock();
+
+    uart_puts("[TEST] Body written successfully. Skipping CRC write...\r\n");
+    uart_puts("[TEST] Forcing immediate system reset now!\r\n");
+}
+
 typedef void (*cmd_func_t)(int argc, char **argv);
 
 typedef struct {
@@ -285,7 +372,8 @@ static const cmd_entry_t cmd_table[] = {
   {"spi_test", cmd_spi_test},
   {"hang", cmd_hang},
   {"ram", cmd_ram},
-  {"config", cmd_config}
+  {"config", cmd_config},
+  {"config_fail", cmd_config_fail}
 };
 
 #define NUM_COMMANDS (sizeof(cmd_table) / sizeof(cmd_table[0]))
