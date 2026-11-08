@@ -4,7 +4,7 @@ There are no discarded input sections
 Memory Configuration
 
 Name             Origin             Length             Attributes
-ROM              0x08000000         0x00001000         xr
+ROM              0x08000000         0x00001400         xr
 RAM              0x20000000         0x00002800         xrw
 *default*        0x00000000         0xffffffff
 

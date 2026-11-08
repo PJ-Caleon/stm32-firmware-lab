@@ -3,7 +3,11 @@ _estack = ORIGIN(RAM) + LENGTH(RAM);
 ENTRY(Reset_Handler)
 
 MEMORY{
-  ROM (rx): ORIGIN = 0x08000000, LENGTH = 4K 
+  /* 4kb + 1kb = 5kb
+   * 1kb for the power fail safety
+   * 0x08001400 - 0x08001400
+   * */
+  ROM (rx): ORIGIN = 0x08000000, LENGTH = 5K 
   RAM (rwx): ORIGIN = 0x20000000, LENGTH = 10K
 }
 
