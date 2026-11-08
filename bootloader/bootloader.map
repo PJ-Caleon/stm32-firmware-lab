@@ -46,7 +46,7 @@ END GROUP
  .isr_vector    0x08000000       0xd8 build/startup.o
                 0x08000000                vectors
 
-.text           0x080000d8      0xcb0
+.text           0x080000d8      0xccc
  *(.vectors .vectors.*)
  *(.text*)
  .text          0x080000d8        0x0 build/main.o
@@ -64,94 +64,94 @@ END GROUP
                 0x080002c6                uart_boot_getc
                 0x080002f6                uart_boot_read_line
                 0x08000350                uart_boot_protocol_loop
- .text          0x08000640      0x17c build/eeprom_config.o
+ .text          0x08000640      0x198 build/eeprom_config.o
                 0x08000640                EEPROM_Read
                 0x080006dc                EEPROM_Write
- .text          0x080007bc       0x50 build/startup.o
-                0x080007bc                DebugMon_Handler
-                0x080007bc                HardFault_Handler
-                0x080007bc                PendSV_Handler
-                0x080007bc                NMI_Handler
-                0x080007bc                EXTI0_IRQHandler
-                0x080007bc                UsageFault_Handler
-                0x080007bc                Default_Handler
-                0x080007bc                MemManage_Handler
-                0x080007bc                SVC_Handler
-                0x080007bc                EXTI1_IRQHandler
-                0x080007bc                BusFault_Handler
-                0x080007bc                USART1_IRQHandler
-                0x080007be                Reset_Handler
- .text          0x0800080c       0xcc build/crc.o
-                0x0800080c                crc32_init_sliceby4
-                0x0800080e                ccr16_ccitt
-                0x08000842                crc16_xmodem
-                0x08000848                ccr16_ccitt_false
-                0x08000850                crc32_bit_by_bit
-                0x0800087c                crc32_sliceby4
-                0x08000880                crc32_hardware
- .text          0x080008d8      0x100 build/clock.o
-                0x080008d8                get_ms_tick
-                0x080008e4                delay_ms
-                0x080008fa                millis
-                0x08000904                systick_init
-                0x0800091c                SysTick_Handler
-                0x0800092c                dwt_init
-                0x08000950                setClock
- .text          0x080009d8      0x17c build/uart.o
-                0x08000a2c                uart_tx_dma_done
-                0x08000a44                uart_data_available
-                0x08000a68                uart_read_char
-                0x08000a94                uart_try_putc
-                0x08000ac4                uart_tx_wait_hook
-                0x08000ac6                uart_putc
-                0x08000ade                uart_puts
-                0x08000af0                uart_init
- .text          0x08000b54      0x100 build/dma.o
-                0x08000b84                dma1_init
-                0x08000b98                dma1_channel_config
-                0x08000bd0                dma1_channel_enable
-                0x08000be8                dma1_channel_disable
-                0x08000c00                dma1_channel_remaining
-                0x08000c14                dma1_set_tc_callback
-                0x08000c38                DMA1_Channel1_IRQHandler
-                0x08000c3c                DMA1_Channel2_IRQHandler
-                0x08000c40                DMA1_Channel3_IRQHandler
-                0x08000c44                DMA1_Channel4_IRQHandler
-                0x08000c48                DMA1_Channel5_IRQHandler
-                0x08000c4c                DMA1_Channel6_IRQHandler
-                0x08000c50                DMA1_Channel7_IRQHandler
- .text          0x08000c54       0xcc build/port_pin.o
-                0x08000c54                port_pin_init
-                0x08000d00                led_on
-                0x08000d10                led_off
- .text          0x08000d20        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
- .text.memset   0x08000d20       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
-                0x08000d20                memset
+ .text          0x080007d8       0x50 build/startup.o
+                0x080007d8                DebugMon_Handler
+                0x080007d8                HardFault_Handler
+                0x080007d8                PendSV_Handler
+                0x080007d8                NMI_Handler
+                0x080007d8                EXTI0_IRQHandler
+                0x080007d8                UsageFault_Handler
+                0x080007d8                Default_Handler
+                0x080007d8                MemManage_Handler
+                0x080007d8                SVC_Handler
+                0x080007d8                EXTI1_IRQHandler
+                0x080007d8                BusFault_Handler
+                0x080007d8                USART1_IRQHandler
+                0x080007da                Reset_Handler
+ .text          0x08000828       0xcc build/crc.o
+                0x08000828                crc32_init_sliceby4
+                0x0800082a                ccr16_ccitt
+                0x0800085e                crc16_xmodem
+                0x08000864                ccr16_ccitt_false
+                0x0800086c                crc32_bit_by_bit
+                0x08000898                crc32_sliceby4
+                0x0800089c                crc32_hardware
+ .text          0x080008f4      0x100 build/clock.o
+                0x080008f4                get_ms_tick
+                0x08000900                delay_ms
+                0x08000916                millis
+                0x08000920                systick_init
+                0x08000938                SysTick_Handler
+                0x08000948                dwt_init
+                0x0800096c                setClock
+ .text          0x080009f4      0x17c build/uart.o
+                0x08000a48                uart_tx_dma_done
+                0x08000a60                uart_data_available
+                0x08000a84                uart_read_char
+                0x08000ab0                uart_try_putc
+                0x08000ae0                uart_tx_wait_hook
+                0x08000ae2                uart_putc
+                0x08000afa                uart_puts
+                0x08000b0c                uart_init
+ .text          0x08000b70      0x100 build/dma.o
+                0x08000ba0                dma1_init
+                0x08000bb4                dma1_channel_config
+                0x08000bec                dma1_channel_enable
+                0x08000c04                dma1_channel_disable
+                0x08000c1c                dma1_channel_remaining
+                0x08000c30                dma1_set_tc_callback
+                0x08000c54                DMA1_Channel1_IRQHandler
+                0x08000c58                DMA1_Channel2_IRQHandler
+                0x08000c5c                DMA1_Channel3_IRQHandler
+                0x08000c60                DMA1_Channel4_IRQHandler
+                0x08000c64                DMA1_Channel5_IRQHandler
+                0x08000c68                DMA1_Channel6_IRQHandler
+                0x08000c6c                DMA1_Channel7_IRQHandler
+ .text          0x08000c70       0xcc build/port_pin.o
+                0x08000c70                port_pin_init
+                0x08000d1c                led_on
+                0x08000d2c                led_off
+ .text          0x08000d3c        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+ .text.memset   0x08000d3c       0x10 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+                0x08000d3c                memset
  *(.rodata*)
  .rodata.str1.1
-                0x08000d30       0x58 build/uart_boot.o
-                0x08000d88                        _etext = .
+                0x08000d4c       0x58 build/uart_boot.o
+                0x08000da4                        _etext = .
 
-.glue_7         0x08000d88        0x0
- .glue_7        0x08000d88        0x0 linker stubs
+.glue_7         0x08000da4        0x0
+ .glue_7        0x08000da4        0x0 linker stubs
 
-.glue_7t        0x08000d88        0x0
- .glue_7t       0x08000d88        0x0 linker stubs
+.glue_7t        0x08000da4        0x0
+ .glue_7t       0x08000da4        0x0 linker stubs
 
-.vfp11_veneer   0x08000d88        0x0
- .vfp11_veneer  0x08000d88        0x0 linker stubs
+.vfp11_veneer   0x08000da4        0x0
+ .vfp11_veneer  0x08000da4        0x0 linker stubs
 
-.v4_bx          0x08000d88        0x0
- .v4_bx         0x08000d88        0x0 linker stubs
+.v4_bx          0x08000da4        0x0
+ .v4_bx         0x08000da4        0x0 linker stubs
 
-.iplt           0x08000d88        0x0
- .iplt          0x08000d88        0x0 build/main.o
+.iplt           0x08000da4        0x0
+ .iplt          0x08000da4        0x0 build/main.o
 
-.igot.plt       0x08000d88        0x0
- .igot.plt      0x08000d88        0x0 build/main.o
+.igot.plt       0x08000da4        0x0
+ .igot.plt      0x08000da4        0x0 build/main.o
 
-.rel.dyn        0x08000d88        0x0
- .rel.iplt      0x08000d88        0x0 build/main.o
+.rel.dyn        0x08000da4        0x0
+ .rel.iplt      0x08000da4        0x0 build/main.o
 
 .bss            0x20000000      0x1b0
                 0x20000000                        _sbss = .
@@ -175,9 +175,9 @@ END GROUP
  .bss           0x200001b0        0x0 /nix/store/lb31wd4lxna4pzis5cadd1fappn0dqsj-gcc-arm-embedded-15.3.rel2/bin/../lib/gcc/arm-none-eabi/15.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
  *(COMMON)
                 0x200001b0                        _ebss = .
-                0x08000d88                        _la_data = LOADADDR (.DATA)
+                0x08000da4                        _la_data = LOADADDR (.DATA)
 
-.DATA           0x200001b0        0x4 load address 0x08000d88
+.DATA           0x200001b0        0x4 load address 0x08000da4
                 0x200001b0                        _sdata = .
  *(.data*)
  .data          0x200001b0        0x0 build/main.o
@@ -194,7 +194,7 @@ END GROUP
                 0x200001b4                        _edata = .
                 0x20002400                        __stack_limit = (_estack - STACK_SIZE)
 
-.stack          0x200001b4      0x404 load address 0x08000d8c
+.stack          0x200001b4      0x404 load address 0x08000da8
                 0x200001b8                        . = ALIGN (0x8)
  *fill*         0x200001b4        0x4 
                 0x200005b8                        . = (. + STACK_SIZE)
@@ -205,32 +205,32 @@ END GROUP
 OUTPUT(bootloader.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x00000000     0x2f64
+.debug_info     0x00000000     0x2fdc
  .debug_info    0x00000000      0x57f build/main.o
  .debug_info    0x0000057f      0x26b build/flash.o
  .debug_info    0x000007ea      0xb4c build/uart_boot.o
- .debug_info    0x00001336      0x59f build/eeprom_config.o
- .debug_info    0x000018d5      0x1cc build/startup.o
- .debug_info    0x00001aa1      0x4f7 build/crc.o
- .debug_info    0x00001f98      0x2b6 build/clock.o
- .debug_info    0x0000224e      0x58e build/uart.o
- .debug_info    0x000027dc      0x5d9 build/dma.o
- .debug_info    0x00002db5      0x1af build/port_pin.o
+ .debug_info    0x00001336      0x617 build/eeprom_config.o
+ .debug_info    0x0000194d      0x1cc build/startup.o
+ .debug_info    0x00001b19      0x4f7 build/crc.o
+ .debug_info    0x00002010      0x2b6 build/clock.o
+ .debug_info    0x000022c6      0x58e build/uart.o
+ .debug_info    0x00002854      0x5d9 build/dma.o
+ .debug_info    0x00002e2d      0x1af build/port_pin.o
 
-.debug_abbrev   0x00000000     0x10e9
+.debug_abbrev   0x00000000     0x10ea
  .debug_abbrev  0x00000000      0x23d build/main.o
  .debug_abbrev  0x0000023d      0x143 build/flash.o
  .debug_abbrev  0x00000380      0x26b build/uart_boot.o
- .debug_abbrev  0x000005eb      0x1bb build/eeprom_config.o
- .debug_abbrev  0x000007a6      0x10d build/startup.o
- .debug_abbrev  0x000008b3      0x18b build/crc.o
- .debug_abbrev  0x00000a3e      0x13d build/clock.o
- .debug_abbrev  0x00000b7b      0x28f build/uart.o
- .debug_abbrev  0x00000e0a      0x22d build/dma.o
- .debug_abbrev  0x00001037       0xb2 build/port_pin.o
+ .debug_abbrev  0x000005eb      0x1bc build/eeprom_config.o
+ .debug_abbrev  0x000007a7      0x10d build/startup.o
+ .debug_abbrev  0x000008b4      0x18b build/crc.o
+ .debug_abbrev  0x00000a3f      0x13d build/clock.o
+ .debug_abbrev  0x00000b7c      0x28f build/uart.o
+ .debug_abbrev  0x00000e0b      0x22d build/dma.o
+ .debug_abbrev  0x00001038       0xb2 build/port_pin.o
 
 .debug_loclists
-                0x00000000     0x10d5
+                0x00000000     0x1147
  .debug_loclists
                 0x00000000       0xad build/main.o
  .debug_loclists
@@ -238,17 +238,17 @@ LOAD linker stubs
  .debug_loclists
                 0x0000013a      0x5c7 build/uart_boot.o
  .debug_loclists
-                0x00000701      0x25f build/eeprom_config.o
+                0x00000701      0x2d1 build/eeprom_config.o
  .debug_loclists
-                0x00000960       0xa0 build/startup.o
+                0x000009d2       0xa0 build/startup.o
  .debug_loclists
-                0x00000a00      0x3b3 build/crc.o
+                0x00000a72      0x3b3 build/crc.o
  .debug_loclists
-                0x00000db3       0x2a build/clock.o
+                0x00000e25       0x2a build/clock.o
  .debug_loclists
-                0x00000ddd       0xd8 build/uart.o
+                0x00000e4f       0xd8 build/uart.o
  .debug_loclists
-                0x00000eb5      0x220 build/dma.o
+                0x00000f27      0x220 build/dma.o
 
 .debug_aranges  0x00000000      0x140
  .debug_aranges
@@ -273,54 +273,54 @@ LOAD linker stubs
                 0x00000120       0x20 build/port_pin.o
 
 .debug_rnglists
-                0x00000000      0x1cf
+                0x00000000      0x1da
  .debug_rnglists
                 0x00000000       0x14 build/main.o
  .debug_rnglists
                 0x00000014       0xaa build/uart_boot.o
  .debug_rnglists
-                0x000000be       0x5f build/eeprom_config.o
+                0x000000be       0x6a build/eeprom_config.o
  .debug_rnglists
-                0x0000011d       0x1d build/startup.o
+                0x00000128       0x1d build/startup.o
  .debug_rnglists
-                0x0000013a       0x57 build/crc.o
+                0x00000145       0x57 build/crc.o
  .debug_rnglists
-                0x00000191       0x1d build/uart.o
+                0x0000019c       0x1d build/uart.o
  .debug_rnglists
-                0x000001ae       0x21 build/dma.o
+                0x000001b9       0x21 build/dma.o
 
-.debug_line     0x00000000     0x204f
+.debug_line     0x00000000     0x2085
  .debug_line    0x00000000      0x27a build/main.o
  .debug_line    0x0000027a      0x290 build/flash.o
  .debug_line    0x0000050a      0x7cf build/uart_boot.o
- .debug_line    0x00000cd9      0x42c build/eeprom_config.o
- .debug_line    0x00001105      0x1c9 build/startup.o
- .debug_line    0x000012ce      0x374 build/crc.o
- .debug_line    0x00001642      0x248 build/clock.o
- .debug_line    0x0000188a      0x324 build/uart.o
- .debug_line    0x00001bae      0x31c build/dma.o
- .debug_line    0x00001eca      0x185 build/port_pin.o
+ .debug_line    0x00000cd9      0x462 build/eeprom_config.o
+ .debug_line    0x0000113b      0x1c9 build/startup.o
+ .debug_line    0x00001304      0x374 build/crc.o
+ .debug_line    0x00001678      0x248 build/clock.o
+ .debug_line    0x000018c0      0x324 build/uart.o
+ .debug_line    0x00001be4      0x31c build/dma.o
+ .debug_line    0x00001f00      0x185 build/port_pin.o
 
-.debug_str      0x00000000      0xaa6
- .debug_str     0x00000000      0xaa6 build/main.o
+.debug_str      0x00000000      0xac8
+ .debug_str     0x00000000      0xac8 build/main.o
                                 0x2f7 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/flash.o
+ .debug_str     0x00000ac8        0x0 build/flash.o
                                 0x269 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/uart_boot.o
+ .debug_str     0x00000ac8        0x0 build/uart_boot.o
                                 0x3b5 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/eeprom_config.o
-                                0x3a4 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/startup.o
+ .debug_str     0x00000ac8        0x0 build/eeprom_config.o
+                                0x3c6 (size before relaxing)
+ .debug_str     0x00000ac8        0x0 build/startup.o
                                 0x1da (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/crc.o
+ .debug_str     0x00000ac8        0x0 build/crc.o
                                 0x267 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/clock.o
+ .debug_str     0x00000ac8        0x0 build/clock.o
                                 0x234 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/uart.o
+ .debug_str     0x00000ac8        0x0 build/uart.o
                                 0x336 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/dma.o
+ .debug_str     0x00000ac8        0x0 build/dma.o
                                 0x398 (size before relaxing)
- .debug_str     0x00000aa6        0x0 build/port_pin.o
+ .debug_str     0x00000ac8        0x0 build/port_pin.o
                                 0x1c2 (size before relaxing)
 
 .comment        0x00000000       0x46

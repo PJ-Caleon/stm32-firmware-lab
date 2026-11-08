@@ -50,7 +50,6 @@ bool EEPROM_Write(const AppConfig *new_config) {
     uint32_t target_slot_addr = 0;
     bool slot_found = false;
 
-    // Scan pages to find the highest sequence number and an empty slot
     for (int p = 0; p < NUM_PAGES; p++) {
         uint32_t addr = pages[p];
         uint32_t page_end = addr + CONFIG_SIZE;
@@ -58,7 +57,6 @@ bool EEPROM_Write(const AppConfig *new_config) {
         while (addr + sizeof(ConfigRecord) <= page_end) {
             ConfigRecord *candidate = (ConfigRecord *)addr;
             
-            // Unwritten flash slot found (erased state is 0xFFFFFFFF)
             if (candidate->magic == 0xFFFFFFFF) {
                 target_slot_addr = addr;
                 slot_found = true;
@@ -78,7 +76,6 @@ bool EEPROM_Write(const AppConfig *new_config) {
         if (slot_found) break;
     }
 
-    // If both pages are full, perform a wear-leveling reset/erase on both pages
     if (!slot_found) {
         target_slot_addr = CONFIG_PAGE_ADDR1;
         
@@ -94,23 +91,37 @@ bool EEPROM_Write(const AppConfig *new_config) {
         flash_lock();
     }
 
-    // Build the new record
+    // Build the new record structure and compute its valid CRC beforehand
     ConfigRecord new_record;
     new_record.magic = CONFIG_MAGIC;
     new_record.sequence_number = next_seq;
     new_record.config = *new_config;
     
     size_t crc_data_len = offsetof(ConfigRecord, crc32);
-    new_record.crc32 = crc32_bit_by_bit((const uint8_t *)&new_record, crc_data_len, 0);
+    uint32_t final_crc = crc32_bit_by_bit((const uint8_t *)&new_record, crc_data_len, 0);
+    new_record.crc32 = final_crc; // Set in memory struct, but we will flash payload first!
 
     if (flash_unlock() != FLASH_OK) return false;
 
+    // Write everything EXCEPT the CRC field first
     const uint16_t *data_ptr = (const uint16_t *)&new_record;
-    uint32_t byte_size = sizeof(ConfigRecord);
+    size_t crc_field_offset = offsetof(ConfigRecord, crc32);
 
-    for (uint32_t i = 0; i < byte_size; i += 2) {
+    for (uint32_t i = 0; i < crc_field_offset; i += 2) {
         uint16_t half_word = *data_ptr++;
         if (flash_write_halfword(target_slot_addr + i, half_word) != FLASH_OK) {
+            flash_lock();
+            return false;
+        }
+    }
+
+    // CRC Last
+    const uint16_t *crc_ptr = (const uint16_t *)((const uint8_t *)&new_record + crc_field_offset);
+    uint32_t crc_size = sizeof(new_record.crc32);
+
+    for (uint32_t i = 0; i < crc_size; i += 2) {
+        uint16_t half_word = *crc_ptr++;
+        if (flash_write_halfword(target_slot_addr + crc_field_offset + i, half_word) != FLASH_OK) {
             flash_lock();
             return false;
         }
