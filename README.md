@@ -77,6 +77,34 @@ Free Ram: 8220 bytes
 Peak Stack: 488 out of 1024 bytes
 ```
 
+# Block Diagrams
+
+## Memory Table
+
+![](img/memory_map.png)
+## State Machine
+
+![](img/state_machine.png)
+
+## Shell Command 
+
+![](img/shell.png)
+## Protocol
+
+![](img/protocol.png)
+
+## I2C
+
+![](img/i2c.png)
+## Watch Dog
+
+![](img/watchdog.png)
+## EEPROM
+
+![](img/eeprom.png)
+## Bootloader 
+
+![](img/bootloader.png)
 # Reference
 - Test Driven Development: https://pragprog.com/titles/jgade/test-driven-development-for-embedded-c/
 
